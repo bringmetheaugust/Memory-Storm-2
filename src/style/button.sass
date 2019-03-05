@@ -1,0 +1,37 @@
+button
+	width: 70%
+	height: 50px
+	font-family: dv2
+	padding: 1%
+	font-size: 2rem
+	letter-spacing: .7rem
+	border: 1px solid $clr
+	cursor: pointer
+	background-color: $bg
+	overflow: hidden
+	transition: background-color .5s
+	.abort
+		transform: translateY(10px)
+	&:hover
+		div:not(.play):not(.abort)
+			animation: play .4s both linear
+			@for $i from 1 to 5
+				&:nth-child(#{$i})
+					animation-delay: #{$i/30}s
+	&>div
+		+flex()
+		transition: transform .5s
+		&>div
+			text-align: center
+	&.abort
+		background-color: red
+		&>div
+			transform: translateY(-40px)
+
+@keyframes play
+	0%
+		transform: translateY(0)
+	50%
+		transform: translateY(-20%)
+	100%
+		transform: translateY(0%)

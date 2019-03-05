@@ -1,0 +1,17 @@
+.game-field-wrap
+	#game-field
+		width: 75vh
+		height: 75vh
+		display: grid
+		border: 1px solid $clr
+		&.play
+			.card-wrap
+				transition: background .5s
+				cursor: pointer
+				&:hover
+					background: $bg
+		
+	@import './count.sass'
+	@import './card.sass'
+
+	@import './media.sass'

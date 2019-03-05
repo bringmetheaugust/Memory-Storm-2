@@ -1,0 +1,36 @@
+.title
+	opacity: 0
+	animation: title 1s both
+	animation-delay: 3s
+	position: absolute
+	height: 100%
+	width: 100%
+	top: 0
+	+flex(center,center,column)
+	font-family: dv2
+	font-size: 5rem
+	.exclamation
+		display: flex
+		opacity: 0
+		animation: title 3s both
+		animation-delay: 7s
+		font-size: 1.5rem
+		letter-spacing: 1rem
+		text-align: center
+		div
+			animation: exclamation .7s both linear
+			animation-delay: 9s
+
+@keyframes title
+	from
+		opacity: 0
+	to
+		opacity: 1
+
+@keyframes exclamation
+	from
+		transform: translateY(-100vh)
+	80%
+		transform: translateY(2vh)
+	to
+		transform: translateY(0)

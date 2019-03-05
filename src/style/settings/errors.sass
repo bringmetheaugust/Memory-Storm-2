@@ -1,0 +1,14 @@
+&.error
+	color: red
+	&::after
+		font-size: 1rem
+		font-family: dv2
+		position: absolute
+		bottom: -17px
+		width: 100%
+	&:first-child::after
+		content: 'please, select any even number from 2 to 6'
+	&:nth-child(2)::after
+		content: 'please, select any even number from 1 to 10'
+	&:nth-child(3)::after
+		content: 'please, select any even number form 10 to 60'

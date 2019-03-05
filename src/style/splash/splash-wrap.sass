@@ -1,0 +1,46 @@
+$div: 0
+$row: 0
+$column: 0
+
+.splash-wrap
+	perspective: 3000px
+	z-index: 10
+	display: grid
+	grid-template-columns: repeat(10, 6vh)
+	grid-template-rows: repeat(10, 6vh)
+	justify-content: center
+	align-items: center
+	.splash
+		perspective: 1000px
+		height: 100%
+		animation: splash 5s both
+		height: 100%
+		background-image: url('../img/splash.png')
+		@for $i from 1 through 100
+			&:nth-child(#{$i})
+				animation-delay: #{$i/40}s
+		@while $div < 100
+			&:nth-child(#{$div+1})
+				background-position: #{$column}0% #{$row}0%
+			$div : $div + 1
+			@if $column == 9
+				$column: 0
+				$row : $row + 1
+			@else
+				$column : $column + 1
+
+@keyframes splash
+	from
+		opacity: 0
+		transform: rotateY(90deg)
+	30%
+		transform: rotateY(0deg)
+	50%
+		opacity: 1
+	80%
+		transform: rotateY(0deg)
+	90%
+		opacity: 1
+	to
+		transform: rotateY(90deg)
+		opacity: 0

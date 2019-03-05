@@ -1,0 +1,35 @@
+@import 'reset.sass'
+@import 'font.sass'
+@import 'mixin.sass'
+
+$clr: #d6d6d6
+$bg: #cbfdf1
+
+.wrapper
+	overflow-x: hidden
+	+flex()
+	min-height: 100vh
+	font-family: dv
+	font-size: 1.5rem
+	@import './splash/index.sass'
+	@import './alert/index.sass'
+	@import './game-field/index.sass'
+	@import './settings/index.sass'
+@import './button.sass'
+
+@media only screen and (max-width : 600px)
+	.wrapper
+		flex-direction: column
+		&>*
+			margin: 0
+@media (orientation: portrait)
+	.wrapper
+		flex-direction: column
+		#splash
+			.splash-wrap
+				grid-template-columns: repeat(10, 8vw)
+				grid-template-rows: repeat(10, 8vw)
+		.game-field-wrap
+			#game-field
+				width: 100vw
+				height: 100vw
