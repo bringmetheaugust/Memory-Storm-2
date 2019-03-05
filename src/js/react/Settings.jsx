@@ -1,36 +1,39 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {setGameSettings} from '../redux/reducers/settings/actionCreator.js';
 
-export default class Settings extends React.Component{
+class Settings extends React.Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			button: true
+		};
+	}
+	toSubmit = (e) =>{
+		e.preventDefault();
+		this.props.setSettings('сюда форму');
 	}
 	render(){
+		const pr = this.props.store;
 		return(
-			<form id='settings'>
+			<form onInput={this.checkForm} onSubmit={this.toSubmit} id='settings'>
 				<label>select grid density
-					<input type='number'/>
+					<input id='density' type='number' defaultValue={pr.density}/>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input type='number'/>
+					<input id='hiding' type='number' defaultValue={pr.hiding}/>
 				</label>
 				<label>select game time (sec)
-					<input type='number'/>
+					<input id='time' type='number' defaultValue={pr.time}/>
 				</label>
-				<button>
-					<div className='play'>
-						<div>p</div>
-						<div>l</div>
-						<div>a</div>
-						<div>y</div>
-					</div>
-					<div className='abort'>
-						<div>s</div>
-						<div>t</div>
-						<div>o</div>
-						<div>p</div>
-					</div>
-				</button>
+				<button disabled={!this.state.button} onSubmit={this.toSubmit}></button>
 			</form>
-		)
-	}
-}
+)}}
+
+export default connect(
+	state => ({store: state.settings}),
+	dispatch =>({
+		setSettings: obj =>
+			dispatch(setGameSettings(obj))
+	})
+)(Settings);

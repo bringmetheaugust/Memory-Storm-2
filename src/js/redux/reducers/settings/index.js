@@ -8,5 +8,6 @@ const getLocalStorage = () =>
 	JSON.parse(localStorage.getItem('settings')) || initialState
 
 export default function settings(state = getLocalStorage(), action){
+	if(action.type === 'setSettings') return action.data
 	return state
 }

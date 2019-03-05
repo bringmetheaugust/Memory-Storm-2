@@ -1,4 +1,4 @@
-export const addChatMessage=(message)=>({
-	type:'addChatMessage',
-	newMessage: message
+export const setGameSettings = (settings) => ({
+	type: 'setSettings',
+	data: settings
 });
