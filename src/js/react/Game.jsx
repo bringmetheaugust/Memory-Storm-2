@@ -10,7 +10,12 @@ export default class Game extends React.Component{
 			<div className='game-field-wrap'>
 				<ul id='game-field'>
 				</ul>
+				<div className='count'>
+					time left :
+					<div id='count'> 0 </div>
+				</div>
 			</div>
+
 		)
 	}
 }

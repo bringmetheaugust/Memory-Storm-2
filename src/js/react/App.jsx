@@ -6,13 +6,13 @@ import Alert from './Alert.jsx';
 export default class App extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={};
 	}
 	render(){
 		return(
 			<React.Fragment>
 				<Game/>
 				<Settings/>
+				<Alert/>
 			</React.Fragment>
 		)
 	}
