@@ -1,4 +1,7 @@
 import React from 'react';
+import Game from './Game.jsx';
+import Settings from './Settings.jsx';
+import Alert from './Alert.jsx';
 
 export default class App extends React.Component{
 	constructor(props){
@@ -7,7 +10,10 @@ export default class App extends React.Component{
 	}
 	render(){
 		return(
-			<div>App</div>
+			<React.Fragment>
+				<Game/>
+				<Settings/>
+			</React.Fragment>
 		)
 	}
 }
