@@ -19,4 +19,4 @@ var pictures = [
 	require('./data/youtube_avatar_200x200.png'),
 ];
 
-module.exports=pictures;
+export default pictures
