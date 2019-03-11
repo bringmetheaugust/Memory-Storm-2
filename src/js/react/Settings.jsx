@@ -1,39 +1,45 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setGameSettings} from '../redux/reducers/settings/actionCreator.js';
+import {setGameAction} from '../redux/reducers/play/actionCreator.js';
+// import {settingsButton} from './elements.jsx';
 
 class Settings extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			button: true
-		};
+		this.density = React.createRef();
+		this.hiding = React.createRef();
+		this.time = React.createRef();
 	}
 	toSubmit = (e) =>{
-		e.preventDefault();
-		this.props.setSettings('сюда форму');
+		this.props.setSettings({
+			density: +this.density.current.value,
+			hiding: +this.hiding.current.value,
+			time: +this.time.current.value,
+		});
+		this.props.setGameAction(true);
 	}
 	render(){
-		const pr = this.props.store;
+		const store = this.props.store;
 		return(
-			<form onInput={this.checkForm} onSubmit={this.toSubmit} id='settings'>
+			<form onSubmit={this.toSubmit} id='settings'>
 				<label>select grid density
-					<input id='density' type='number' defaultValue={pr.density}/>
+					<input id='density' ref = {this.density} type='number' defaultValue={store.density}/>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input id='hiding' type='number' defaultValue={pr.hiding}/>
+					<input id='hiding' ref = {this.hiding} type='number' defaultValue={store.hiding}/>
 				</label>
 				<label>select game time (sec)
-					<input id='time' type='number' defaultValue={pr.time}/>
+					<input id='time' ref = {this.time} type='number' defaultValue={store.time}/>
 				</label>
-				<button disabled={!this.state.button} onSubmit={this.toSubmit}></button>
+				<div onClick = {this.toSubmit} className = 'button'></div>
 			</form>
 )}}
 
 export default connect(
 	state => ({store: state.settings}),
 	dispatch =>({
-		setSettings: obj =>
-			dispatch(setGameSettings(obj))
+		setSettings: obj => dispatch(setGameSettings(obj)),
+		setGameAction: bool => dispatch(setGameAction(bool))
 	})
 )(Settings);
