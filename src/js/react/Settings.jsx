@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {setGameSettings} from '../redux/reducers/settings/actionCreator.js';
 import {setGameAction} from '../redux/reducers/play/actionCreator.js';
 import {settingsButton} from './elements.jsx';
-var MIN_GAME_TIME = 10, MAX_GAME_TIME = 60;
-var MIN_HIDING_TIME = 1, MAX_HIDING_TIME = 10;
-var MIN_DENSITY= 2, MAX_DENSITY = 6;
+const MIN_GAME_TIME = 10, MAX_GAME_TIME = 60;
+const MIN_HIDING_TIME = 1, MAX_HIDING_TIME = 10;
+const MIN_DENSITY= 2, MAX_DENSITY = 6;
 
 class Settings extends React.Component{
 	constructor(props){
