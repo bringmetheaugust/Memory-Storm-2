@@ -13,9 +13,9 @@ export default class Card extends React.Component{
 	toDisable = () => this.setState({isDisabled: true});
 	render(){
 		return(
-			<li onClick = {isDisabled ? false : this.toActive} className='card-wrap'>
+			<li onClick = {this.state.isDisabled ? false : this.toActive} className='card-wrap'>
 				{
-					isActive && <img src={require(`../../img/data/${this.props.img}`)}/>
+					this.state.isActive && <img src={require(`../../img/data/${this.props.img}`)}/>
 				}
 			</li>
 		)
