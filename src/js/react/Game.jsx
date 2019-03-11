@@ -29,6 +29,5 @@ class Game extends React.Component{
 )}}
 
 export default connect(
-	state => ({store: state.settings}),
-	dispatch =>({})
+	state => ({store: state.settings})
 )(Game);

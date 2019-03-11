@@ -21,18 +21,19 @@ class Settings extends React.Component{
 	}
 	checkForm = (e) =>{
 		var trg = e.target;
-		if(trg.id === 'density') this.setState({invalidDensity: (trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
-		if(trg.id === 'hiding') this.setState({invalidHiding: (trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
-		if(trg.id === 'time') this.setState({invalidTime: (trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
+		if(trg.id === 'density') this.setState({invalidDensity: (!bool || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
+		if(trg.id === 'hiding') this.setState({invalidHiding: (!bool || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
+		if(trg.id === 'time') this.setState({invalidTime: (!bool || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
+		this.props.setGameAction();
+		if(this.props.store.play) return;
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
 			density: +this.density.current.value,
 			hiding: +this.hiding.current.value,
 			time: +this.time.current.value,
 		});
-		this.props.setGameAction();
 	}
 	render(){
 		const str = this.props.store.settings, st = this.state;
