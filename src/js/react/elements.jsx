@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const settingsButton = (
-	<div className = 'button' id = 'play'>
+	<React.Fragment>
 		<div className = 'play'>
 			<div>p</div>
 			<div>l</div>
@@ -14,5 +14,5 @@ export const settingsButton = (
 			<div>o</div>
 			<div>p</div>
 		</div>
-	</div>
+	</React.Fragment>
 );
