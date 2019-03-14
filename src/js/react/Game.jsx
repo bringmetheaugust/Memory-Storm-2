@@ -8,8 +8,9 @@ class Game extends React.Component{
 		super(props);
 		this.count = React.createRef();
 	}
-	shouldComponentUpdate(nextPr, nextSt){
-		if(this.props.store.buffer != nextPr.store.buffer) return false;
+	shouldComponentUpdate(nextPr){
+		if(this.props.store.play != nextPr.store.play) return true;
+		return false;
 	}
 	componentWillReceiveProps(pr){
 		pr.store.play ? this.runCount(pr.store.settings.time) : this.stopCount();
