@@ -65,7 +65,9 @@ class Settings extends React.Component{
 )}}
 
 export default connect(
-	state => ({store: state}),
+	state => ({
+		store: state
+	}),
 	dispatch =>({
 		setSettings: obj => dispatch(setGameSettings(obj)),
 		setGameAction: () => dispatch(setGameAction())

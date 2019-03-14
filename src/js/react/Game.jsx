@@ -8,28 +8,29 @@ class Game extends React.Component{
 		super(props);
 		this.count = React.createRef();
 	}
-	componentWillReceiveProps = (pr) =>{
-		if(pr.store.play){
-			let count = pr.store.settings.time;
-			this.countInterval = setInterval(() =>{
-				this.count.current.textContent = --count;
-			}, 1000);
-		}else{
-			clearInterval(this.countInterval);
-			this.count.current.textContent = '0';
-		}
+	componentWillReceiveProps(pr){
+		pr.store.play ? this.runCount(pr.store.settings.time) : this.stopCount();
 	}
-	toGenerateCards(){
+	runCount = (time) =>{
+		this.countInterval = setInterval(() =>{
+			this.count.current.textContent = --time;
+		}, 1000);
+	}
+	stopCount = () =>{
+		clearInterval(this.countInterval);
+		this.count.current.textContent = '0';
+	}
+	toGenerateCards = () =>{
 		let arr = pictures.slice(0, Math.pow(this.props.density, 2) / 2);
 		return arr.concat(arr).sort(() => Math.random() - Math.random());
 	}
 	render(){
-		const arrayOfPictures = this.toGenerateCards();
 		return(
 			<div className='game-field-wrap'>
-				<ul id='game-field' style = {{gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)`}} >
+				<ul id='game-field'
+					style = {{gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)`}} >
 					{
-						arrayOfPictures.map((i, n) => <Card key = {n} img = {i}/>)
+						this.toGenerateCards().map((i, n) => <Card key = {Math.random()} img = {i}/>)
 					}
 				</ul>
 				<div className='count'>
