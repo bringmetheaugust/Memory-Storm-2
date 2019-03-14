@@ -36,9 +36,10 @@ class Card extends React.Component{
 		}
 	}
 	render(){
+		const cardOpportunity = this.state.isDisabled || !this.props.store.play || this.state.isOpen;
 		return(
-			<li className={`card-wrap ${this.state.isDisabled && 'disabled'}`}
-				onClick = {(this.state.isDisabled || !this.props.store.play) ? null : this.toActivateCard}>
+			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
+				onClick = {cardOpportunity ? null : this.toActivateCard}>
 				{
 					this.state.isOpen && <img ref = {this.imgRef} src={this.props.img}/>
 				}
