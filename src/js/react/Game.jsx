@@ -31,7 +31,7 @@ class Game extends React.Component{
 	render(){
 		return(
 			<div className='game-field-wrap'>
-				<ul id='game-field'
+				<ul id='game-field' className = {this.props.store.play ? 'play' : ''}
 					style = {{gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)`}} >
 					{
 						this.toGenerateCards().map((i, n) => <Card key = {Math.random()} img = {i}/>)
