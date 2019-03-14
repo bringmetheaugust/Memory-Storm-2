@@ -19,7 +19,9 @@ class Card extends React.Component{
 		this.props.addItemOnBuffer(this);
 	}
 	toCloseCard = () =>{
-		this.imgRef.current.className = 'disactive';
+		try{
+			this.imgRef.current.className = 'disactive';
+		}catch(e){console.log(e);}
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
 	toDisable = () => this.setState({isDisabled: true});
@@ -33,7 +35,7 @@ class Card extends React.Component{
 	}
 	render(){
 		return(
-			<li className='card-wrap'
+			<li className={`card-wrap ${this.state.isDisabled && 'disabled'}`}
 				onClick = {(this.state.isDisabled || !this.props.store.play) ? null : this.toActivateCard}>
 				{
 					this.state.isOpen && <img ref = {this.imgRef} src={this.props.img}/>
