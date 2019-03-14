@@ -6,34 +6,37 @@ class Card extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			isActive: false,
+			isOpen: false,
 			isDisabled: false
 		}
 		this.imgRef = React.createRef();
 	}
-	toActive = () =>{
-		this.setState({isActive: true});
-		// this.props.addItemOnBuffer(this);
+	toOpenCard = () =>{
+		this.setState({isOpen: true});
 	}
-	toDeactivate = () =>{
+	toActivateCard = () =>{
+		this.toOpenCard();
+		this.props.addItemOnBuffer(this);
+	}
+	toCloseCard = () =>{
 		this.imgRef.current.className = 'disactive';
-		setTimeout(() => this.setState({isActive: false}), 500);
+		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
 	toDisable = () => this.setState({isDisabled: true});
 	componentDidMount(){
 		if(this.props.store.play){
-			this.toActive();
+			this.toOpenCard();
 			setTimeout(() =>{
-				this.toDeactivate();
+				this.toCloseCard();
 			}, this.props.store.settings.hiding * 1000);
 		}
 	}
 	render(){
 		return(
 			<li className='card-wrap'
-				onClick = {(this.state.isDisabled || !this.props.store.play) ? null : this.toActive}>
+				onClick = {(this.state.isDisabled || !this.props.store.play) ? null : this.toActivateCard}>
 				{
-					this.state.isActive && <img ref = {this.imgRef} src={this.props.img}/>
+					this.state.isOpen && <img ref = {this.imgRef} src={this.props.img}/>
 				}
 			</li>
 )}}
@@ -43,6 +46,6 @@ export default connect(
 		store: state
 	}),
 	dispatch =>({
-		addItemOnBuffer : i => dispatch(addItemOnBuffer(i))
+		addItemOnBuffer : item => dispatch(addItemOnBuffer(item))
 	})
 )(Card);
