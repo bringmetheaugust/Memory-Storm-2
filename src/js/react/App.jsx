@@ -12,9 +12,6 @@ class App extends React.Component{
 			gameOver: false
 		}
 	}
-	componentWillReceiveProps(nextPr){
-		if(!nextPr.store.buffer.score) this.setState({gameOver: true});
-	}
 	closeAlert = () => this.setState({gameOver: false});
 	render(){
 		return(
