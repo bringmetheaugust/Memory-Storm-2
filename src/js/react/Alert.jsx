@@ -2,13 +2,17 @@ import React from 'react';
 
 const Alert = (props) =>
 	<div id='alert'>
-		<div className='title'></div>
-		<button>
+		<div className='title'>
+			{
+				props.win ? 'You win!!!' : 'You lose :('
+			}
+		</div>
+		<div onClick = {() => props.closeAlert()} className = 'button'>
 			<div>b</div>
 			<div>a</div>
 			<div>c</div>
 			<div>k</div>
-		</button>
+		</div>
 	</div>
 
-export default Alert
+export default Alert;

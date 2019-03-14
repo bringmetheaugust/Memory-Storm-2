@@ -3,12 +3,37 @@ import Game from './Game.jsx';
 import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import {connect} from 'react-redux';
+import {setGameAction} from '../redux/reducers/play/actionCreator.js';
 
-const App = () =>
-	<React.Fragment>
-		<Game/>
-		<Settings/>
-		<Alert/>
-	</React.Fragment>
+class App extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			gameOver: false
+		}
+	}
+	componentWillReceiveProps(nextPr){
+		if(!nextPr.store.buffer.score) this.setState({gameOver: true});
+	}
+	closeAlert = () => this.setState({gameOver: false});
+	render(){
+		return(
+			<React.Fragment>
+				<Game/>
+				<Settings/>
+				{
+					this.state.gameOver && <Alert closeAlert = {this.closeAlert} win = {true}/>
+				}
+			</React.Fragment>
+		)
+	}
+}
 
-export default App;
+export default connect(
+	state => ({
+		store: state
+	}),
+	dispatch =>({
+		setGameAction: () => dispatch(setGameAction())
+	})
+)(App);
