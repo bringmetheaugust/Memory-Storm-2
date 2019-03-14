@@ -9,11 +9,11 @@ class Game extends React.Component{
 		this.count = React.createRef();
 	}
 	shouldComponentUpdate(nextPr){
-		if(this.props.store.play != nextPr.store.play) return true;
+		if(this.props.store.play !== nextPr.store.play) return true;
 		return false;
 	}
-	componentWillReceiveProps(pr){
-		pr.store.play ? this.runCount(pr.store.settings.time) : this.stopCount();
+	componentWillUpdate(nextPr){
+		nextPr.store.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	}
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
