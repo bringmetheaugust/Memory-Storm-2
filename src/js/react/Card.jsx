@@ -50,6 +50,6 @@ export default connect(
 		store: state
 	}),
 	dispatch =>({
-		addItemOnBuffer : item => dispatch(addItemOnBuffer(item))
+		addItemOnBuffer: item => dispatch(addItemOnBuffer(item)),
 	})
 )(Card);

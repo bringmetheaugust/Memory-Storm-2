@@ -8,7 +8,7 @@ export default function buffer(state = initialState, action){
 		if(state.buffer === null) return Object.assign(state, {buffer: action.data});
 		if(action.data.props.img === state.buffer.props.img){
 			[action.data, state.buffer].forEach(i => i.toDisable());
-			return Object.assign(state, {buffer: null});
+			return Object.assign({}, {score: --state.score}, {buffer: null});
 		}
 		[action.data, state.buffer].forEach(i => i.toCloseCard());
 		return Object.assign(state, {buffer: null});
