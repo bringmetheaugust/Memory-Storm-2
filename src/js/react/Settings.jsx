@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {setGameSettings} from '../redux/reducers/settings/actionCreator.js';
 import {setGameAction} from '../redux/reducers/play/actionCreator.js';
+import {setGameResultCounter} from '../redux/reducers/result/actionCreator.js';
 import {settingsButton} from './elements.jsx';
 const MIN_GAME_TIME = 10, MAX_GAME_TIME = 60;
 const MIN_HIDING_TIME = 1, MAX_HIDING_TIME = 10;
@@ -21,9 +22,12 @@ class Settings extends React.Component{
 	}
 	checkForm = (e) =>{
 		var trg = e.target;
-		if(trg.id === 'density') this.setState({invalidDensity: (trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
-		if(trg.id === 'hiding') this.setState({invalidHiding: (trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
-		if(trg.id === 'time') this.setState({invalidTime: (trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
+		if(trg.id === 'density') this.setState({invalidDensity:
+			(trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
+		if(trg.id === 'hiding') this.setState({invalidHiding:
+			(trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
+		if(trg.id === 'time') this.setState({invalidTime:
+			(trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction();
@@ -34,6 +38,7 @@ class Settings extends React.Component{
 			hiding: +this.hiding.current.value,
 			time: +this.time.current.value,
 		});
+		this.props.setGameResultCounter(Math.pow(this.density.current.value, 2) / 2);
 	}
 	render(){
 		const str = this.props.store.settings, st = this.state;
@@ -70,6 +75,7 @@ export default connect(
 	}),
 	dispatch =>({
 		setSettings: obj => dispatch(setGameSettings(obj)),
-		setGameAction: () => dispatch(setGameAction())
+		setGameAction: () => dispatch(setGameAction()),
+		setGameResultCounter: score => dispatch(setGameResultCounter(score))
 	})
 )(Settings);
