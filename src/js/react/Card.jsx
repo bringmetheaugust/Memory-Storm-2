@@ -21,7 +21,9 @@ class Card extends React.Component{
 	toCloseCard = () =>{
 		try{
 			this.imgRef.current.className = 'disactive';
-		}catch(e){console.log(e);}
+		}catch(e){
+			console.warn(e);
+		}
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
 	toDisable = () => this.setState({isDisabled: true});
