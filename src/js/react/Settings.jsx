@@ -11,9 +11,6 @@ const MIN_DENSITY= 2, MAX_DENSITY = 6;
 class Settings extends React.Component{
 	constructor(props){
 		super(props);
-		this.density = React.createRef();
-		this.hiding = React.createRef();
-		this.time = React.createRef();
 		this.state = {
 			invalidDensity: false,
 			invalidHiding: false,
@@ -34,9 +31,9 @@ class Settings extends React.Component{
 		if(this.props.store.play) return;
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
-			density: +this.density.current.value,
-			hiding: +this.hiding.current.value,
-			time: +this.time.current.value,
+			density: +this.density.value,
+			hiding: +this.hiding.value,
+			time: +this.time.value,
 		});
 		this.props.setGameResultScore(Math.pow(this.density.current.value, 2) / 2);
 	}
@@ -45,19 +42,19 @@ class Settings extends React.Component{
 		return(
 			<form onInput = {this.checkForm} id='settings'>
 				<label>select grid density
-					<input id = 'density' ref = {this.density} type='number' defaultValue={str.density}/>
+					<input id = 'density' ref = {(i) => this.density = i} type='number' defaultValue={str.density}/>
 						<div className = 'error'>
 							{st.invalidDensity ? 'Please, set any from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input id = 'hiding' ref = {this.hiding} type='number' defaultValue={str.hiding}/>
+					<input id = 'hiding' ref = {(i) => this.hiding = i} type='number' defaultValue={str.hiding}/>
 						<div className = 'error'>
 							{st.invalidHiding ? 'Please, set any number from 1 to 10' : ''}
 						</div>
 				</label>
 				<label>select game time (sec)
-					<input id = 'time' ref = {this.time} type='number' defaultValue={str.time}/>
+					<input id = 'time' ref = {(i) => this.time = i} type='number' defaultValue={str.time}/>
 						<div className = 'error'>
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>
