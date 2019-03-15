@@ -35,7 +35,7 @@ class Settings extends React.Component{
 			hiding: +this.hiding.value,
 			time: +this.time.value,
 		});
-		this.props.setGameResultScore(Math.pow(this.density.current.value, 2) / 2);
+		this.props.setGameResultScore(Math.pow(this.density.value, 2) / 2);
 	}
 	render(){
 		const str = this.props.store.settings, st = this.state;
