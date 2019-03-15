@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './Card.jsx';
 import {connect} from 'react-redux';
 import pictures from '../pictures.js';
+import {setGameAction} from '../redux/reducers/play/actionCreator.js';
 
 class Game extends React.Component{
 	constructor(props){
@@ -17,6 +18,10 @@ class Game extends React.Component{
 	}
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
+			if(time === 1){
+				this.props.setGameAction();
+				this.stopCount();
+			}
 			this.count.current.textContent = --time;
 		}, 1000);
 	}
@@ -49,5 +54,8 @@ export default connect(
 	state => ({
 		store: state,
 		density: state.settings.density,
+	}),
+	dispatch => ({
+		setGameAction: () => dispatch(setGameAction()),
 	})
 )(Game);
