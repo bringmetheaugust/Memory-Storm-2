@@ -5,12 +5,12 @@
 $clr: #d6d6d6
 $bg: #cbfdf1
 
-.wrapper
+#root
 	overflow-x: hidden
 	+flex()
+	flex-wrap: wrap
 	min-height: 100vh
-	font-family: dv
-	font-size: 1.5rem
+	+txt(1.5rem, black, dv)
 	@import './splash/index.sass'
 	@import './alert/index.sass'
 	@import './game-field/index.sass'
@@ -18,12 +18,12 @@ $bg: #cbfdf1
 @import './button.sass'
 
 @media only screen and (max-width : 600px)
-	.wrapper
+	#root
 		flex-direction: column
 		&>*
 			margin: 0
 @media (orientation: portrait)
-	.wrapper
+	#root
 		flex-direction: column
 		#splash
 			.splash-wrap
