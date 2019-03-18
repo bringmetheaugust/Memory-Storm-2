@@ -6,11 +6,15 @@ class Splash extends React.Component{
 		this.state ={ isActive: true };
 	}
 	hideSplash = () =>{
-		this.splash.style.opacity = '0';
+		if(this.splash) this.splash.style.opacity = '0';
 		setTimeout(() => this.setState({ isActive: false }), 1000);
 	}
-	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , 13000);
-	componentWillUnmount = () => cleartimeout(this.count);
+	componentDidMount(){
+		this.count = setTimeout(() => this.hideSplash() , 13000);
+	}
+	componentWillUnmount(){
+		clearTimeout(this.count);
+	}
 	render(){
 		if(!this.state.isActive) return null;
 		return(
