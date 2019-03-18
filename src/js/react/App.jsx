@@ -12,6 +12,9 @@ class App extends React.Component{
 			gameOver: false
 		}
 	}
+	componentWillReceiveProps(nextPr){
+		if(!nextPr.store) this.setState({gameOver: true});
+	}
 	closeAlert = () => this.setState({gameOver: false});
 	render(){
 		return(
@@ -28,7 +31,7 @@ class App extends React.Component{
 
 export default connect(
 	state => ({
-		store: state
+		store: state.play
 	}),
 	dispatch =>({
 		setGameAction: () => dispatch(setGameAction())
