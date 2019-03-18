@@ -20,11 +20,11 @@ class Settings extends React.Component{
 	checkForm = (e) =>{
 		var trg = e.target;
 		if(trg.id === 'density') this.setState({invalidDensity:
-			(trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
+			(typeof trg.value !== 'number' || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
 		if(trg.id === 'hiding') this.setState({invalidHiding:
-			(trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
+			(typeof trg.value !== 'number' || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
 		if(trg.id === 'time') this.setState({invalidTime:
-			(trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
+			(typeof trg.value !== 'number' || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction();
@@ -45,7 +45,7 @@ class Settings extends React.Component{
 				<label>select grid density
 					<input id = 'density' ref = {(i) => this.density = i} type='number' defaultValue={str.density}/>
 						<div className = 'error'>
-							{st.invalidDensity ? 'Please, set any from 2 to 6 multiples of two' : ''}
+							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
 				<label>select time for pictures hiding (sec)
