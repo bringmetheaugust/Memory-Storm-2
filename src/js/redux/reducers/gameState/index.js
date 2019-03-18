@@ -1,6 +1,6 @@
 const initialState = false;
 
-export default function play(state = initialState, action){
+export default function gameState(state = initialState, action){
 	if(action.type === 'setGameAction'){
 		return !state;
 	}

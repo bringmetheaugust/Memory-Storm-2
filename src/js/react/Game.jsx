@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './Card.jsx';
 import {connect} from 'react-redux';
 import pictures from '../pictures.js';
+import {setGameAction} from '../redux/reducers/gameState/actionCreator.js';
 
 class Game extends React.Component{
 	constructor(props){
@@ -9,14 +10,18 @@ class Game extends React.Component{
 		this.count = React.createRef();
 	}
 	shouldComponentUpdate(nextPr){
-		if(this.props.store.play !== nextPr.store.play) return true;
+		if(this.props.store.gameState !== nextPr.store.gameState) return true;
 		return false;
 	}
 	componentWillUpdate(nextPr){
-		nextPr.store.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
+		nextPr.store.gameState ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	}
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
+			if(time === 1){
+				this.props.setGameAction();
+				this.stopCount();
+			}
 			this.count.current.textContent = --time;
 		}, 1000);
 	}
@@ -31,7 +36,7 @@ class Game extends React.Component{
 	render(){
 		return(
 			<div className='game-field-wrap'>
-				<ul id='game-field' className = {this.props.store.play ? 'play' : ''}
+				<ul id='game-field' className = {this.props.store.gameState ? 'play' : ''}
 					style = {{gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)`}} >
 					{
 						this.toGenerateCards().map((i, n) => <Card key = {Math.random()} img = {i}/>)
@@ -49,5 +54,8 @@ export default connect(
 	state => ({
 		store: state,
 		density: state.settings.density,
+	}),
+	dispatch => ({
+		setGameAction: () => dispatch(setGameAction()),
 	})
 )(Game);
