@@ -28,7 +28,7 @@ class Card extends React.Component{
 	}
 	toDisable = () => this.setState({isDisabled: true});
 	componentDidMount(){
-		if(this.props.store.play){
+		if(this.props.store.gameState){
 			this.toOpenCard();
 			setTimeout(() =>{
 				this.toCloseCard();
@@ -36,7 +36,7 @@ class Card extends React.Component{
 		}
 	}
 	render(){
-		const cardOpportunity = this.state.isDisabled || !this.props.store.play || this.state.isOpen;
+		const cardOpportunity = this.state.isDisabled || !this.props.store.gameState || this.state.isOpen;
 		return(
 			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}>

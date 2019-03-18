@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {setGameSettings} from '../redux/reducers/settings/actionCreator.js';
-import {setGameAction} from '../redux/reducers/play/actionCreator.js';
+import {setGameAction} from '../redux/reducers/gameState/actionCreator.js';
 import {setGameResultScore} from '../redux/reducers/buffer/actionCreator.js';
 import {settingsButton} from './elements.jsx';
 const MIN_GAME_TIME = 10, MAX_GAME_TIME = 60;
@@ -28,7 +28,7 @@ class Settings extends React.Component{
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction();
-		if(this.props.store.play) return;
+		if(this.props.store.gameState) return;
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
 			density: +this.density.value,
@@ -59,7 +59,7 @@ class Settings extends React.Component{
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>
 				</label>
-				<div className = {`button ${this.props.store.play && 'abort'}`}
+				<div className = {`button ${this.props.store.gameState && 'abort'}`}
 					onClick = {(!st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis) ? this.toSubmit : null}>
 					{settingsButton}
 				</div>

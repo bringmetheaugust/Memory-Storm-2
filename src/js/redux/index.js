@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 import reducers from './reducers/index.js';
-import {setGameAction} from './reducers/play/actionCreator.js';
+import {setGameAction} from './reducers/gameState/actionCreator.js';
 import {setGameResultScore} from './reducers/buffer/actionCreator.js';
 
 export const store = createStore(reducers,
