@@ -1,6 +1,6 @@
 const initialState = {
 	buffer: null,
-	score: 0
+	score: null
 };
 
 export default function buffer(state = initialState, action){
