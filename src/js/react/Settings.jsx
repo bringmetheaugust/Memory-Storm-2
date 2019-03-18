@@ -18,13 +18,14 @@ class Settings extends React.Component{
 		}
 	}
 	checkForm = (e) =>{
-		var trg = e.target;
+		const trg = e.target;
+		const isNan = Number.isNaN(Number(trg.value));
 		if(trg.id === 'density') this.setState({invalidDensity:
-			(typeof trg.value !== 'number' || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
+			(isNan || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
 		if(trg.id === 'hiding') this.setState({invalidHiding:
-			(typeof trg.value !== 'number' || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
+			(isNan || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
 		if(trg.id === 'time') this.setState({invalidTime:
-			(typeof trg.value !== 'number' || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
+			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction();
