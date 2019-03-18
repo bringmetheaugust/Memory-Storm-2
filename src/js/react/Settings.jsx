@@ -28,8 +28,9 @@ class Settings extends React.Component{
 			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
-		this.props.setGameAction();
-		if(this.props.store.gameState) return;
+		this.props.setGameAction(null);
+		if(this.props.play) return;
+		window.scrollTo(0, 0);
 		this.props.clearBuffer();
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
@@ -44,24 +45,24 @@ class Settings extends React.Component{
 		return(
 			<form onInput = {this.checkForm} id='settings'>
 				<label>select grid density
-					<input id = 'density' ref = {(i) => this.density = i} type='number' defaultValue={str.density}/>
+					<input id = 'density' ref = {i => this.density = i} type='number' defaultValue={str.density}/>
 						<div className = 'error'>
 							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input id = 'hiding' ref = {(i) => this.hiding = i} type='number' defaultValue={str.hiding}/>
+					<input id = 'hiding' ref = {i => this.hiding = i} type='number' defaultValue={str.hiding}/>
 						<div className = 'error'>
 							{st.invalidHiding ? 'Please, set any number from 1 to 10' : ''}
 						</div>
 				</label>
 				<label>select game time (sec)
-					<input id = 'time' ref = {(i) => this.time = i} type='number' defaultValue={str.time}/>
+					<input id = 'time' ref = {i => this.time = i} type='number' defaultValue={str.time}/>
 						<div className = 'error'>
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>
 				</label>
-				<div className = {`button ${this.props.store.gameState && 'abort'}`}
+				<div className = {`button ${this.props.play ? 'abort' : ''}`}
 					onClick = {(!st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis) ? this.toSubmit : null}>
 					{settingsButton}
 				</div>
@@ -70,11 +71,12 @@ class Settings extends React.Component{
 
 export default connect(
 	state => ({
-		store: state
+		store: state,
+		play: state.gameState.play
 	}),
-	dispatch =>({
+	dispatch => ({
 		setSettings: obj => dispatch(setGameSettings(obj)),
-		setGameAction: () => dispatch(setGameAction()),
+		setGameAction: bool => dispatch(setGameAction(bool)),
 		setGameResultScore: score => dispatch(setGameResultScore(score)),
 		clearBuffer: () => dispatch(clearBuffer())
 	})

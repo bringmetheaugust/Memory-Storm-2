@@ -7,27 +7,24 @@ import {setGameAction} from '../redux/reducers/gameState/actionCreator.js';
 class Game extends React.Component{
 	constructor(props){
 		super(props);
-		this.count = React.createRef();
 	}
 	shouldComponentUpdate(nextPr){
-		if(this.props.store.gameState !== nextPr.store.gameState) return true;
+		if(this.props.play !== nextPr.play) return true;
 		return false;
 	}
-	componentWillUpdate(nextPr){
-		nextPr.store.gameState ? this.runCount(nextPr.store.settings.time) : this.stopCount();
-	}
+	componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
 			if(time === 1){
-				this.props.setGameAction();
+				this.props.setGameAction(false);
 				this.stopCount();
 			}
-			this.count.current.textContent = --time;
+			this.count.textContent = --time;
 		}, 1000);
 	}
 	stopCount = () =>{
 		clearInterval(this.countInterval);
-		this.count.current.textContent = '0';
+		this.count.textContent = '0';
 	}
 	toGenerateCards = () =>{
 		let arr = pictures.slice(0, Math.pow(this.props.density, 2) / 2);
@@ -36,7 +33,7 @@ class Game extends React.Component{
 	render(){
 		return(
 			<div className='game-field-wrap'>
-				<ul id='game-field' className = {this.props.store.gameState ? 'play' : ''}
+				<ul id='game-field' className = {this.props.play? 'play' : ''}
 					style = {{gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)`}} >
 					{
 						this.toGenerateCards().map((i, n) => <Card key = {Math.random()} img = {i}/>)
@@ -44,7 +41,7 @@ class Game extends React.Component{
 				</ul>
 				<div className='count'>
 					time left :
-					<div ref = {this.count} id='count'> 0 </div>
+					<div ref = {i => this.count = i} id='count'> 0 </div>
 				</div>
 			</div>
 
@@ -54,8 +51,7 @@ export default connect(
 	state => ({
 		store: state,
 		density: state.settings.density,
+		play: state.gameState.play,
 	}),
-	dispatch => ({
-		setGameAction: () => dispatch(setGameAction()),
-	})
+	dispatch => ({ setGameAction: (bool) => dispatch(setGameAction(bool)) })
 )(Game);

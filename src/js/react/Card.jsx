@@ -10,9 +10,7 @@ class Card extends React.Component{
 			isDisabled: false
 		}
 	}
-	toOpenCard = () =>{
-		this.setState({isOpen: true});
-	}
+	toOpenCard = () => this.setState({ isOpen: true });
 	toActivateCard = () =>{
 		this.toOpenCard();
 		this.props.addItemOnBuffer({
@@ -25,34 +23,31 @@ class Card extends React.Component{
 		if(this.imgRef !== null) this.imgRef.className = 'disactive';
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
-	toDisable = () => this.setState({isDisabled: true});
+	toDisable = () => this.setState({ isDisabled: true });
 	componentDidMount(){
-		if(this.props.store.gameState){
+		if(this.props.play){
 			this.toOpenCard();
 			this.mountCount = setTimeout(() =>{
 				this.toCloseCard();
 			}, this.props.store.settings.hiding * 1000);
 		}
 	}
-	componentWillUnmount(){
-		clearTimeout(this.mountCount);
-	}
+	componentWillUnmount = () => clearTimeout(this.mountCount);
 	render(){
-		const cardOpportunity = this.state.isDisabled || !this.props.store.gameState || this.state.isOpen;
+		const cardOpportunity = this.state.isDisabled || !this.props.play || this.state.isOpen;
 		return(
 			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}>
 				{
-					this.state.isOpen && <img ref = {(img) => this.imgRef = img} src={this.props.img}/>
+					this.state.isOpen && <img ref = {i => this.imgRef = i} src={this.props.img}/>
 				}
 			</li>
 )}}
 
 export default connect(
 	state => ({
-		store: state
+		store: state,
+		play: state.gameState.play,
 	}),
-	dispatch =>({
-		addItemOnBuffer: item => dispatch(addItemOnBuffer(item)),
-	})
+	dispatch =>({ addItemOnBuffer: item => dispatch(addItemOnBuffer(item)) })
 )(Card);

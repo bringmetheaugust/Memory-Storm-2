@@ -3,18 +3,18 @@ import React from 'react';
 class Splash extends React.Component{
 	constructor(props){
 		super(props);
-		this.state ={ isActive: true };
+		this.state = { isActive: true };
 	}
 	hideSplash = () =>{
-		this.splash.style.opacity = '0';
+		if(this.splash) this.splash.style.opacity = '0';
 		setTimeout(() => this.setState({ isActive: false }), 1000);
 	}
 	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , 13000);
-	componentWillUnmount = () => cleartimeout(this.count);
+	componentWillUnmount = () => clearTimeout(this.count);
 	render(){
 		if(!this.state.isActive) return null;
 		return(
-			<div id = 'splash' ref ={(splash) => this.splash = splash}>
+			<div id = 'splash' ref ={i => this.splash = i}>
 				<div className = 'title'>
 					MEMORY STORM
 					<div className = 'exclamation'>
@@ -24,13 +24,11 @@ class Splash extends React.Component{
 				</div>
 				<div className = 'splash-wrap'>
 					{
-						[...new Array(100)].map(i => <div className = 'splash' key = {Math.random()}></div>)
+						[...new Array(100)].map((i, n) => <div className = 'splash' key = {n}></div>)
 					}
 				</div>
 				<div onClick = {this.hideSplash} id = 'close'>close</div>
 			</div>
-		)
-	}
-}
+)}}
 
 export default Splash;
