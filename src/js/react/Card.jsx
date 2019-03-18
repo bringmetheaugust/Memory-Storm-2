@@ -9,7 +9,6 @@ class Card extends React.Component{
 			isOpen: false,
 			isDisabled: false
 		}
-		this.imgRef = React.createRef();
 	}
 	toOpenCard = () =>{
 		this.setState({isOpen: true});
@@ -23,21 +22,20 @@ class Card extends React.Component{
 		});
 	}
 	toCloseCard = () =>{
-		try{
-			this.imgRef.current.className = 'disactive';
-		}catch(e){
-			// console.warn(e);
-		}
+		if(this.imgRef !== null) this.imgRef.className = 'disactive';
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
 	toDisable = () => this.setState({isDisabled: true});
 	componentDidMount(){
 		if(this.props.store.gameState){
 			this.toOpenCard();
-			setTimeout(() =>{
+			this.mountCount = setTimeout(() =>{
 				this.toCloseCard();
 			}, this.props.store.settings.hiding * 1000);
 		}
+	}
+	componentWillUnmount(){
+		clearTimeout(this.mountCount);
 	}
 	render(){
 		const cardOpportunity = this.state.isDisabled || !this.props.store.gameState || this.state.isOpen;
@@ -45,7 +43,7 @@ class Card extends React.Component{
 			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}>
 				{
-					this.state.isOpen && <img ref = {this.imgRef} src={this.props.img}/>
+					this.state.isOpen && <img ref = {(img) => this.imgRef = img} src={this.props.img}/>
 				}
 			</li>
 )}}
