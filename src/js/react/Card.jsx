@@ -43,7 +43,7 @@ class Card extends React.Component{
 			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}>
 				{
-					this.state.isOpen && <img ref = {(img) => this.imgRef = img} src={this.props.img}/>
+					this.state.isOpen && <img ref = {i => this.imgRef = i} src={this.props.img}/>
 				}
 			</li>
 )}}

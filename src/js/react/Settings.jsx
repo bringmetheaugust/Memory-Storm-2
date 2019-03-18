@@ -46,19 +46,19 @@ class Settings extends React.Component{
 		return(
 			<form onInput = {this.checkForm} id='settings'>
 				<label>select grid density
-					<input id = 'density' ref = {(i) => this.density = i} type='number' defaultValue={str.density}/>
+					<input id = 'density' ref = {i => this.density = i} type='number' defaultValue={str.density}/>
 						<div className = 'error'>
 							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input id = 'hiding' ref = {(i) => this.hiding = i} type='number' defaultValue={str.hiding}/>
+					<input id = 'hiding' ref = {i => this.hiding = i} type='number' defaultValue={str.hiding}/>
 						<div className = 'error'>
 							{st.invalidHiding ? 'Please, set any number from 1 to 10' : ''}
 						</div>
 				</label>
 				<label>select game time (sec)
-					<input id = 'time' ref = {(i) => this.time = i} type='number' defaultValue={str.time}/>
+					<input id = 'time' ref = {i => this.time = i} type='number' defaultValue={str.time}/>
 						<div className = 'error'>
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>

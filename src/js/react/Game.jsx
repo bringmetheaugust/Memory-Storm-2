@@ -7,7 +7,6 @@ import {setGameAction} from '../redux/reducers/gameState/actionCreator.js';
 class Game extends React.Component{
 	constructor(props){
 		super(props);
-		this.count = React.createRef();
 	}
 	shouldComponentUpdate(nextPr){
 		if(this.props.play !== nextPr.play) return true;
@@ -22,12 +21,12 @@ class Game extends React.Component{
 				this.props.setGameAction(false);
 				this.stopCount();
 			}
-			this.count.current.textContent = --time;
+			this.count.textContent = --time;
 		}, 1000);
 	}
 	stopCount = () =>{
 		clearInterval(this.countInterval);
-		this.count.current.textContent = '0';
+		this.count.textContent = '0';
 	}
 	toGenerateCards = () =>{
 		let arr = pictures.slice(0, Math.pow(this.props.density, 2) / 2);
@@ -44,7 +43,7 @@ class Game extends React.Component{
 				</ul>
 				<div className='count'>
 					time left :
-					<div ref = {this.count} id='count'> 0 </div>
+					<div ref = {i => this.count = i} id='count'> 0 </div>
 				</div>
 			</div>
 
