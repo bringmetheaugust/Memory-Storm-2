@@ -76,7 +76,7 @@ export default connect(
 	}),
 	dispatch => ({
 		setSettings: obj => dispatch(setGameSettings(obj)),
-		setGameAction: () => dispatch(setGameAction()),
+		setGameAction: bool => dispatch(setGameAction(bool)),
 		setGameResultScore: score => dispatch(setGameResultScore(score)),
 		clearBuffer: () => dispatch(clearBuffer())
 	})
