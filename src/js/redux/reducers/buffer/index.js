@@ -13,6 +13,9 @@ export default function buffer(state = initialState, action){
 		[action.data, state.buffer].forEach(i => i.close());
 		return Object.assign(state, {buffer: null});
 	}
+	if(action.type === 'clear'){
+		return {buffer: null, score: null};
+	}
 	if(action.type === 'setScore'){
 		return Object.assign(state, {score: action.data});
 	}
