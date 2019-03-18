@@ -28,10 +28,9 @@ class Settings extends React.Component{
 			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
-		console.log('before', this.props.play);
-		this.props.setGameAction();
-		console.log('after', this.props.play);
+		this.props.setGameAction(null);
 		if(this.props.play) return;
+		window.scrollTo(0, 0);
 		this.props.clearBuffer();
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
@@ -72,10 +71,10 @@ class Settings extends React.Component{
 
 export default connect(
 	state => ({
-		play: state.gameState.play,
-		store: state
+		store: state,
+		play: state.gameState.play
 	}),
-	dispatch =>({
+	dispatch => ({
 		setSettings: obj => dispatch(setGameSettings(obj)),
 		setGameAction: () => dispatch(setGameAction()),
 		setGameResultScore: score => dispatch(setGameResultScore(score)),

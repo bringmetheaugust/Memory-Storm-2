@@ -11,7 +11,7 @@ export default function gameState(state = initialState, action){
 				result: action.win
 			};
 		}
-		return Object.assign(state, {play: !state.play});
+		return Object.assign({}, state, {play: !state.play});
 	}
 	return state;
 }

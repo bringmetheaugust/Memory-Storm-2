@@ -24,7 +24,7 @@ class Splash extends React.Component{
 				</div>
 				<div className = 'splash-wrap'>
 					{
-						[...new Array(100)].map(i => <div className = 'splash' key = {Math.random()}></div>)
+						[...new Array(100)].map((i, n) => <div className = 'splash' key = {n}></div>)
 					}
 				</div>
 				<div onClick = {this.hideSplash} id = 'close'>close</div>
