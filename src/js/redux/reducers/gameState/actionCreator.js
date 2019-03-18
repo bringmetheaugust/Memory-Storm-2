@@ -1,3 +1,4 @@
-export const setGameAction = () => ({
-	type: 'setGameAction'
+export const setGameAction = (bool) => ({
+	type: 'setGameAction',
+	win: bool
 });

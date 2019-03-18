@@ -1,12 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const Alert = (props) =>
 	<div id='alert'>
 		<div className='title'>
-			{/*{
-				props.win ? 'You win!!!' : 'You lose :('
-			}*/}
-			Game Over
+			{
+				props.result ? 'You win!!!' : 'You lose :('
+			}
 		</div>
 		<div onClick = {() => props.closeAlert()} className = 'button'>
 			<div>b</div>
@@ -16,4 +16,6 @@ const Alert = (props) =>
 		</div>
 	</div>
 
-export default Alert;
+export default connect(
+	state => ({ result: state.gameState.result }),
+)(Alert);

@@ -13,7 +13,7 @@ class App extends React.Component{
 		}
 	}
 	componentWillReceiveProps(nextPr){
-		if(!nextPr.store) this.setState({gameOver: true});
+		if(!nextPr.play) this.setState({gameOver: true});
 	}
 	closeAlert = () => this.setState({gameOver: false});
 	render(){
@@ -23,11 +23,13 @@ class App extends React.Component{
 				<Game/>
 				<Settings/>
 				{
-					this.state.gameOver && <Alert closeAlert = {this.closeAlert} win = {true}/>
+					this.state.gameOver && <Alert closeAlert = {this.closeAlert}/>
 				}
 			</React.Fragment>
 )}}
 
 export default connect(
-	state => ({ store: state.gameState }),
+	state => ({
+		play: state.gameState.play
+	}),
 )(App);

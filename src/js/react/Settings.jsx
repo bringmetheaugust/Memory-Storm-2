@@ -28,8 +28,10 @@ class Settings extends React.Component{
 			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
+		console.log('before', this.props.play);
 		this.props.setGameAction();
-		if(this.props.store.gameState) return;
+		console.log('after', this.props.play);
+		if(this.props.play) return;
 		this.props.clearBuffer();
 		e.preventDefault(), e.persist();
 		this.props.setSettings({
@@ -61,7 +63,7 @@ class Settings extends React.Component{
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>
 				</label>
-				<div className = {`button ${this.props.store.gameState && 'abort'}`}
+				<div className = {`button ${this.props.play ? 'abort' : ''}`}
 					onClick = {(!st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis) ? this.toSubmit : null}>
 					{settingsButton}
 				</div>
@@ -70,6 +72,7 @@ class Settings extends React.Component{
 
 export default connect(
 	state => ({
+		play: state.gameState.play,
 		store: state
 	}),
 	dispatch =>({
