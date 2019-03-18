@@ -16,7 +16,11 @@ class Card extends React.Component{
 	}
 	toActivateCard = () =>{
 		this.toOpenCard();
-		this.props.addItemOnBuffer(this);
+		this.props.addItemOnBuffer({
+			img: this.props.img,
+			close: this.toCloseCard,
+			disable: this.toDisable
+		});
 	}
 	toCloseCard = () =>{
 		try{
