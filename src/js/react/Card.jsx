@@ -10,9 +10,7 @@ class Card extends React.Component{
 			isDisabled: false
 		}
 	}
-	toOpenCard = () =>{
-		this.setState({isOpen: true});
-	}
+	toOpenCard = () => this.setState({ isOpen: true });
 	toActivateCard = () =>{
 		this.toOpenCard();
 		this.props.addItemOnBuffer({
@@ -25,7 +23,7 @@ class Card extends React.Component{
 		if(this.imgRef !== null) this.imgRef.className = 'disactive';
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
-	toDisable = () => this.setState({isDisabled: true});
+	toDisable = () => this.setState({ isDisabled: true });
 	componentDidMount(){
 		if(this.props.play){
 			this.toOpenCard();
@@ -34,9 +32,7 @@ class Card extends React.Component{
 			}, this.props.store.settings.hiding * 1000);
 		}
 	}
-	componentWillUnmount(){
-		clearTimeout(this.mountCount);
-	}
+	componentWillUnmount = () => clearTimeout(this.mountCount);
 	render(){
 		const cardOpportunity = this.state.isDisabled || !this.props.play || this.state.isOpen;
 		return(
@@ -53,7 +49,5 @@ export default connect(
 		store: state,
 		play: state.gameState.play,
 	}),
-	dispatch =>({
-		addItemOnBuffer: item => dispatch(addItemOnBuffer(item)),
-	})
+	dispatch =>({ addItemOnBuffer: item => dispatch(addItemOnBuffer(item)) })
 )(Card);

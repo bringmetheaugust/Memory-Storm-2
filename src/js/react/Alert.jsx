@@ -19,6 +19,7 @@ const Alert = (props) =>{
 		</div>
 		)
 }
+
 export default connect(
 	state => ({ result: state.gameState.result }),
 )(Alert);

@@ -7,8 +7,7 @@ const initialState = {
 	time: 60
 };
 
-const getLocalStorage = () =>
-	validateForm(JSON.parse(localStorage.getItem('settings'))) || initialState;
+const getLocalStorage = () => validateForm(JSON.parse(localStorage.getItem('settings'))) || initialState;
 
 const validateForm = (obj) =>{
 	if(!obj) return;

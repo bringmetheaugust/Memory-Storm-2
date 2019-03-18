@@ -29,8 +29,6 @@ class Splash extends React.Component{
 				</div>
 				<div onClick = {this.hideSplash} id = 'close'>close</div>
 			</div>
-		)
-	}
-}
+)}}
 
 export default Splash;

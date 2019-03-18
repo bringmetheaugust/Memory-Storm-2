@@ -8,16 +8,13 @@ import {connect} from 'react-redux';
 class App extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			gameOver: false
-		}
+		this.state = { gameOver: false }
 	}
 	componentWillReceiveProps(nextPr){
 		if(!nextPr.play) this.setState({gameOver: true});
 	}
-	closeAlert = () => this.setState({gameOver: false});
-	render(){
-		return(
+	closeAlert = () => this.setState({ gameOver: false });
+	render = () =>
 			<React.Fragment>
 				<Splash/>
 				<Game/>
@@ -26,10 +23,8 @@ class App extends React.Component{
 					this.state.gameOver && <Alert closeAlert = {this.closeAlert}/>
 				}
 			</React.Fragment>
-)}}
+}
 
 export default connect(
-	state => ({
-		play: state.gameState.play
-	}),
+	state => ({ play: state.gameState.play }),
 )(App);

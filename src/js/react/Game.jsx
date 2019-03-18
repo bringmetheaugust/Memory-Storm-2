@@ -12,9 +12,7 @@ class Game extends React.Component{
 		if(this.props.play !== nextPr.play) return true;
 		return false;
 	}
-	componentWillUpdate(nextPr){
-		nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
-	}
+	componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
 			if(time === 1){
@@ -55,7 +53,5 @@ export default connect(
 		density: state.settings.density,
 		play: state.gameState.play,
 	}),
-	dispatch => ({
-		setGameAction: (bool) => dispatch(setGameAction(bool)),
-	})
+	dispatch => ({ setGameAction: (bool) => dispatch(setGameAction(bool)) })
 )(Game);
