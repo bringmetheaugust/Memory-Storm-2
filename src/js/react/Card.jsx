@@ -20,12 +20,12 @@ class Card extends React.Component{
 		});
 	}
 	toCloseCard = () =>{
-		if(this.imgRef !== null) this.imgRef.className = 'disactive';
+		if (this.imgRef !== null) this.imgRef.className = 'disactive';
 		setTimeout(() => this.setState({isOpen: false}), 500);
 	}
 	toDisable = () => this.setState({ isDisabled: true });
 	componentDidMount(){
-		if(this.props.play){
+		if (this.props.play){
 			this.toOpenCard();
 			this.mountCount = setTimeout(() =>{
 				this.toCloseCard();

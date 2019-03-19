@@ -29,7 +29,7 @@ class Settings extends React.Component{
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction(null);
-		if(this.props.play) return;
+		if (this.props.play) return;
 		window.scrollTo(0, 0);
 		this.props.clearBuffer();
 		e.preventDefault(), e.persist();

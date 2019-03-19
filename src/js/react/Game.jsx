@@ -9,13 +9,12 @@ class Game extends React.Component{
 		super(props);
 	}
 	shouldComponentUpdate(nextPr){
-		if(this.props.play !== nextPr.play) return true;
-		return false;
+		return this.props.play !== nextPr.play ? true : false;
 	}
 	componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
-			if(time === 1){
+			if (time === 1){
 				this.props.setGameAction(false);
 				this.stopCount();
 			}
@@ -39,8 +38,7 @@ class Game extends React.Component{
 						this.toGenerateCards().map((i, n) => <Card key = {Math.random()} img = {i}/>)
 					}
 				</ul>
-				<div className='count'>
-					time left :
+				<div className='count'>time left :
 					<div ref = {i => this.count = i} id='count'> 0 </div>
 				</div>
 			</div>
