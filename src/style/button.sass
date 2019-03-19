@@ -17,14 +17,14 @@
 			@for $i from 1 to 5
 				&:nth-child(#{$i})
 					animation-delay: #{$i/30}s
-	&>div
+	&>ul
 		+flex()
 		transition: transform .5s
-		&>div
+		&>li
 			text-align: center
 	&.abort
 		background-color: red
-		&>div
+		&>ul
 			transform: translateY(-40px)
 
 @keyframes play

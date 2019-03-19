@@ -2,17 +2,17 @@ import React from 'react';
 
 export const settingsButton = (
 	<React.Fragment>
-		<div className = 'play'>
-			<div>p</div>
-			<div>l</div>
-			<div>a</div>
-			<div>y</div>
-		</div>
-		<div className = 'abort'>
-			<div>s</div>
-			<div>t</div>
-			<div>o</div>
-			<div>p</div>
-		</div>
+		<ul className = 'play'>
+			<li>p</li>
+			<li>l</li>
+			<li>a</li>
+			<li>y</li>
+		</ul>
+		<ul className = 'abort'>
+			<li>s</li>
+			<li>t</li>
+			<li>o</li>
+			<li>p</li>
+		</ul>
 	</React.Fragment>
 );
