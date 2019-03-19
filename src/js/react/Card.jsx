@@ -25,7 +25,7 @@ class Card extends React.Component{
 	}
 	toDisable = () => this.setState({ isDisabled: true });
 	componentDidMount(){
-		if (this.props.play){
+		if (this.props.play) {
 			this.toOpenCard();
 			this.mountCount = setTimeout(() =>{
 				this.toCloseCard();

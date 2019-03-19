@@ -8,13 +8,11 @@ class Game extends React.Component{
 	constructor(props){
 		super(props);
 	}
-	shouldComponentUpdate(nextPr){
-		return this.props.play !== nextPr.play ? true : false;
-	}
+	shouldComponentUpdate = (nextPr) => this.props.play !== nextPr.play ? true : false;
 	componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	runCount = (time) =>{
 		this.countInterval = setInterval(() =>{
-			if (time === 1){
+			if (time === 1) {
 				this.props.setGameAction(false);
 				this.stopCount();
 			}

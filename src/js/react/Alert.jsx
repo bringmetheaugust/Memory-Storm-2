@@ -17,7 +17,7 @@ const Alert = (props) =>{
 				<div>k</div>
 			</div>
 		</div>
-		)
+	)
 }
 
 export default connect(
