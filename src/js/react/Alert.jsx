@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const Alert = (props) =>{
-	if(props.result === null) return null;
+	if (props.result === null) return null;
 	return(
 		<div id='alert'>
 			<div className='title'>
@@ -17,7 +17,7 @@ const Alert = (props) =>{
 				<div>k</div>
 			</div>
 		</div>
-		)
+	)
 }
 
 export default connect(

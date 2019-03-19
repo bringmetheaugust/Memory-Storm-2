@@ -8,7 +8,7 @@ export const store = createStore(reducers,
 );
 
 store.subscribe(() => {
-	if(store.getState().buffer.score === 0){
+	if (store.getState().buffer.score === 0) {
 		store.dispatch(setGameResultScore(null));
 		store.dispatch(setGameAction(true));
 	}

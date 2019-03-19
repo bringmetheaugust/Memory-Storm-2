@@ -20,16 +20,16 @@ class Settings extends React.Component{
 	checkForm = (e) =>{
 		const trg = e.target;
 		const isNan = Number.isNaN(Number(trg.value));
-		if(trg.id === 'density') this.setState({invalidDensity:
+		if (trg.id === 'density') this.setState({invalidDensity:
 			(isNan || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
-		if(trg.id === 'hiding') this.setState({invalidHiding:
+		if (trg.id === 'hiding') this.setState({invalidHiding:
 			(isNan || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
-		if(trg.id === 'time') this.setState({invalidTime:
+		if (trg.id === 'time') this.setState({invalidTime:
 			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction(null);
-		if(this.props.play) return;
+		if (this.props.play) return;
 		window.scrollTo(0, 0);
 		this.props.clearBuffer();
 		e.preventDefault(), e.persist();
@@ -45,19 +45,22 @@ class Settings extends React.Component{
 		return(
 			<form onInput = {this.checkForm} id='settings'>
 				<label>select grid density
-					<input id = 'density' ref = {i => this.density = i} type='number' defaultValue={str.density}/>
+					<input id = 'density' ref = {i => this.density = i} type='number'
+						defaultValue={str.density} readOnly = {this.props.play}/>
 						<div className = 'error'>
 							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
 				<label>select time for pictures hiding (sec)
-					<input id = 'hiding' ref = {i => this.hiding = i} type='number' defaultValue={str.hiding}/>
+					<input id = 'hiding' ref = {i => this.hiding = i} type='number'
+						defaultValue={str.hiding} readOnly = {this.props.play}/>
 						<div className = 'error'>
 							{st.invalidHiding ? 'Please, set any number from 1 to 10' : ''}
 						</div>
 				</label>
 				<label>select game time (sec)
-					<input id = 'time' ref = {i => this.time = i} type='number' defaultValue={str.time}/>
+					<input id = 'time' ref = {i => this.time = i} type='number'
+						defaultValue={str.time} readOnly = {this.props.play}/>
 						<div className = 'error'>
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>

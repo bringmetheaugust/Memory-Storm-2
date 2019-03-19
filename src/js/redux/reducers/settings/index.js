@@ -10,18 +10,18 @@ const initialState = {
 const getLocalStorage = () => validateForm(JSON.parse(localStorage.getItem('settings'))) || initialState;
 
 const validateForm = (obj) =>{
-	if(!obj) return;
-	for(var i in obj){
-		if(typeof obj[i] !== 'number' || Number.isNaN(obj[i]) ) return;
+	if (!obj) return null;
+	for (var i in obj){
+		if (typeof obj[i] !== 'number' || Number.isNaN(obj[i])) return null;
 	}
-	if((obj.density < MIN_DENSITY || obj.density > MAX_DENSITY || obj.density % 2) ||
+	if ((obj.density < MIN_DENSITY || obj.density > MAX_DENSITY || obj.density % 2) ||
 		(obj.hiding < MIN_HIDING_TIME || obj.hiding > MAX_HIDING_TIME) ||
-		(obj.time < MIN_GAME_TIME || obj.time > MAX_GAME_TIME)) return;
+		(obj.time < MIN_GAME_TIME || obj.time > MAX_GAME_TIME)) return null;
 	return obj;
 }
 
 export default function settings(state = getLocalStorage(), action){
-	if(action.type === 'setSettings'){
+	if (action.type === 'setSettings') {
 		localStorage.setItem('settings', JSON.stringify(action.data))
 		return action.data;
 	}
