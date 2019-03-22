@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 import pictures from '../pictures.js';
 import { setCards } from '../redux/actionCreator.js';
 
-class App extends React.Component{
-	constructor(props){
+class App extends React.Component {
+	constructor(props) {
 		super(props);
 	}
 	componentDidMount() {
@@ -16,7 +16,7 @@ class App extends React.Component{
 		this.props.setCards([...arr, ...arr].map(i => ({
 			id: String(Math.random()).slice(2, 12),
 			img: i,
-			isActive: false,
+			isOpen: false,
 			isDisable: false,
 		})));
 	}
