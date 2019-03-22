@@ -18,7 +18,7 @@ export const openAllCards = (bool) => ({
 	data: bool
 });
 
-// export const setGameSettings = (settings) => ({
-// 	type: 'setSettings',
-// 	data: settings
-// });
+export const setGameSettings = (settings) => ({
+	type: 'SET_GAME_SETTINGS',
+	data: settings
+});

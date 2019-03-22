@@ -42,6 +42,12 @@ function reducer(state = initialState, action) {
 				buffer: a
 			}
 		}
+		case 'SET_GAME_SETTINGS': {
+			return {
+				...state,
+				settings: action.data
+			}
+		}
 	}
 	return state;
 }

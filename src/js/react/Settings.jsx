@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { setGameSettings } from '../redux/reducers/settings/actionCreator.js';
 import { setGameAction } from '../redux/actionCreator.js';
 import { openAllCards } from '../redux/actionCreator.js';
 // import { setGameResultScore, clearBuffer } from '../redux/reducers/buffer/actionCreator.js';
 import { settingsButton } from './elements.jsx';
+import { setGameSettings } from '../redux/actionCreator.js';
 const MIN_GAME_TIME = 10;
 const MAX_GAME_TIME = 60;
 const MIN_HIDING_TIME = 1;
@@ -34,6 +34,13 @@ class Settings extends React.Component {
 	toSubmit = (e) =>{
 		this.props.setGameAction(null);
 		this.props.openAllCards(!this.props.store.play);
+		const form = {
+			density: +this.density.value,
+			hiding: +this.hiding.value,
+			time: +this.time.value
+		};
+		localStorage.setItem('settings', JSON.stringify(form));
+		this.props.setGameSettings(form);
 		// if (this.props.play) return;
 		// window.scrollTo(0, 0);
 		// this.props.clearBuffer();
@@ -45,7 +52,15 @@ class Settings extends React.Component {
 		// });
 		// this.props.setGameResultScore(Math.pow(this.density.value, 2) / 2);
 	}
+	shouldComponentUpdate(){
+		return true;
+	}
+	componentDidMount() {
+		const localSettings = JSON.parse(localStorage.getItem('settings'));
+		if (localSettings) this.props.setGameSettings(localSettings);
+	}
 	render() {
+		console.log(this.props.store.settings);
 		const str = this.props.store.settings, st = this.state;
 		return(
 			<form onInput={this.checkForm} id='settings'>
@@ -53,7 +68,7 @@ class Settings extends React.Component {
 					<input id = 'density'
 						ref={i => this.density = i}
 						type='number'
-						defaultValue={str.density}
+						defaultValue={this.props.store.settings.density}
 						readOnly={this.props.store.play}
 					/>
 						<div className = 'error'>
@@ -95,7 +110,7 @@ class Settings extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		// setSettings: obj => dispatch(setGameSettings(obj)),
+		setGameSettings: form => dispatch(setGameSettings(form)),
 		setGameAction: bool => dispatch(setGameAction(bool)),
 		// setGameResultScore: score => dispatch(setGameResultScore(score)),
 		openAllCards: (bool) => dispatch(openAllCards(bool))
