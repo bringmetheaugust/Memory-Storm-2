@@ -17,11 +17,18 @@ export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ &&
 
 function reducer(state = initialState, action) {
 	switch (action.type) {
-		case 'SET_CARDS' :
+		case 'SET_CARDS': {
 			return {
 				...state,
 				cards: action.data
 			};
+		}
+		case 'SET_GAME_ACTION': {
+			return {
+				...state,
+				play: !state.play
+			}
+		}
 	}
 	return state;
 }

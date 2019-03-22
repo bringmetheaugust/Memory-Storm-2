@@ -3,7 +3,7 @@ import Game from './Game.jsx';
 import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import pictures from '../pictures.js';
 import { setCards } from '../redux/actionCreator.js';
 
@@ -24,7 +24,7 @@ class App extends React.Component {
 			<React.Fragment>
 				{/*<Splash/>*/}
 				<Game />
-				{/*<Settings/>*/}
+				<Settings/>
 				{/*<Alert />*/}
 			</React.Fragment>
 }

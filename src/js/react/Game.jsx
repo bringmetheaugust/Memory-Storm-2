@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from './Card.jsx';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import pictures from '../pictures.js';
-import {setGameAction} from '../redux/reducers/gameState/actionCreator.js';
+import { setGameAction } from '../redux/actionCreator.js';
 
 class Game extends React.Component {
 	constructor(props) {
@@ -40,7 +40,9 @@ class Game extends React.Component {
 				</div>
 			</div>
 
-)}}
+		)
+	}
+}
 
 export default connect(
 	state => ({

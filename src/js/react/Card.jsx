@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addItemOnBuffer} from '../redux/reducers/buffer/actionCreator.js';
+import { addItemOnBuffer } from '../redux/actionCreator.js';
 
-class Card extends React.Component{
-	constructor(props){
+class Card extends React.Component {
+	constructor(props) {
 		super(props);
 	}
 	// toOpenCard = () => this.setState({ isOpen: true });
@@ -36,7 +36,7 @@ class Card extends React.Component{
 			<li className={`card-wrap ${dt.isDisable ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}
 			>
-				{ dt.isOpen && <img ref = {i => this.imgRef = i} src={dt.img}/> }
+				{ dt.isOpen && <img ref={i => this.imgRef = i} src={dt.img} /> }
 			</li>
 )}}
 
