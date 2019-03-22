@@ -2,15 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const Alert = (props) =>{
-	if (props.result === null) return null;
 	return(
 		<div id='alert'>
 			<div className='title'>
-				{
-					props.result ? 'You win!!!' : 'You lose :('
-				}
 			</div>
-			<div onClick = {() => props.closeAlert()} className = 'button'>
+			<div className = 'button'>
 				<div>b</div>
 				<div>a</div>
 				<div>c</div>
@@ -21,5 +17,5 @@ const Alert = (props) =>{
 }
 
 export default connect(
-	state => ({ result: state.gameState.result }),
+	state => ({ store: state }),
 )(Alert);

@@ -1,15 +1,27 @@
 import {createStore} from 'redux';
-import reducers from './reducers/index.js';
-import {setGameAction} from './reducers/gameState/actionCreator.js';
-import {setGameResultScore} from './reducers/buffer/actionCreator.js';
 
-export const store = createStore(reducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+var initialState = {
+	settings: {
+		density: 4,
+		hiding: 5,
+		time: 60
+	},
+	cards: [],
+	play: false,
+	result: null,
+	buffer: null,
+	score: null
+};
 
-store.subscribe(() => {
-	if (store.getState().buffer.score === 0) {
-		store.dispatch(setGameResultScore(null));
-		store.dispatch(setGameAction(true));
+export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+function reducer(state = initialState, action) {
+	switch (action.type) {
+		case 'SET_CARDS' :
+			return {
+				...state,
+				cards: action.data
+			};
 	}
-})
+	return state;
+}

@@ -4,27 +4,32 @@ import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import {connect} from 'react-redux';
+import pictures from '../pictures.js';
+import { setCards } from '../redux/actionCreator.js';
 
 class App extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = { gameOver: false }
 	}
-	componentWillReceiveProps(nextPr){
-		if (!nextPr.play) this.setState({ gameOver: true });
+	componentDidMount() {
+		const arr = pictures.slice(0, Math.pow(this.props.store.settings.density, 2) / 2);
+		this.props.setCards([...arr, ...arr].map(i => ({
+			id: String(Math.random()).slice(2, 12),
+			img: i,
+			isActive: false,
+			isDisable: false,
+		})));
 	}
-	closeAlert = () => this.setState({ gameOver: false });
 	render = () =>
 			<React.Fragment>
-				<Splash/>
-				<Game/>
-				<Settings/>
-				{
-					this.state.gameOver && <Alert closeAlert = {this.closeAlert}/>
-				}
+				{/*<Splash/>*/}
+				<Game />
+				{/*<Settings/>*/}
+				{/*<Alert />*/}
 			</React.Fragment>
 }
 
 export default connect(
-	state => ({ play: state.gameState.play }),
+	state => ({ store: state }),
+	dispatch => ({ setCards: cards => dispatch(setCards(cards)) })
 )(App);
