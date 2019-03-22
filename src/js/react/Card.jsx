@@ -1,31 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { addItemOnBuffer } from '../redux/actionCreator.js';
+import { openCard } from '../redux/actionCreator.js';
+// import { addItemOnBuffer } from '../redux/actionCreator.js';
 
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	// toOpenCard = () => this.setState({ isOpen: true });
-	// toActivateCard = () =>{
-	// 	this.toOpenCard();
-	// 	this.props.addItemOnBuffer({
-	// 		img: this.props.img,
-	// 		close: this.toCloseCard,
-	// 		disable: this.toDisable
-	// 	});
+	// toActivateCard = () => {
+	// 	this.props.openCard(this.props.data.id);
+	// // 	this.props.addItemOnBuffer({
+	// // 		img: this.props.img,
+	// // 		close: this.toCloseCard,
+	// // 		disable: this.toDisable
+	// // 	});
 	// }
 	// toCloseCard = () =>{
 	// 	if (this.imgRef !== null) this.imgRef.className = 'disactive';
 	// 	setTimeout(() => this.setState({isOpen: false}), 500);
 	// }
 	// toDisable = () => this.setState({ isDisabled: true });
-	// componentDidMount(){
-	// 	if (this.props.play) {
-	// 		this.toOpenCard();
-	// 		this.mountCount = setTimeout(() =>{
-	// 			this.toCloseCard();
-	// 		}, this.props.store.settings.hiding * 1000);
+	// componentDidMount() {
+	// 	if (this.props.store.play) {
+	// 		// this.toOpenCard();
+	// 		this.props.openCard(this.props.data.id);
+	// 	// 	this.mountCount = setTimeout(() =>{
+	// 	// 		this.toCloseCard();
+	// 	// 	}, this.props.store.settings.hiding * 1000);
 	// 	}
 	// }
 	// componentWillUnmount = () => clearTimeout(this.mountCount);
@@ -42,5 +44,5 @@ class Card extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch =>({ addItemOnBuffer: item => dispatch(addItemOnBuffer(item)) })
+	dispatch =>({ openCard: id => dispatch(openCard(id)) }),
 )(Card);

@@ -29,6 +29,19 @@ function reducer(state = initialState, action) {
 				play: !state.play
 			}
 		}
+		case 'OPEN_ALL_CARDS': {
+			return {
+				...state,
+				cards: state.cards.map(i => ({...i, isOpen: action.data}))
+			}
+		}
+		case 'OPEN_CARD': {
+			const a = state.cards.find(i => i.id === action.data);
+			return {
+				...state,
+				buffer: a
+			}
+		}
 	}
 	return state;
 }

@@ -8,6 +8,15 @@ export const setGameAction = (bool) => ({
 	data: bool
 });
 
+export const openCard = (id) => ({
+	type: 'OPEN_CARD',
+	data: id
+});
+
+export const openAllCards = (bool) => ({
+	type: 'OPEN_ALL_CARDS',
+	data: bool
+});
 
 // export const setGameSettings = (settings) => ({
 // 	type: 'setSettings',

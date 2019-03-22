@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { setGameSettings } from '../redux/reducers/settings/actionCreator.js';
 import { setGameAction } from '../redux/actionCreator.js';
+import { openAllCards } from '../redux/actionCreator.js';
 // import { setGameResultScore, clearBuffer } from '../redux/reducers/buffer/actionCreator.js';
 import { settingsButton } from './elements.jsx';
 const MIN_GAME_TIME = 10;
@@ -32,6 +33,7 @@ class Settings extends React.Component {
 	}
 	toSubmit = (e) =>{
 		this.props.setGameAction(null);
+		this.props.openAllCards(!this.props.store.play);
 		// if (this.props.play) return;
 		// window.scrollTo(0, 0);
 		// this.props.clearBuffer();
@@ -96,6 +98,6 @@ export default connect(
 		// setSettings: obj => dispatch(setGameSettings(obj)),
 		setGameAction: bool => dispatch(setGameAction(bool)),
 		// setGameResultScore: score => dispatch(setGameResultScore(score)),
-		// clearBuffer: () => dispatch(clearBuffer())
+		openAllCards: (bool) => dispatch(openAllCards(bool))
 	})
 )(Settings);
