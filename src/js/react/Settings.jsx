@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setGameAction } from '../redux/actionCreator.js';
-import { openAllCards } from '../redux/actionCreator.js';
-// import { setGameResultScore, clearBuffer } from '../redux/reducers/buffer/actionCreator.js';
 import { settingsButton } from './elements.jsx';
-import { setGameSettings } from '../redux/actionCreator.js';
-const MIN_GAME_TIME = 10;
-const MAX_GAME_TIME = 60;
-const MIN_HIDING_TIME = 1;
-const MAX_HIDING_TIME = 10;
-const MIN_DENSITY = 2;
-const MAX_DENSITY = 6;
+import {
+	setGameSettings,
+	setGameAction
+} from '../redux/actionCreator.js';
+import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {
 	constructor(props) {
@@ -25,15 +20,16 @@ class Settings extends React.Component {
 		const trg = e.target;
 		const isNan = Number.isNaN(Number(trg.value));
 		if (trg.id === 'density') this.setState({ invalidDensity:
-			(isNan || trg.value < MIN_DENSITY || trg.value > MAX_DENSITY || trg.value % 2)});
+			(isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2)});
 		if (trg.id === 'hiding') this.setState({invalidHiding:
-			(isNan || trg.value < MIN_HIDING_TIME || trg.value > MAX_HIDING_TIME)});
+			(isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME)});
 		if (trg.id === 'time') this.setState({invalidTime: 
-			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
+			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
 	}
-	toSubmit = (e) =>{
+	toSubmit = (e) => {
+		this.props.setGameAction();
+		if (this.props.store.play) return;
 		// TODO: REBUILD ALL SUBMIT METHOD
-		// this.props.setGameAction(null);
 		// this.props.openAllCards(!this.props.store.play);
 		const form = {
 			density: +this.density.value,
@@ -42,7 +38,6 @@ class Settings extends React.Component {
 		};
 		localStorage.setItem('settings', JSON.stringify(form));
 		// this.props.setGameSettings(form);
-		// if (this.props.play) return;
 		// window.scrollTo(0, 0);
 		// this.props.clearBuffer();
 		// e.preventDefault(), e.persist();
@@ -102,5 +97,7 @@ class Settings extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch => ({ })
+	dispatch => ({
+		setGameAction: () => dispatch(setGameAction())
+	})
 )(Settings);
