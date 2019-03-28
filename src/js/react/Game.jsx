@@ -31,9 +31,7 @@ class Game extends React.Component {
 					className={this.props.store.play ? 'play' : ''}
 					style={{ gridTemplate : `repeat(${density}, 1fr)/repeat(${density}, 1fr)` }}
 				>
-					{
-						this.props.cards.map(i => <Card key={Math.random()} data={i} />)
-					}
+					{ this.props.cards.map(i => <Card key={Math.random()} data={i} />) }
 				</ul>
 				<div className='count'>time left :
 					<div ref={i => this.count = i} id='count'> 0 </div>

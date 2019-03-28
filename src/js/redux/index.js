@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import reducer from './reducer.js';
 import pictures from '../pictures.js';
 import { setCards } from './actionCreator.js';
@@ -12,6 +13,7 @@ const setReadyCards = store => next => action => {
 			isOpen: false,
 			isDisable: false,
 		})));
+		console.info('rendered cards :', cards);
 		return next(setCards(cards));
 	}
 	return next(action);
@@ -20,7 +22,7 @@ const setReadyCards = store => next => action => {
 export const store = createStore(
 	reducer,
 	compose(
-		applyMiddleware(setReadyCards),
+		applyMiddleware(setReadyCards, ReduxThunk),
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	)
 );

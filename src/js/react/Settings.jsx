@@ -24,6 +24,7 @@ class Settings extends React.Component {
 			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
 	}
 	toSubmit = (e) => {
+		e.preventDefault(), e.persist();
 		this.props.setGameAction();
 		if (this.props.store.play) return;
 		// TODO: REBUILD ALL SUBMIT METHOD
@@ -34,10 +35,7 @@ class Settings extends React.Component {
 			time: +this.time.value
 		};
 		localStorage.setItem('settings', JSON.stringify(form));
-		// this.props.setGameSettings(form);
-		// window.scrollTo(0, 0);
-		// this.props.clearBuffer();
-		// e.preventDefault(), e.persist();
+		window.scrollTo(0, 0);
 		// this.props.setSettings({
 		// 	density: +this.density.value,
 		// 	hiding: +this.hiding.value,
@@ -58,7 +56,7 @@ class Settings extends React.Component {
 						defaultValue={this.props.store.settings.density}
 						readOnly={this.props.store.play}
 					/>
-						<div className = 'error'>
+						<div className='error'>
 							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
 						</div>
 				</label>
@@ -84,7 +82,7 @@ class Settings extends React.Component {
 						defaultValue={str.time}
 						readOnly={this.props.store.play}
 					/>
-						<div className = 'error'>
+						<div className='error'>
 							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
 						</div>
 				</label>
