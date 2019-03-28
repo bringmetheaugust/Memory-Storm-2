@@ -32,15 +32,16 @@ class Settings extends React.Component {
 			(isNan || trg.value < MIN_GAME_TIME || trg.value > MAX_GAME_TIME)});
 	}
 	toSubmit = (e) =>{
-		this.props.setGameAction(null);
-		this.props.openAllCards(!this.props.store.play);
+		// TODO: REBUILD ALL SUBMIT METHOD
+		// this.props.setGameAction(null);
+		// this.props.openAllCards(!this.props.store.play);
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
 			time: +this.time.value
 		};
 		localStorage.setItem('settings', JSON.stringify(form));
-		this.props.setGameSettings(form);
+		// this.props.setGameSettings(form);
 		// if (this.props.play) return;
 		// window.scrollTo(0, 0);
 		// this.props.clearBuffer();
@@ -52,15 +53,7 @@ class Settings extends React.Component {
 		// });
 		// this.props.setGameResultScore(Math.pow(this.density.value, 2) / 2);
 	}
-	shouldComponentUpdate(){
-		return true;
-	}
-	componentDidMount() {
-		const localSettings = JSON.parse(localStorage.getItem('settings'));
-		if (localSettings) this.props.setGameSettings(localSettings);
-	}
 	render() {
-		console.log(this.props.store.settings);
 		const str = this.props.store.settings, st = this.state;
 		return(
 			<form onInput={this.checkForm} id='settings'>
@@ -109,10 +102,5 @@ class Settings extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch => ({
-		setGameSettings: form => dispatch(setGameSettings(form)),
-		setGameAction: bool => dispatch(setGameAction(bool)),
-		// setGameResultScore: score => dispatch(setGameResultScore(score)),
-		openAllCards: (bool) => dispatch(openAllCards(bool))
-	})
+	dispatch => ({ })
 )(Settings);
