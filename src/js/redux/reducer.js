@@ -17,10 +17,12 @@ export default function reducer(state = initialState, action) {
 		case 'SET_GAME_ACTION': {
 			return {
 				...state,
-				play: !state.play
+				gameState: {
+					...state.gameState,
+					play: !state.gameState.play
+				}
 			}
 		}
-		// TODO: DEVELOP METHOD TO OPEN ALL CARDS
 		// case 'OPEN_ALL_CARDS': {
 		// 	return {
 		// 		...state,

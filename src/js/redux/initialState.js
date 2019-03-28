@@ -5,7 +5,10 @@ const initialState = {
 		time: 60
 	},
 	cards: [],
-	play: false,
+	gameState: {
+		play: false,
+		counter: 0
+	}
 };
 
 export default initialState;

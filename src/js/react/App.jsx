@@ -4,7 +4,7 @@ import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
-import { setGameSettings, setCards, combinedSettings } from '../redux/actionCreator.js';
+import { setCards, combinedSettings } from '../redux/actionCreator.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -12,7 +12,7 @@ class App extends React.Component {
 	}
 	componentDidMount() {
 		const localData = localStorage.getItem('settings');
-		localData && localData !== JSON.stringify(this.props.store.settings) ?
+		(localData && localData !== JSON.stringify(this.props.store.settings)) ?
 			this.props.combinedSettings(JSON.parse(localData)) :
 			this.props.setCards(this.props.store.settings.density);
 	}
@@ -20,7 +20,7 @@ class App extends React.Component {
 		<React.Fragment>
 			{/*<Splash/>*/}
 			<Game />
-			<Settings/>
+			<Settings />
 			{/*<Alert />*/}
 		</React.Fragment>
 }
@@ -28,7 +28,6 @@ class App extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		setGameSettings: i => dispatch(setGameSettings(i)),
 		setCards: i => dispatch(setCards(i)),
 		combinedSettings: (settings) => dispatch(combinedSettings(settings))
 	})

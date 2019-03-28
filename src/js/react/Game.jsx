@@ -28,7 +28,7 @@ class Game extends React.Component {
 		return(
 			<div className='game-field-wrap'>
 				<ul id='game-field'
-					className={this.props.store.play ? 'play' : ''}
+					className={this.props.store.gameState.play ? 'play' : ''}
 					style={{ gridTemplate : `repeat(${density}, 1fr)/repeat(${density}, 1fr)` }}
 				>
 					{ this.props.cards.map(i => <Card key={Math.random()} data={i} />) }
