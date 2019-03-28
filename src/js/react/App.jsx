@@ -21,7 +21,8 @@ class App extends React.Component {
 	// })));
 	componentDidMount() {
 		const localData = localStorage.getItem('settings');
-		if (localData !== JSON.stringify(this.props.store.settings)) {
+		if (localData && localData !== JSON.stringify(this.props.store.settings)) {
+			console.log('test');
 			this.props.setGameSettings(JSON.parse(localData));
 		}
 	}

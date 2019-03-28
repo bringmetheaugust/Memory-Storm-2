@@ -53,7 +53,9 @@ class Settings extends React.Component {
 		return(
 			<form onInput={this.checkForm} id='settings'>
 				<label>select grid density
-					<input id = 'density'
+					<input
+						key={Math.random()}
+						id='density'
 						ref={i => this.density = i}
 						type='number'
 						defaultValue={this.props.store.settings.density}
@@ -65,7 +67,8 @@ class Settings extends React.Component {
 				</label>
 				<label>select time for pictures hiding (sec)
 					<input
-						id ='hiding'
+						key={Math.random()}
+						id='hiding'
 						ref={i => this.hiding = i}
 						type='number'
 						defaultValue={str.hiding}
@@ -77,6 +80,7 @@ class Settings extends React.Component {
 				</label>
 				<label>select game time (sec)
 					<input
+						key={Math.random()}
 						id='time'
 						ref={i => this.time = i}
 						type='number'
