@@ -11,22 +11,21 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	componentDidMount() {
-		const arr = pictures.slice(0, Math.pow(this.props.store.settings.density, 2) / 2);
-		this.props.setCards([...arr, ...arr].map(i => ({
-			id: String(Math.random()).slice(2, 12),
-			img: i,
-			isOpen: false,
-			isDisable: false,
-		})));
-	}
+	// TODO: DEVELOP METHOD TO RENDERING CARDS
+	// const arr = pictures.slice(0, Math.pow(this.props.store.settings.density, 2) / 2);
+	// this.props.setCards([...arr, ...arr].map(i => ({
+	// 	id: String(Math.random()).slice(2, 12),
+	// 	img: i,
+	// 	isOpen: false,
+	// 	isDisable: false,
+	// })));
 	render = () =>
-			<React.Fragment>
-				{/*<Splash/>*/}
-				<Game />
-				<Settings/>
-				{/*<Alert />*/}
-			</React.Fragment>
+		<React.Fragment>
+			{/*<Splash/>*/}
+			<Game />
+			<Settings/>
+			{/*<Alert />*/}
+		</React.Fragment>
 }
 
 export default connect(
