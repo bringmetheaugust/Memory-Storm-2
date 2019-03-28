@@ -8,13 +8,12 @@ export default function reducer(state = initialState, action) {
 				settings: action.data
 			}
 		}
-		//TODO: DEVELOP METHOD TO SET CARDS INTO GAME FIELD
-		// case 'SET_CARDS': {
-		// 	return {
-		// 		...state,
-		// 		cards: action.data
-		// 	};
-		// }
+		case 'SET_CARDS': {
+			return {
+				...state,
+				cards: action.data
+			};
+		}
 		case 'SET_GAME_ACTION': {
 			return {
 				...state,

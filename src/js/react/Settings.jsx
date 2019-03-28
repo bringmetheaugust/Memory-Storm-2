@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { settingsButton } from './elements.jsx';
-import {
-	setGameSettings,
-	setGameAction
-} from '../redux/actionCreator.js';
+import { setGameSettings, setGameAction } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {
@@ -54,7 +51,7 @@ class Settings extends React.Component {
 			<form onInput={this.checkForm} id='settings'>
 				<label>select grid density
 					<input
-						key={str.time}
+						key={str.density}
 						id='density'
 						ref={i => this.density = i}
 						type='number'
@@ -67,7 +64,7 @@ class Settings extends React.Component {
 				</label>
 				<label>select time for pictures hiding (sec)
 					<input
-						key={str.time}
+						key={str.hiding}
 						id='hiding'
 						ref={i => this.hiding = i}
 						type='number'

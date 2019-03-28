@@ -4,8 +4,7 @@ import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
-import pictures from '../pictures.js';
-import { setGameSettings } from '../redux/actionCreator.js';
+import { setGameSettings, setCards } from '../redux/actionCreator.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -22,9 +21,11 @@ class App extends React.Component {
 	componentDidMount() {
 		const localData = localStorage.getItem('settings');
 		if (localData && localData !== JSON.stringify(this.props.store.settings)) {
-			console.log('test');
 			this.props.setGameSettings(JSON.parse(localData));
+			// TODO: add return to disable setCards method
+			return;
 		}
+		this.props.setCards(this.props.store.settings.density);
 	}
 	render = () =>
 		<React.Fragment>
@@ -38,6 +39,7 @@ class App extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		setGameSettings: i => dispatch(setGameSettings(i))
+		setGameSettings: i => dispatch(setGameSettings(i)),
+		setCards: i => dispatch(setCards(i))
 	})
 )(App);

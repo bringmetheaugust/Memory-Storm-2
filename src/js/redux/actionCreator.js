@@ -1,7 +1,7 @@
-// export const setCards = (cards) => ({
-// 	type: 'SET_CARDS',
-// 	data: cards
-// });
+export const setCards = (cards) => ({
+	type: 'SET_CARDS',
+	data: cards
+});
 
 export const setGameAction = (bool) => ({
 	type: 'SET_GAME_ACTION',
