@@ -13,7 +13,6 @@ const setReadyCards = store => next => action => {
 			isOpen: false,
 			isDisable: false,
 		})));
-		console.info('rendered cards :', cards);
 		return next(setCards(cards));
 	}
 	return next(action);

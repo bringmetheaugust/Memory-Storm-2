@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { settingsButton } from './elements.jsx';
-import { setGameSettings, setGameAction } from '../redux/actionCreator.js';
+import { setGameSettings, setGameAction, combinedSettings } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {
@@ -18,6 +18,7 @@ class Settings extends React.Component {
 		const isNan = Number.isNaN(Number(trg.value));
 		if (trg.id === 'density') this.setState({ invalidDensity:
 			(isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2)});
+			//TODO: add method to render cards during input changing
 		if (trg.id === 'hiding') this.setState({invalidHiding:
 			(isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME)});
 		if (trg.id === 'time') this.setState({invalidTime: 
@@ -26,16 +27,17 @@ class Settings extends React.Component {
 	toSubmit = (e) => {
 		e.preventDefault(), e.persist();
 		this.props.setGameAction();
-		if (this.props.store.play) return;
-		// TODO: REBUILD ALL SUBMIT METHOD
 		// this.props.openAllCards(!this.props.store.play);
+		if (this.props.store.play) return;
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
 			time: +this.time.value
 		};
+		this.props.combinedSettings(form);
 		localStorage.setItem('settings', JSON.stringify(form));
 		window.scrollTo(0, 0);
+		// TODO: REBUILD ALL SUBMIT METHOD
 		// this.props.setSettings({
 		// 	density: +this.density.value,
 		// 	hiding: +this.hiding.value,
@@ -97,6 +99,7 @@ class Settings extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		setGameAction: () => dispatch(setGameAction())
+		setGameAction: () => dispatch(setGameAction()),
+		combinedSettings: (settings) => dispatch(combinedSettings(settings))
 	})
 )(Settings);
