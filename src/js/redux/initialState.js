@@ -8,7 +8,7 @@ const initialState = {
 	gameState: {
 		play: false,
 		counter: 0,
-		win: true
+		win: null
 	}
 };
 
