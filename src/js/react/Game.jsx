@@ -7,7 +7,9 @@ class Game extends React.Component {
 		super(props);
 	}
 	// shouldComponentUpdate(nextPr) {
-	// 	return false;
+	// 	console.log(this.props.store.gameState.counter, nextPr.store.gameState.counter); 
+	// 	// return this.props.store.gameState.counter === nextPr.store.gameState.counter ? true : false;
+	// 	return true;
 	// }
 	render() {
 		const density = this.props.store.settings.density;

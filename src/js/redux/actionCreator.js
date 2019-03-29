@@ -51,18 +51,17 @@ export const runGame = form => (dispatch, getState) => {
 	window.scrollTo(0, 0);
 	let temporaryCount = getState().gameState.counter;
 	counter = setInterval(() => {
-		if (temporaryCount <= 1) clearInterval(counter), dispatch(endGame());
+		if (temporaryCount <= 1) return dispatch(endGame()), clearInterval(counter);
 		dispatch(setCounter());
-		--temporaryCount;
+		temporaryCount--;
 	}, 1000);
 };
 
 export const endGame = () => dispatch => {
 	clearInterval(counter);
-	dispatch(setCounter(0))
 	dispatch(setGameAction());
 	dispatch(openAllCards(false));
-
+	dispatch(setCounter(0));
 };
 
 // export const openCard = (id) => ({
