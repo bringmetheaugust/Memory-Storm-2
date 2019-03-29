@@ -4,7 +4,7 @@ import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
-import { setCards, combinedSettings } from '../redux/actionCreator.js';
+import { createCardsList, combinedSettings } from '../redux/actionCreator.js';
 
 class App extends React.Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class App extends React.Component {
 		const localData = localStorage.getItem('settings');
 		(localData && localData !== JSON.stringify(this.props.store.settings)) ?
 			this.props.combinedSettings(JSON.parse(localData)) :
-			this.props.setCards(this.props.store.settings.density);
+			this.props.createCardsList();
 	}
 	render = () =>
 		<React.Fragment>
@@ -28,7 +28,7 @@ class App extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		setCards: i => dispatch(setCards(i)),
+		createCardsList: () => dispatch(createCardsList()),
 		combinedSettings: (settings) => dispatch(combinedSettings(settings))
 	})
 )(App);
