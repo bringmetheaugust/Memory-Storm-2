@@ -1,5 +1,6 @@
 import pictures from '../pictures.js';
 let counter;
+let hideCards;
 
 export const setCards = cards => ({
 	type: 'SET_CARDS',
@@ -49,6 +50,9 @@ export const runGame = form => (dispatch, getState) => {
 	dispatch(openAllCards(true));
 	localStorage.setItem('settings', JSON.stringify(form));
 	window.scrollTo(0, 0);
+	hideCards = setTimeout(() => {
+		dispatch(openAllCards(false));
+	}, form.hiding * 1000);
 	let temporaryCount = getState().gameState.counter;
 	counter = setInterval(() => {
 		if (temporaryCount <= 1) return dispatch(endGame()), clearInterval(counter);
@@ -58,6 +62,7 @@ export const runGame = form => (dispatch, getState) => {
 };
 
 export const endGame = () => dispatch => {
+	clearTimeout(hideCards);
 	clearInterval(counter);
 	dispatch(setGameAction());
 	dispatch(openAllCards(false));
