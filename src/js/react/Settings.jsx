@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { settingsButton } from './elements.jsx';
+import DoubleButton from './DoubleButton.jsx';
 import { runGame, endGame } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
@@ -24,8 +24,8 @@ class Settings extends React.Component {
 		if (trg.id === 'time') this.setState({invalidTime: 
 			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
 	}
-	toSubmit = (e) => {
-		if (this.props.store.gameState.play) return this.props.endGame();
+	toSubmit = () => {
+		if (this.props.play) return this.props.endGame();
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
@@ -34,7 +34,8 @@ class Settings extends React.Component {
 		this.props.runGame(form);
 	}
 	render() {
-		const str = this.props.store.settings, st = this.state, play = this.props.store.gameState.play;
+		const str = this.props.store.settings, st = this.state;
+		const submitOpportunity = !st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis;
 		return(
 			<form onInput={this.checkForm} id='settings'>
 				<label>select grid density
@@ -44,7 +45,7 @@ class Settings extends React.Component {
 						ref={i => this.density = i}
 						type='number'
 						defaultValue={this.props.store.settings.density}
-						readOnly={play}
+						readOnly={this.props.play}
 					/>
 						<div className='error'>
 							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
@@ -57,7 +58,7 @@ class Settings extends React.Component {
 						ref={i => this.hiding = i}
 						type='number'
 						defaultValue={str.hiding}
-						readOnly={play}
+						readOnly={this.props.play}
 					/>
 						<div className='error'> {st.invalidHiding ? 'Please, set any number from 1 to 10' : ''} </div>
 				</label>
@@ -68,20 +69,24 @@ class Settings extends React.Component {
 						ref={i => this.time = i}
 						type='number'
 						defaultValue={str.time}
-						readOnly={play}
+						readOnly={this.props.play}
 					/>
 						<div className='error'> {st.invalidTime ? 'Please, set any number form 10 to 60' : ''} </div>
 				</label>
-				<div className={`button ${play? 'abort' : ''}`}
-					onClick={(!st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis) ? this.toSubmit : null}
-				>
-					{settingsButton}
-				</div>
+				<DoubleButton
+					play={this.props.play}
+					event={submitOpportunity && this.toSubmit}
+					firstBlock='play'
+					secondBlock='stop'
+				/>
 			</form>
 )}}
 
 export default connect(
-	state => ({ store: state }),
+	state => ({
+		store: state,
+		play: state.gameState.play
+	}),
 	dispatch => ({
 		runGame: form => dispatch(runGame(form)),
 		endGame: () => dispatch(endGame()),

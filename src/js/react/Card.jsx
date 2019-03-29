@@ -24,14 +24,13 @@ class Card extends React.Component {
 	// }
 	// componentWillUnmount = () => clearTimeout(this.mountCount);
 	render() {
-		const dt = this.props.data;
 		// const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
 		const cardOpportunity = false;
 		return(
-			<li className={`card-wrap ${dt.isDisable ? 'disabled' : ''}`}
+			<li className={`card-wrap ${this.props.data.isDisable ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}
 			>
-				{ dt.isOpen && <img ref={i => this.imgRef = i} src={dt.img} /> }
+				{ <img ref={i => this.imgRef = i} src={this.props.data.img} /> }
 			</li>
 )}}
 

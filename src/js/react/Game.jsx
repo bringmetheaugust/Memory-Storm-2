@@ -7,7 +7,7 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	shouldComponentUpdate = nextPr => this.props.play === nextPr.play ? false : true;
+	shouldComponentUpdate = () => !this.props.play;
 	render() {
 		return(
 			<div className='game-field-wrap'>
@@ -25,7 +25,7 @@ class Game extends React.Component {
 
 export default connect(
 	state => ({
-		cards : state.cards.sort(() => Math.random() - Math.random()),
+		cards : state.cards,
 		density: state.settings.density,
 		play: state.gameState.play
 	}),
