@@ -48,8 +48,11 @@ export const runGame = form => (dispatch, getState) => {
 	dispatch(openAllCards(true));
 	localStorage.setItem('settings', JSON.stringify(form));
 	window.scrollTo(0, 0);
+	let temporaryCount = getState().gameState.counter;
 	const counter = setInterval(() => {
+		if (temporaryCount <= 1) clearInterval(counter), dispatch(endGame());
 		dispatch(setCounter());
+		--temporaryCount;
 	}, 1000);
 };
 

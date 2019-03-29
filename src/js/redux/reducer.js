@@ -34,6 +34,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				gameState: {
 					...state.gameState,
+					//TODO: try to reduce code
 					counter: action.data === undefined ? --state.gameState.counter : action.data
 				}
 			}
