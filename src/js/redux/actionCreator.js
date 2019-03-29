@@ -2,8 +2,15 @@ import pictures from '../pictures.js';
 let counter;
 let hideCards;
 
+const SET_GAME_ACTION = 'SET_GAME_ACTION';
+const SET_CARDS = 'SET_CARDS';
+const SET_GAME_SETTINGS = 'SET_GAME_SETTINGS';
+const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
+const SET_COUNTER = 'SET_COUNTER';
+const OPEN_CARD = 'OPEN_CARD';
+
 export const setCards = cards => ({
-	type: 'SET_CARDS',
+	type: SET_CARDS,
 	data: cards
 });
 
@@ -20,12 +27,12 @@ export const createCardsList = () => (dispatch, getState) => {
 };
 
 export const setGameAction = bool => ({
-	type: 'SET_GAME_ACTION',
+	type: SET_GAME_ACTION,
 	data: bool
 });
 
 export const setGameSettings = settings => ({
-	type: 'SET_GAME_SETTINGS',
+	type: SET_GAME_SETTINGS,
 	data: settings
 });
 
@@ -35,12 +42,12 @@ export const combinedSettings = settings => dispatch => {
 };
 
 export const openAllCards = bool => ({
-	type: 'OPEN_ALL_CARDS',
+	type: OPEN_ALL_CARDS,
 	data: bool
 });
 
-export const setCounter = (num) => ({
-	type: 'SET_COUNTER',
+export const setCounter = num => ({
+	type: SET_COUNTER,
 	data: num
 });
 
@@ -70,7 +77,7 @@ export const endGame = () => dispatch => {
 	dispatch(setCounter(0));
 };
 
-export const openCard = (id) => ({
-	type: 'OPEN_CARD',
+export const openCard = id => ({
+	type: OPEN_CARD,
 	data: id
 });
