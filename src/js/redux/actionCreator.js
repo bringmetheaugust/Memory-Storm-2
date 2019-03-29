@@ -8,7 +8,8 @@ export const setCards = cards => ({
 });
 
 export const createCardsList = () => (dispatch, getState) => {
-	const temporaryArr = pictures.slice(0, Math.pow(getState().settings.density, 2) / 2);
+	const temporaryArr = pictures.sort(() => Math.random() - Math.random())
+		.slice(0, Math.pow(getState().settings.density, 2) / 2);
 	const cards = ([...temporaryArr, ...temporaryArr].map(i => ({
 		id: String(Math.random()).slice(2, 12),
 		img: i,
@@ -69,7 +70,7 @@ export const endGame = () => dispatch => {
 	dispatch(setCounter(0));
 };
 
-// export const openCard = (id) => ({
-// 	type: 'OPEN_CARD',
-// 	data: id
-// });
+export const openCard = (id) => ({
+	type: 'OPEN_CARD',
+	data: id
+});

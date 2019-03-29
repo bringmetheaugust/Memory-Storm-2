@@ -38,6 +38,13 @@ export default function reducer(state = initialState, action) {
 				}
 			}
 		}
+		case 'OPEN_CARD': {
+			console.log(action.data);
+			return {
+				...state,
+				cards: state.cards.map(i => i.id === action.data ? {...i, isOpen: true} : i)
+			}
+		}
 	}
 	return state;
 }

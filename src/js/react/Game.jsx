@@ -7,6 +7,7 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	shouldComponentUpdate = nextPr => this.props.play === nextPr.play ? false : true;
 	render() {
 		return(
 			<div className='game-field-wrap'>

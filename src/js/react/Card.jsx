@@ -1,21 +1,13 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { openCard } from '../redux/actionCreator.js';
-// import { addItemOnBuffer } from '../redux/actionCreator.js';
 
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	// toOpenCard = () => this.setState({ isOpen: true });
-	// toActivateCard = () => {
-	// 	this.props.openCard(this.props.data.id);
-	// // 	this.props.addItemOnBuffer({
-	// // 		img: this.props.img,
-	// // 		close: this.toCloseCard,
-	// // 		disable: this.toDisable
-	// // 	});
-	// }
+	toActivateCard = () => this.props.openCard(this.props.data.id);
 	// toCloseCard = () =>{
 	// 	if (this.imgRef !== null) this.imgRef.className = 'disactive';
 	// 	setTimeout(() => this.setState({isOpen: false}), 500);
@@ -33,7 +25,8 @@ class Card extends React.Component {
 	// componentWillUnmount = () => clearTimeout(this.mountCount);
 	render() {
 		const dt = this.props.data;
-		const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
+		// const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
+		const cardOpportunity = false;
 		return(
 			<li className={`card-wrap ${dt.isDisable ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}
