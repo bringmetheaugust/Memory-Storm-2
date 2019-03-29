@@ -6,21 +6,8 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	//TODO: create counter
-	// shouldComponentUpdate = (nextPr) => this.props.play !== nextPr.play ? true : false;
-	// componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
-	// runCount = (time) =>{
-	// 	this.countInterval = setInterval(() =>{
-	// 		if (time === 1) {
-	// 			this.props.setGameAction(false);
-	// 			this.stopCount();
-	// 		}
-	// 		this.count.textContent = --time;
-	// 	}, 1000);
-	// }
-	// stopCount = () =>{
-	// 	clearInterval(this.countInterval);
-	// 	this.count.textContent = '0';
+	// shouldComponentUpdate(nextPr) {
+	// 	return false;
 	// }
 	render() {
 		const density = this.props.store.settings.density;

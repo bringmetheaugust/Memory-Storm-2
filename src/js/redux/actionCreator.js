@@ -1,4 +1,5 @@
 import pictures from '../pictures.js';
+let counter;
 
 export const setCards = cards => ({
 	type: 'SET_CARDS',
@@ -49,7 +50,7 @@ export const runGame = form => (dispatch, getState) => {
 	localStorage.setItem('settings', JSON.stringify(form));
 	window.scrollTo(0, 0);
 	let temporaryCount = getState().gameState.counter;
-	const counter = setInterval(() => {
+	counter = setInterval(() => {
 		if (temporaryCount <= 1) clearInterval(counter), dispatch(endGame());
 		dispatch(setCounter());
 		--temporaryCount;
@@ -57,8 +58,11 @@ export const runGame = form => (dispatch, getState) => {
 };
 
 export const endGame = () => dispatch => {
+	clearInterval(counter);
+	dispatch(setCounter(0))
 	dispatch(setGameAction());
 	dispatch(openAllCards(false));
+
 };
 
 // export const openCard = (id) => ({
