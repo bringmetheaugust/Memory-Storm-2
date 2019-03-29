@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {connect} from 'react-redux';
+import DoubleButton from './DoubleButton.jsx';
 
 const Alert = (props) =>{
+	const [isVisible, hideAlert ] = useState(true);
+	if (!isVisible) return null;
 	return(
 		<div id='alert'>
-			<div className='title'>
-			</div>
-			<div className = 'button'>
-				<div>b</div>
-				<div>a</div>
-				<div>c</div>
-				<div>k</div>
-			</div>
+			<div className='title'>you {props.store.gameState.win ? 'win!!!' : 'lose :('}</div>
+			<DoubleButton firstBlock='back' secondBlock='' event={() => hideAlert(false)} />
 		</div>
 	)
 }

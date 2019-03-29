@@ -7,7 +7,8 @@ const initialState = {
 	cards: [],
 	gameState: {
 		play: false,
-		counter: 0
+		counter: 0,
+		win: true
 	}
 };
 
