@@ -33,7 +33,7 @@ class Game extends React.Component {
 					{ this.props.cards.map(i => <Card key={Math.random()} data={i} />) }
 				</ul>
 				<div className='count'>time left :
-					<div ref={i => this.count = i} id='count'> 0 </div>
+					<div id='count'>{this.props.store.gameState.counter}</div>
 				</div>
 			</div>
 

@@ -36,12 +36,21 @@ export const openAllCards = bool => ({
 	data: bool
 });
 
+export const setCounter = (num) => ({
+	type: 'SET_COUNTER',
+	data: num
+});
+
 export const runGame = form => (dispatch, getState) => {
 	dispatch(setGameAction());
 	dispatch(combinedSettings(form));
+	dispatch(setCounter(form.time))
 	dispatch(openAllCards(true));
 	localStorage.setItem('settings', JSON.stringify(form));
 	window.scrollTo(0, 0);
+	const counter = setInterval(() => {
+		dispatch(setCounter());
+	}, 1000);
 };
 
 export const endGame = () => dispatch => {

@@ -29,6 +29,15 @@ export default function reducer(state = initialState, action) {
 				cards: state.cards.map(i => ({...i, isOpen: action.data}))
 			}
 		}
+		case 'SET_COUNTER': {
+			return {
+				...state,
+				gameState: {
+					...state.gameState,
+					counter: action.data === undefined ? --state.gameState.counter : action.data
+				}
+			}
+		}
 	}
 	return state;
 }
