@@ -29,6 +29,6 @@ export default connect(
 	state => ({ store: state }),
 	dispatch => ({
 		createCardsList: () => dispatch(createCardsList()),
-		combinedSettings: (settings) => dispatch(combinedSettings(settings))
+		combinedSettings: settings => dispatch(combinedSettings(settings))
 	})
 )(App);

@@ -1,6 +1,6 @@
 import pictures from '../pictures.js';
 
-export const setCards = (cards) => ({
+export const setCards = cards => ({
 	type: 'SET_CARDS',
 	data: cards
 });
@@ -16,27 +16,27 @@ export const createCardsList = () => (dispatch, getState) => {
 	dispatch(setCards(cards));
 };
 
-export const setGameAction = (bool) => ({
+export const setGameAction = bool => ({
 	type: 'SET_GAME_ACTION',
 	data: bool
 });
 
-export const setGameSettings = (settings) => ({
+export const setGameSettings = settings => ({
 	type: 'SET_GAME_SETTINGS',
 	data: settings
 });
 
-export const combinedSettings = (settings) => dispatch => {
+export const combinedSettings = settings => dispatch => {
 	dispatch(setGameSettings(settings));
 	dispatch(createCardsList());
 };
 
 export const runCounter = () => ({ type: 'RUN_COUNTER '});
 
-// export const openAllCards = (bool) => ({
-// 	type: 'OPEN_ALL_CARDS',
-// 	data: bool
-// });
+export const openAllCards = bool => ({
+	type: 'OPEN_ALL_CARDS',
+	data: bool
+});
 
 // export const openCard = (id) => ({
 // 	type: 'OPEN_CARD',

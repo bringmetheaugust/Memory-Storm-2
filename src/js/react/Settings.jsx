@@ -5,6 +5,7 @@ import {
 	setGameSettings,
 	setGameAction,
 	combinedSettings,
+	openAllCards
 } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
@@ -31,13 +32,16 @@ class Settings extends React.Component {
 	toSubmit = (e) => {
 		e.preventDefault(), e.persist();
 		this.props.setGameAction();
-		if (this.props.store.gameState.play) return;
+		//FIX_ME: replace method to OPEN_ALL_CARDS
+		if (this.props.store.gameState.play) return this.props.openAllCards(false);
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
 			time: +this.time.value
 		};
 		this.props.combinedSettings(form);
+		//FIX_ME: replace method to OPEN_ALL_CARDS
+		this.props.openAllCards(true);
 		localStorage.setItem('settings', JSON.stringify(form));
 		window.scrollTo(0, 0);
 	}
@@ -96,6 +100,7 @@ export default connect(
 	state => ({ store: state }),
 	dispatch => ({
 		setGameAction: () => dispatch(setGameAction()),
-		combinedSettings: (settings) => dispatch(combinedSettings(settings)),
+		combinedSettings: settings => dispatch(combinedSettings(settings)),
+		openAllCards: bool => dispatch(openAllCards(bool))
 	})
 )(Settings);

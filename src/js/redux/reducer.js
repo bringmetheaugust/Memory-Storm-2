@@ -23,12 +23,12 @@ export default function reducer(state = initialState, action) {
 				}
 			}
 		}
-		// case 'OPEN_ALL_CARDS': {
-		// 	return {
-		// 		...state,
-		// 		cards: state.cards.map(i => ({...i, isOpen: action.data}))
-		// 	}
-		// }
+		case 'OPEN_ALL_CARDS': {
+			return {
+				...state,
+				cards: state.cards.map(i => ({...i, isOpen: action.data}))
+			}
+		}
 	}
 	return state;
 }
