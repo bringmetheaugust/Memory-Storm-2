@@ -1,13 +1,12 @@
 import React from 'react';
 import Card from './Card.jsx';
 import { connect } from 'react-redux';
-import pictures from '../pictures.js';
-import { setGameAction } from '../redux/actionCreator.js';
 
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	//TODO: create counter
 	// shouldComponentUpdate = (nextPr) => this.props.play !== nextPr.play ? true : false;
 	// componentWillUpdate = (nextPr) => nextPr.play ? this.runCount(nextPr.store.settings.time) : this.stopCount();
 	// runCount = (time) =>{
@@ -47,5 +46,4 @@ export default connect(
 		cards : state.cards.sort(() => Math.random() - Math.random()),
 		store: state
 	}),
-	// dispatch => ({ setGameAction: (bool) => dispatch(setGameAction(bool)) })
 )(Game);

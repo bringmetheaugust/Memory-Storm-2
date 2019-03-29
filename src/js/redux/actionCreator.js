@@ -31,12 +31,23 @@ export const combinedSettings = settings => dispatch => {
 	dispatch(createCardsList());
 };
 
-export const runCounter = () => ({ type: 'RUN_COUNTER '});
-
 export const openAllCards = bool => ({
 	type: 'OPEN_ALL_CARDS',
 	data: bool
 });
+
+export const runGame = form => (dispatch, getState) => {
+	dispatch(setGameAction());
+	dispatch(combinedSettings(form));
+	dispatch(openAllCards(true));
+	localStorage.setItem('settings', JSON.stringify(form));
+	window.scrollTo(0, 0);
+};
+
+export const endGame = () => dispatch => {
+	dispatch(setGameAction());
+	dispatch(openAllCards(false));
+};
 
 // export const openCard = (id) => ({
 // 	type: 'OPEN_CARD',

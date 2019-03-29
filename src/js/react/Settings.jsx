@@ -1,12 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { settingsButton } from './elements.jsx';
-import {
-	setGameSettings,
-	setGameAction,
-	combinedSettings,
-	openAllCards
-} from '../redux/actionCreator.js';
+import { runGame, endGame } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {
@@ -30,20 +25,13 @@ class Settings extends React.Component {
 			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
 	}
 	toSubmit = (e) => {
-		e.preventDefault(), e.persist();
-		this.props.setGameAction();
-		//FIX_ME: replace method to OPEN_ALL_CARDS
-		if (this.props.store.gameState.play) return this.props.openAllCards(false);
+		if (this.props.store.gameState.play) return this.props.endGame();
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
 			time: +this.time.value
 		};
-		this.props.combinedSettings(form);
-		//FIX_ME: replace method to OPEN_ALL_CARDS
-		this.props.openAllCards(true);
-		localStorage.setItem('settings', JSON.stringify(form));
-		window.scrollTo(0, 0);
+		this.props.runGame(form);
 	}
 	render() {
 		const str = this.props.store.settings, st = this.state, play = this.props.store.gameState.play;
@@ -71,9 +59,7 @@ class Settings extends React.Component {
 						defaultValue={str.hiding}
 						readOnly={play}
 					/>
-						<div className='error'>
-							{st.invalidHiding ? 'Please, set any number from 1 to 10' : ''}
-						</div>
+						<div className='error'> {st.invalidHiding ? 'Please, set any number from 1 to 10' : ''} </div>
 				</label>
 				<label>select game time (sec)
 					<input
@@ -84,9 +70,7 @@ class Settings extends React.Component {
 						defaultValue={str.time}
 						readOnly={play}
 					/>
-						<div className='error'>
-							{st.invalidTime ? 'Please, set any number form 10 to 60' : ''}
-						</div>
+						<div className='error'> {st.invalidTime ? 'Please, set any number form 10 to 60' : ''} </div>
 				</label>
 				<div className={`button ${play? 'abort' : ''}`}
 					onClick={(!st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis) ? this.toSubmit : null}
@@ -99,8 +83,7 @@ class Settings extends React.Component {
 export default connect(
 	state => ({ store: state }),
 	dispatch => ({
-		setGameAction: () => dispatch(setGameAction()),
-		combinedSettings: settings => dispatch(combinedSettings(settings)),
-		openAllCards: bool => dispatch(openAllCards(bool))
+		runGame: form => dispatch(runGame(form)),
+		endGame: () => dispatch(endGame()),
 	})
 )(Settings);
