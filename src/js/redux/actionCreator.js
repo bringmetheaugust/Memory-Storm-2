@@ -8,6 +8,7 @@ const SET_GAME_SETTINGS = 'SET_GAME_SETTINGS';
 const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
 const SET_COUNTER = 'SET_COUNTER';
 const OPEN_CARD = 'OPEN_CARD';
+const SET_GAME_RESULT = 'SET_GAME_RESULT';
 
 export const setCards = cards => ({
 	type: SET_CARDS,
@@ -61,7 +62,11 @@ export const runGame = form => (dispatch, getState) => {
 	hideCards = setTimeout(() => dispatch(openAllCards(false)), form.hiding * 1000);
 	let temporaryCount = getState().gameState.counter;
 	counter = setInterval(() => {
-		if (temporaryCount <= 1) return dispatch(endGame()), clearInterval(counter);
+		if (temporaryCount <= 1) {
+			dispatch(endGame());
+			clearInterval(counter);
+			return dispatch(setGameResult(false));
+		}
 		dispatch(setCounter());
 		temporaryCount--;
 	}, 1000);
@@ -78,4 +83,9 @@ export const endGame = () => dispatch => {
 export const openCard = id => ({
 	type: OPEN_CARD,
 	data: id
+});
+
+export const setGameResult = bool => ({
+	type: SET_GAME_RESULT,
+	payload: bool
 });

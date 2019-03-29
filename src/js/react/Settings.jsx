@@ -14,8 +14,7 @@ class Settings extends React.Component {
 		}
 	}
 	checkForm = (e) => {
-		const trg = e.target;
-		const isNan = Number.isNaN(Number(trg.value));
+		const trg = e.target, isNan = Number.isNaN(Number(trg.value));
 		if (trg.id === 'density') {
 			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
 				return this.setState({ invalidDensity: true });
@@ -47,7 +46,7 @@ class Settings extends React.Component {
 						id='density'
 						ref={i => this.density = i}
 						type='number'
-						defaultValue={this.props.store.settings.density}
+						defaultValue={str.density}
 						readOnly={this.props.play}
 					/>
 						<div className='error'>

@@ -8,23 +8,9 @@ class Card extends React.Component {
 		this.img = this.props.data.img;
 		this.id = this.props.data.id;
 	}
-	// toOpenCard = () => this.setState({ isOpen: true });
 	toActivateCard = () => this.props.openCard(this.props.data.id);
-	// toCloseCard = () =>{
-	// 	if (this.imgRef !== null) this.imgRef.className = 'disactive';
-	// 	setTimeout(() => this.setState({isOpen: false}), 500);
-	// }
-	// toDisable = () => this.setState({ isDisabled: true });
-	// componentDidMount() {
-	// 	if (this.props.store.play) {
-	// 		// this.toOpenCard();
-	// 		this.props.openCard(this.props.data.id);
-	// 	// 	this.mountCount = setTimeout(() =>{
-	// 	// 		this.toCloseCard();
-	// 	// 	}, this.props.store.settings.hiding * 1000);
-	// 	}
-	// }
 	render() {
+		//FIX_ME: change oppportunity for click events on cards
 		// const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
 		const cardOpportunity = false;
 		return(

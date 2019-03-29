@@ -39,12 +39,21 @@ export default function reducer(state = initialState, action) {
 			}
 		}
 		case 'OPEN_CARD': {
-			console.log('click on :', action.data);
+			console.info('click on :', action.data);
 			return {
 				...state,
 				cards: state.cards.map(i => i.id === action.data ? {...i, isOpen: true} : i)
 			}
 		}
+		case 'SET_GAME_RESULT': {
+			return {
+				...state,
+				gameState: {
+					...state.gameState,
+					win: action.payload
+				}
+			}
+		}
 	}
 	return state;
-}
+} 
