@@ -5,6 +5,8 @@ import { openCard } from '../redux/actionCreator.js';
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
+		this.img = this.props.data.img;
+		this.id = this.props.data.id;
 	}
 	// toOpenCard = () => this.setState({ isOpen: true });
 	toActivateCard = () => this.props.openCard(this.props.data.id);
@@ -22,7 +24,6 @@ class Card extends React.Component {
 	// 	// 	}, this.props.store.settings.hiding * 1000);
 	// 	}
 	// }
-	// componentWillUnmount = () => clearTimeout(this.mountCount);
 	render() {
 		// const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
 		const cardOpportunity = false;

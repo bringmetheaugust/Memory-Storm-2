@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DoubleButton from './DoubleButton.jsx';
-import { runGame, endGame } from '../redux/actionCreator.js';
+import { runGame, endGame, combinedSettings } from '../redux/actionCreator.js';
 import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {
@@ -16,9 +16,12 @@ class Settings extends React.Component {
 	checkForm = (e) => {
 		const trg = e.target;
 		const isNan = Number.isNaN(Number(trg.value));
-		if (trg.id === 'density') this.setState({ invalidDensity:
-			(isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2)});
-			//TODO: add method to render cards during input changing
+		if (trg.id === 'density') {
+			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
+				return this.setState({ invalidDensity: true });
+			this.setState({ invalidDensity: false });
+			this.props.combinedSettings({...this.props.store.settings, density: trg.value});
+		}
 		if (trg.id === 'hiding') this.setState({invalidHiding:
 			(isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME)});
 		if (trg.id === 'time') this.setState({invalidTime: 
@@ -90,5 +93,6 @@ export default connect(
 	dispatch => ({
 		runGame: form => dispatch(runGame(form)),
 		endGame: () => dispatch(endGame()),
+		combinedSettings: form => dispatch(combinedSettings(form))
 	})
 )(Settings);

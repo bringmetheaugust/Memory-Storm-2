@@ -14,9 +14,9 @@ export const setCards = cards => ({
 	data: cards
 });
 
-export const createCardsList = () => (dispatch, getState) => {
+export const createCardsList = val => (dispatch, getState) => {
 	const temporaryArr = pictures.sort(() => Math.random() - Math.random())
-		.slice(0, Math.pow(getState().settings.density, 2) / 2);
+		.slice(0, Math.pow((val || getState().settings.density), 2) / 2);
 	const cards = ([...temporaryArr, ...temporaryArr].map(i => ({
 		id: String(Math.random()).slice(2, 12),
 		img: i,
