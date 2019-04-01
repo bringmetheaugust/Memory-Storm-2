@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { openCard } from '../redux/actionCreator.js';
+import { activateCard } from '../redux/actionCreator.js';
 
 class Card extends React.Component {
 	constructor(props) {
@@ -8,7 +8,7 @@ class Card extends React.Component {
 		this.state = { ...this.props.data };
 	}
 	static getDerivedStateFromProps = (nextPr, prevSt) => ({ ...nextPr.store.cards.find(i => i.id === prevSt.id) });
-	toActivateCard = () => this.props.openCard(this.props.data.id);
+	toActivateCard = () => this.props.activateCard(this.props.data.id);
 	render() {
 		const cardOpportunity = this.state.isDisable || !this.props.store.gameState.play || this.state.isOpen;
 		return(
@@ -21,5 +21,5 @@ class Card extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch =>({ openCard: id => dispatch(openCard(id)) }),
+	dispatch =>({ activateCard: id => dispatch(activateCard(id)) }),
 )(Card);
