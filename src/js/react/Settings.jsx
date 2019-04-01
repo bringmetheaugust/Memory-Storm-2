@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DoubleButton from './DoubleButton.jsx';
-import { runGame, endGame, combinedSettings } from '../redux/actionCreator.js';
+import { runGame, endGame } from '../redux/actionCreator/index.js';
+import { combinedSettings } from '../redux/actionCreator/settings.js';
 import * as GV from '../gameValue.js';
 
 class Settings extends React.Component {

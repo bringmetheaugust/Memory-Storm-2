@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { activateCard } from '../redux/actionCreator.js';
+import { activateCard } from '../redux/actionCreator/cards.js';
 
 class Card extends React.Component {
 	constructor(props) {
