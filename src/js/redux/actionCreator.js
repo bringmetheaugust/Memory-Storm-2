@@ -84,13 +84,16 @@ export const endGame = () => dispatch => {
 export const activateCard = id => (dispatch, getState) => {
 	dispatch(openCard(id));
 	const openedCards = getState().cards.filter(i => (i.isOpen && !i.isDisable) === true);
-	if (openedCards.length > 1) {
-		if (openedCards[0].img === openedCards[1].img) {
-			openedCards.forEach(i => dispatch(disableCard(i.id)));
-			//TODO: add method to check game result
-		}
+	setTimeout(() => {
+		if (openedCards.length > 1) {
+			if (openedCards[0].img === openedCards[1].img) {
+				openedCards.forEach(i => dispatch(disableCard(i.id)));
+				//TODO: add method to check game result
+				//dispatch(checkGameResult());
+			}
 		dispatch(openAllCards(false));
 	}
+	}, 500);
 };
 
 export const openCard = id => ({
