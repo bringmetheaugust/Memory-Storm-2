@@ -27,8 +27,5 @@ class App extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch => ({
-		createCardsList: () => dispatch(createCardsList()),
-		combinedSettings: settings => dispatch(combinedSettings(settings))
-	})
+	{ createCardsList, combinedSettings }
 )(App);

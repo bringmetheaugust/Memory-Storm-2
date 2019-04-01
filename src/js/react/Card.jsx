@@ -21,5 +21,5 @@ class Card extends React.Component {
 
 export default connect(
 	state => ({ store: state }),
-	dispatch =>({ activateCard: id => dispatch(activateCard(id)) }),
+	{ activateCard }
 )(Card);

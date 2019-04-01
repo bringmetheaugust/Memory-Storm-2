@@ -89,9 +89,5 @@ export default connect(
 		store: state,
 		play: state.gameState.play
 	}),
-	dispatch => ({
-		runGame: form => dispatch(runGame(form)),
-		endGame: bool => dispatch(endGame(bool)),
-		combinedSettings: form => dispatch(combinedSettings(form))
-	})
+	{ runGame, endGame, combinedSettings }
 )(Settings);
