@@ -3,24 +3,15 @@ import initialState from './initialState.js';
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case 'SET_GAME_SETTINGS': {
-			return {
-				...state,
-				settings: action.payload
-			}
+			return { ...state, settings: action.payload }
 		}
 		case 'SET_CARDS': {
-			return {
-				...state,
-				cards: action.payload
-			};
+			return { ...state, cards: action.payload };
 		}
 		case 'SET_GAME_ACTION': {
 			return {
 				...state,
-				gameState: {
-					...state.gameState,
-					play: !state.gameState.play
-				}
+				gameState: { ...state.gameState, play: !state.gameState.play }
 			}
 		}
 		case 'OPEN_ALL_CARDS': {
@@ -53,10 +44,7 @@ export default function reducer(state = initialState, action) {
 		case 'SET_GAME_RESULT': {
 			return {
 				...state,
-				gameState: {
-					...state.gameState,
-					win: action.payload
-				}
+				gameState: { ...state.gameState, win: action.payload }
 			}
 		}
 	}
