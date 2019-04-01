@@ -27,7 +27,7 @@ class Settings extends React.Component {
 			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
 	}
 	toSubmit = () => {
-		if (this.props.play) return this.props.endGame();
+		if (this.props.play) return this.props.endGame(null);
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,
@@ -91,7 +91,7 @@ export default connect(
 	}),
 	dispatch => ({
 		runGame: form => dispatch(runGame(form)),
-		endGame: () => dispatch(endGame()),
+		endGame: bool => dispatch(endGame(bool)),
 		combinedSettings: form => dispatch(combinedSettings(form))
 	})
 )(Settings);

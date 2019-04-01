@@ -63,14 +63,11 @@ export const runGame = form => (dispatch, getState) => {
 	hideCards = setTimeout(() => dispatch(openAllCards(false)), form.hiding * 1000);
 	let temporaryCount = getState().gameState.counter;
 	counter = setInterval(() => {
-		if (temporaryCount <= 1) {
-			dispatch(endGame());
-			clearInterval(counter);
-			return dispatch(setGameResult(false));
-		}
+		if (temporaryCount <= 1) return dispatch(endGame(false)), clearInterval(counter);
 		dispatch(setCounter());
 		temporaryCount--;
 	}, 1000);
+	dispatch(setGameResult(null));
 };
 
 export const endGame = bool => dispatch => {
