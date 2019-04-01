@@ -73,12 +73,13 @@ export const runGame = form => (dispatch, getState) => {
 	}, 1000);
 };
 
-export const endGame = () => dispatch => {
+export const endGame = bool => dispatch => {
 	clearTimeout(hideCards);
 	clearInterval(counter);
 	dispatch(setGameAction());
 	dispatch(openAllCards(false));
 	dispatch(setCounter(0));
+	dispatch(setGameResult(bool));
 };
 
 export const activateCard = id => (dispatch, getState) => {
@@ -89,7 +90,7 @@ export const activateCard = id => (dispatch, getState) => {
 			if (openedCards[0].img === openedCards[1].img) {
 				openedCards.forEach(i => dispatch(disableCard(i.id)));
 				//TODO: add method to check game result
-				//dispatch(checkGameResult());
+				if (getState().cards.every(i => i.isDisable === true)) return dispatch(endGame(true));
 			}
 		dispatch(openAllCards(false));
 	}
