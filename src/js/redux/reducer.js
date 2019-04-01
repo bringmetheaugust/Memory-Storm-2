@@ -39,7 +39,6 @@ export default function reducer(state = initialState, action) {
 			}
 		}
 		case 'OPEN_CARD': {
-			console.info('click on :', action.data);
 			return {
 				...state,
 				cards: state.cards.map(i => i.id === action.data ? {...i, isOpen: true} : i)

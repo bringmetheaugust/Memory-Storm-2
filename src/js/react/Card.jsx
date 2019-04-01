@@ -5,19 +5,17 @@ import { openCard } from '../redux/actionCreator.js';
 class Card extends React.Component {
 	constructor(props) {
 		super(props);
-		this.img = this.props.data.img;
-		this.id = this.props.data.id;
+		this.state = { ...this.props.data };
 	}
+	static getDerivedStateFromProps = (nextPr, prevSt) => ({ ...nextPr.store.cards.find(i => i.id === prevSt.id) });
 	toActivateCard = () => this.props.openCard(this.props.data.id);
 	render() {
-		//FIX_ME: change oppportunity for click events on cards
-		// const cardOpportunity = dt.isDisable || !this.props.store.play || dt.isOpen;
-		const cardOpportunity = false;
+		const cardOpportunity = this.state.isDisable || !this.props.store.gameState.play || this.state.isOpen;
 		return(
-			<li className={`card-wrap ${this.props.data.isDisable ? 'disabled' : ''}`}
+			<li className={`card-wrap ${this.state.isDisable ? 'disabled' : ''}`}
 				onClick = {cardOpportunity ? null : this.toActivateCard}
 			>
-				{ <img ref={i => this.imgRef = i} src={this.props.data.img} /> }
+				{ this.state.isOpen && <img ref={i => this.imgRef = i} src={this.props.data.img} /> }
 			</li>
 )}}
 
