@@ -13,7 +13,7 @@ const SET_GAME_RESULT = 'SET_GAME_RESULT';
 
 export const setCards = cards => ({
 	type: SET_CARDS,
-	data: cards
+	payload: cards
 });
 
 export const createCardsList = val => (dispatch, getState) => {
@@ -30,12 +30,12 @@ export const createCardsList = val => (dispatch, getState) => {
 
 export const setGameAction = bool => ({
 	type: SET_GAME_ACTION,
-	data: bool
+	payload: bool
 });
 
 export const setGameSettings = settings => ({
 	type: SET_GAME_SETTINGS,
-	data: settings
+	payload: settings
 });
 
 export const combinedSettings = settings => dispatch => {
@@ -45,12 +45,12 @@ export const combinedSettings = settings => dispatch => {
 
 export const openAllCards = bool => ({
 	type: OPEN_ALL_CARDS,
-	data: bool
+	payload: bool
 });
 
 export const setCounter = num => ({
 	type: SET_COUNTER,
-	data: num
+	payload: num
 });
 
 export const runGame = form => (dispatch, getState) => {
@@ -89,7 +89,6 @@ export const activateCard = id => (dispatch, getState) => {
 		if (openedCards.length > 1) {
 			if (openedCards[0].img === openedCards[1].img) {
 				openedCards.forEach(i => dispatch(disableCard(i.id)));
-				//TODO: add method to check game result
 				if (getState().cards.every(i => i.isDisable === true)) return dispatch(endGame(true));
 			}
 		dispatch(openAllCards(false));
@@ -99,12 +98,12 @@ export const activateCard = id => (dispatch, getState) => {
 
 export const openCard = id => ({
 	type: OPEN_CARD,
-	data: id
+	payload: id
 });
 
 export const disableCard = id => ({
 	type: DISABLE_CARD,
-	data: id
+	payload: id
 });
 
 export const setGameResult = bool => ({
