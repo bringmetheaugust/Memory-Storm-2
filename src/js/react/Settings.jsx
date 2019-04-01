@@ -39,7 +39,7 @@ class Settings extends React.Component {
 		const str = this.props.store.settings, st = this.state;
 		const submitOpportunity = !st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis;
 		return(
-			<form onInput={this.checkForm} id='settings'>
+			<form onInput={this.checkForm} id='settings' className={this.props.play ? 'play' : ''}>
 				<label>select grid density
 					<input
 						key={str.density}
