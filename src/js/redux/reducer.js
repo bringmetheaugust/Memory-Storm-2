@@ -17,7 +17,13 @@ export default function reducer(state = initialState, action) {
 		case 'OPEN_ALL_CARDS': {
 			return {
 				...state,
-				cards: state.cards.map(i => ({...i, isOpen: i.isDisable ? true : action.payload}))
+				cards: state.cards.map(i => ({ ...i, isOpen: i.isDisable ? true : action.payload }))
+			}
+		}
+		case 'DISACTIVE_ALL_CARDS': {
+			return {
+				...state,
+				cards: state.cards.map(i => ({ ...i, isActive: i.isDisable ? false : true }))
 			}
 		}
 		case 'SET_COUNTER': {
@@ -32,7 +38,7 @@ export default function reducer(state = initialState, action) {
 		case 'OPEN_CARD': {
 			return {
 				...state,
-				cards: state.cards.map(i => i.id === action.payload ? {...i, isOpen: true} : i)
+				cards: state.cards.map(i => i.id === action.payload ? {...i, isOpen: true, isActive: false } : i),
 			}
 		}
 		case 'DISABLE_CARD': {

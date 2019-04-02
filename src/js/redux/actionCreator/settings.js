@@ -21,6 +21,7 @@ export const createCardsList = val => (dispatch, getState) => {
 		img: i,
 		isOpen: false,
 		isDisable: false,
+		isActive: false
 	}))).sort(() => Math.random() - Math.random());
 	dispatch(setCards(cards));
 };
