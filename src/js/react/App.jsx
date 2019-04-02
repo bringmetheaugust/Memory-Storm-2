@@ -3,28 +3,29 @@ import Game from './Game.jsx';
 import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.js';
 
-class App extends React.Component{
-	constructor(props){
+class App extends React.Component {
+	constructor(props) {
 		super(props);
-		this.state = { gameOver: false }
 	}
-	componentWillReceiveProps(nextPr){
-		if (!nextPr.play) this.setState({ gameOver: true });
+	componentDidMount() {
+		const localData = localStorage.getItem('settings');
+		(localData && localData !== JSON.stringify(this.props.store.settings)) ?
+			this.props.combinedSettings(JSON.parse(localData)) :
+			this.props.createCardsList();
 	}
-	closeAlert = () => this.setState({ gameOver: false });
 	render = () =>
-			<React.Fragment>
-				<Splash/>
-				<Game/>
-				<Settings/>
-				{
-					this.state.gameOver && <Alert closeAlert = {this.closeAlert}/>
-				}
-			</React.Fragment>
+		<React.Fragment>
+			<Splash/>
+			<Game />
+			<Settings />
+			<Alert />
+		</React.Fragment>
 }
 
 export default connect(
-	state => ({ play: state.gameState.play }),
+	state => ({ store: state }),
+	{ createCardsList, combinedSettings }
 )(App);

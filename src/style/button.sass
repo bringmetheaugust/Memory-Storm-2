@@ -12,7 +12,7 @@
 	.abort
 		transform: translateY(10px)
 	&:hover
-		div:not(.play):not(.abort)
+		li:not(.play):not(.abort)
 			animation: play .4s both linear
 			@for $i from 1 to 5
 				&:nth-child(#{$i})

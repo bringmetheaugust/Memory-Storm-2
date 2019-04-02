@@ -1,15 +1,11 @@
-import {createStore} from 'redux';
-import reducers from './reducers/index.js';
-import {setGameAction} from './reducers/gameState/actionCreator.js';
-import {setGameResultScore} from './reducers/buffer/actionCreator.js';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from 'redux-thunk';
+import reducer from './reducer.js';
 
-export const store = createStore(reducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+export const store = createStore(
+	reducer,
+	composeWithDevTools(
+		applyMiddleware(ReduxThunk),
+	)
 );
-
-store.subscribe(() => {
-	if (store.getState().buffer.score === 0) {
-		store.dispatch(setGameResultScore(null));
-		store.dispatch(setGameAction(true));
-	}
-})

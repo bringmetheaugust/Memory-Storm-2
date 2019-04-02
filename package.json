@@ -29,6 +29,7 @@
     "postcss-loader": "^2.1.4",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
+    "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1"
@@ -38,6 +39,7 @@
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"

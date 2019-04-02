@@ -1,19 +1,21 @@
 li
+	perspective: 800px
+	perspective-origin: 50% 50%
 	border: 1px solid $clr
 	display: flex
 	align-items: center
 	transition: background 1s
-	overflow: hidden
 	background: linear-gradient(30deg, white  0%, white 35%, $bg  50%, white 65%, white 100%)
 	background-position: 0% 100%
 	background-size: 700%
 	animation: storm 2.5s
 	img
+		outline: 1px solid $clr
 		width: 100%
 		backface-visibility: hidden
 		animation: show 1s both
 		transition: all .3s
-		z-index: 10
+		z-index: 15
 		&.disactive
 			animation: hidden .5s both
 	&.disabled
@@ -31,7 +33,7 @@ li
 	from
 		transform: rotateY(0deg)
 	to
-		transform: rotateY(90deg)
+		transform: rotateY(-90deg)
 
 @keyframes storm
 	to

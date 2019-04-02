@@ -16,10 +16,10 @@ another empty block, where was her 'clone'. If You have failed, all pictures wil
 ***
 ### User quickstart:
 To get started, download 'Dist' folder, open it and run 'index.html' file via browser.
-Also, You can joy it here <https://bringmetheaugust.github.io/memory>
+Also, You can joy it here <https://bringmetheaugust.github.io/memoryPro>
 ***
 ### Development quickstart:
-Clone the repository `https://github.com/bringmetheaugust/Memory-Storm`, install all **NPM**
+Clone the repository `https://github.com/bringmetheaugust/Memory-Storm-2`, install all **NPM**
 dependencies via `npm install` comand and run `npm run dev` into NodeJS console.
 ***
 ### Support:

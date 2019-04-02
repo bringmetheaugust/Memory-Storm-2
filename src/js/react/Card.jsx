@@ -1,53 +1,29 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {addItemOnBuffer} from '../redux/reducers/buffer/actionCreator.js';
+import { connect } from 'react-redux';
+import { activateCard } from '../redux/actionCreator/cards.js';
 
-class Card extends React.Component{
-	constructor(props){
+class Card extends React.Component {
+	constructor(props) {
 		super(props);
-		this.state = {
-			isOpen: false,
-			isDisabled: false
-		}
+		this.state = { ...this.props.data };
 	}
-	toOpenCard = () => this.setState({ isOpen: true });
-	toActivateCard = () =>{
-		this.toOpenCard();
-		this.props.addItemOnBuffer({
-			img: this.props.img,
-			close: this.toCloseCard,
-			disable: this.toDisable
-		});
-	}
-	toCloseCard = () =>{
-		if (this.imgRef !== null) this.imgRef.className = 'disactive';
-		setTimeout(() => this.setState({isOpen: false}), 500);
-	}
-	toDisable = () => this.setState({ isDisabled: true });
-	componentDidMount(){
-		if (this.props.play) {
-			this.toOpenCard();
-			this.mountCount = setTimeout(() =>{
-				this.toCloseCard();
-			}, this.props.store.settings.hiding * 1000);
-		}
-	}
-	componentWillUnmount = () => clearTimeout(this.mountCount);
-	render(){
-		const cardOpportunity = this.state.isDisabled || !this.props.play || this.state.isOpen;
+	static getDerivedStateFromProps = (nextPr, prevSt) => ({ ...nextPr.store.cards.find(i => i.id === prevSt.id) });
+	activateCard = () => this.props.activateCard(this.props.data.id);
+	render() {
+		const cardOpportunity = this.state.isDisable || !this.props.store.gameState.play || this.state.isOpen;
 		return(
-			<li className={`card-wrap ${this.state.isDisabled ? 'disabled' : ''}`}
-				onClick = {cardOpportunity ? null : this.toActivateCard}>
-				{
-					this.state.isOpen && <img ref = {i => this.imgRef = i} src={this.props.img}/>
-				}
+			<li className={`card-wrap ${this.state.isDisable ? 'disabled' : ''}`}
+				onClick = {cardOpportunity ? null : this.activateCard}
+			>
+				{ this.state.isOpen &&
+					<img ref={i => this.imgRef = i}
+						src={this.props.data.img}
+						className={this.state.isActive ? 'disactive' : ''}
+					/> }
 			</li>
 )}}
 
 export default connect(
-	state => ({
-		store: state,
-		play: state.gameState.play,
-	}),
-	dispatch =>({ addItemOnBuffer: item => dispatch(addItemOnBuffer(item)) })
+	state => ({ store: state }),
+	{ activateCard }
 )(Card);
