@@ -18,7 +18,7 @@ class App extends React.Component {
 	}
 	render = () =>
 		<React.Fragment>
-			{/*<Splash/>*/}
+			<Splash/>
 			<Game />
 			<Settings />
 			<Alert />
