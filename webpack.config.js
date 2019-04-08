@@ -9,7 +9,7 @@ module.exports={
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
-		filename: 'bundle.[chunkhash].js',
+		filename: 'bundle.js',
 		publicPath: ''
 	},
 	devtool: 'source-map',
@@ -102,7 +102,7 @@ module.exports={
 				inject: false,
 			}
 		),
-    	new ExtractTextPlugin("style.[chunkhash].css"),
+    	new ExtractTextPlugin("style.css"),
     	new CleanWebpackPlugin(['dist']),
   	],
 	mode: 'development'
