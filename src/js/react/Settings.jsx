@@ -21,7 +21,7 @@ class Settings extends React.Component {
 			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
 				return this.setState({ invalidDensity: true });
 			this.setState({ invalidDensity: false });
-			this.props.combinedSettings({ ...this.props.store.settings, density: trg.value });
+			this.props.combinedSettings({ ...this.props.store.settings, density: +trg.value });
 		}
 		if (trg.id === 'hiding') {
 			const validHiddingTime = isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME;
