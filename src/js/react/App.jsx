@@ -5,6 +5,7 @@ import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
 import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.js';
+import PropTypes from 'prop-types';
 
 class App extends React.Component {
 	componentDidMount() {
@@ -21,6 +22,12 @@ class App extends React.Component {
 			<Alert />
 		</React.Fragment>
 }
+
+App.propTypes = {
+	store: PropTypes.object,
+	createCardsList: PropTypes.func,
+	combinedSettings: PropTypes.func
+};
 
 export default connect(
 	state => ({ store: state }),

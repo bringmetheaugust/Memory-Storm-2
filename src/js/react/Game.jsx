@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './Card.jsx';
 import Counter from './Counter.jsx';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Game extends React.Component {
 	shouldComponentUpdate = () => !this.props.play;
@@ -18,6 +19,12 @@ class Game extends React.Component {
 			</div>
 		)
 	}
+}
+
+Game.propTypes = {
+	cards: PropTypes.array,
+	density: PropTypes.number,
+	play: PropTypes.bool
 }
 
 export default connect(

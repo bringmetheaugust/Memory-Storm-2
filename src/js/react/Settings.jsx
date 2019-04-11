@@ -4,6 +4,7 @@ import DoubleButton from './DoubleButton.jsx';
 import { runGame, endGame } from '../redux/actionCreator/index.js';
 import { combinedSettings } from '../redux/actionCreator/settings.js';
 import * as GV from '../gameValue.js';
+import PropTypes from 'prop-types';
 
 class Settings extends React.Component {
 	constructor(props) {
@@ -88,7 +89,17 @@ class Settings extends React.Component {
 					secondBlock='stop'
 				/>
 			</form>
-)}}
+		)
+	}
+}
+
+Settings.propTypes = {
+	store: PropTypes.object,
+	play: PropTypes.bool,
+	runGame: PropTypes.func,
+	endGame: PropTypes.func,
+	combinedSettings: PropTypes.func
+};
 
 export default connect(
 	state => ({

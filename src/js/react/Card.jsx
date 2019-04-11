@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { activateCard } from '../redux/actionCreator/cards.js';
+import PropTypes from 'prop-types';
 
 class Card extends React.Component {
 	constructor(props) {
@@ -25,6 +26,11 @@ class Card extends React.Component {
 		)
 	}	
 }
+
+Card.propTypes = {
+	store: PropTypes.object,
+	activateCard: PropTypes.func
+};
 
 export default connect(
 	state => ({ store: state }),
