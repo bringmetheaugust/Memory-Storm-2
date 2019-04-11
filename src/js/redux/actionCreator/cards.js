@@ -1,27 +1,23 @@
 import { endGame } from './index.js';
-
-const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
-const OPEN_CARD = 'OPEN_CARD';
-const DISABLE_CARD = 'DISABLE_CARD';
-const DISACTIVE_ALL_CARDS = 'DISACTIVE_ALL_CARDS';
+import * as AT from '../actionTypes.js';
 
 export const openCard = id => ({
-	type: OPEN_CARD,
+	type: AT.OPEN_CARD,
 	payload: id
 });
 
 export const disableCard = id => ({
-	type: DISABLE_CARD,
+	type: AT.DISABLE_CARD,
 	payload: id
 });
 
 export const openAllCards = bool => ({
-	type: OPEN_ALL_CARDS,
+	type: AT.OPEN_ALL_CARDS,
 	payload: bool
 });
 
 export const disactiveAllCards = () => ({
-	type: DISACTIVE_ALL_CARDS
+	type: AT.DISACTIVE_ALL_CARDS
 });
 
 export const closeAllCards = () => dispatch => {
