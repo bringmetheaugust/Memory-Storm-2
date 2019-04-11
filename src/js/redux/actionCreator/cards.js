@@ -1,5 +1,6 @@
 import { endGame } from './index.js';
 import * as AT from '../actionTypes.js';
+const cardHiddingTime = 500;
 
 export const openCard = id => ({
 	type: AT.OPEN_CARD,
@@ -22,7 +23,7 @@ export const disactiveAllCards = () => ({
 
 export const closeAllCards = () => dispatch => {
 	dispatch(disactiveAllCards());
-	setTimeout(() => dispatch(openAllCards(false)), 500);
+	setTimeout(() => dispatch(openAllCards(false)), cardHiddingTime);
 };
 
 export const activateCard = id => (dispatch, getState) => {

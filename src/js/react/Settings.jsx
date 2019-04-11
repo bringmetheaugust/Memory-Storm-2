@@ -20,15 +20,20 @@ class Settings extends React.Component {
 			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
 				return this.setState({ invalidDensity: true });
 			this.setState({ invalidDensity: false });
-			this.props.combinedSettings({...this.props.store.settings, density: trg.value});
+			this.props.combinedSettings({ ...this.props.store.settings, density: trg.value });
 		}
-		if (trg.id === 'hiding') this.setState({invalidHiding:
-			(isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME)});
-		if (trg.id === 'time') this.setState({invalidTime: 
-			(isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME)});
+		if (trg.id === 'hiding') {
+			const validHiddingTime = isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME;
+			this.setState({ invalidHiding: validHiddingTime });
+		}
+		if (trg.id === 'time') {
+			const validGameTime = isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME;
+			this.setState({ invalidTime: validGameTime });
+		}
 	}
 	toSubmit = () => {
 		if (this.props.play) return this.props.endGame(null);
+		window.scrollTo(0, 0);
 		const form = {
 			density: +this.density.value,
 			hiding: +this.hiding.value,

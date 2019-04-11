@@ -21,7 +21,10 @@ class Card extends React.Component {
 						className={this.state.isActive ? 'disactive' : ''}
 					/> }
 			</li>
-)}}
+
+		)
+	}	
+}
 
 export default connect(
 	state => ({ store: state }),

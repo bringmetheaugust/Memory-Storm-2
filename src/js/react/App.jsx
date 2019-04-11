@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.js';
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	componentDidMount() {
 		const localData = localStorage.getItem('settings');
 		(localData && localData !== JSON.stringify(this.props.store.settings)) ?

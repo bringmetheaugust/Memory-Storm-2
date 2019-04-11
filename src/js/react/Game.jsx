@@ -4,9 +4,6 @@ import Counter from './Counter.jsx';
 import { connect } from 'react-redux';
 
 class Game extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	shouldComponentUpdate = () => !this.props.play;
 	render() {
 		return(
