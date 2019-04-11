@@ -2,11 +2,9 @@ import React from 'react';
 import Card from './Card.jsx';
 import Counter from './Counter.jsx';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Game extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	shouldComponentUpdate = () => !this.props.play;
 	render() {
 		return(
@@ -15,12 +13,18 @@ class Game extends React.Component {
 					className={this.props.play ? 'play' : ''}
 					style={{ gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)` }}
 				>
-					{this.props.cards.map(i => <Card key={Math.random()} data={i} />)}
+					{this.props.cards.map(i => <Card key={i.id} data={i} />)}
 				</ul>
 				<Counter />
 			</div>
 		)
 	}
+}
+
+Game.propTypes = {
+	cards: PropTypes.array,
+	density: PropTypes.number,
+	play: PropTypes.bool
 }
 
 export default connect(

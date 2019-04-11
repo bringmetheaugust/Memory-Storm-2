@@ -1,15 +1,13 @@
+import * as AT from '../actionTypes.js';
 import pictures from '../../pictures.js';
 
-const SET_GAME_SETTINGS = 'SET_GAME_SETTINGS';
-const SET_CARDS = 'SET_CARDS';
-
 export const setGameSettings = settings => ({
-	type: SET_GAME_SETTINGS,
+	type: AT.SET_GAME_SETTINGS,
 	payload: settings
 });
 
 export const setCards = cards => ({
-	type: SET_CARDS,
+	type: AT.SET_CARDS,
 	payload: cards
 });
 

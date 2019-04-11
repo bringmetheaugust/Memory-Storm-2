@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DoubleButton from './DoubleButton.jsx';
+import PropTypes from 'prop-types';
 
 class Alert extends React.Component {
 	constructor (props) {
@@ -18,6 +19,8 @@ class Alert extends React.Component {
 		)
 	}
 }
+
+Alert.propTypes = { win: PropTypes.bool };
 
 export default connect(
 	state => ({ win: state.gameState.win }),

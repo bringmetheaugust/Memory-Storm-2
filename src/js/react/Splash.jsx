@@ -1,4 +1,5 @@
 import React from 'react';
+const splashHiddingTime = 13000;
 
 class Splash extends React.Component {
 	constructor(props) {
@@ -9,7 +10,7 @@ class Splash extends React.Component {
 		if (this.splash) this.splash.style.opacity = '0';
 		setTimeout(() => this.setState({ isActive: false }), 1000);
 	}
-	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , 13000);
+	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , splashHiddingTime);
 	componentWillUnmount = () => clearTimeout(this.count);
 	render() {
 		if (!this.state.isActive) return null;
