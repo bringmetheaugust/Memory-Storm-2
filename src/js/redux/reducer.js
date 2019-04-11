@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action) {
 		case AT.DISACTIVE_ALL_CARDS: {
 			return {
 				...state,
-				cards: state.cards.map(i => ({ ...i, isActive: i.isDisable ? false : true }))
+				cards: state.cards.map(i => ({ ...i, isActive: !i.isDisable }))
 			}
 		}
 		case AT.SET_COUNTER: {
