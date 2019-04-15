@@ -1,21 +1,25 @@
 import React from 'react';
-const splashHiddingTime = 13000;
+const SPLASH_TIME = 13000;
+const SPLASH_HIDDING_TIME = 1000;
 
 class Splash extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isActive: true };
+		this.state = {
+			isActive: true,
+			isHidden: false
+		};
 	}
 	hideSplash = () => {
-		if (this.splash) this.splash.style.opacity = '0';
-		setTimeout(() => this.setState({ isActive: false }), 1000);
+		if (this.splash) this.setState({ isHidden: true });
+		setTimeout(() => this.setState({ isActive: false }), SPLASH_HIDDING_TIME);
 	}
-	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , splashHiddingTime);
+	componentDidMount = () => this.count = setTimeout(() => this.hideSplash() , SPLASH_TIME);
 	componentWillUnmount = () => clearTimeout(this.count);
 	render() {
 		if (!this.state.isActive) return null;
 		return(
-			<div id='splash' ref ={i => this.splash = i}>
+			<div id='splash' ref ={i => this.splash = i} style={{ opacity: this.state.isHidden ? 0 : 1 }}>
 				<div className='title'>MEMORY STORM
 					<div className='exclamation'>work hard , play hard
 						<div>!</div>
