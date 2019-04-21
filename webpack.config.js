@@ -16,7 +16,7 @@ module.exports={
 	devServer:{
 		contentBase: './dist',
 		watchContentBase: true,
-  		compress: true,
+		compress: true,
 		overlay: true,
 		historyApiFallback: true,
 	},
@@ -30,15 +30,15 @@ module.exports={
                     presets:["@babel/preset-env", "@babel/preset-react"],
                     plugins: [["@babel/plugin-proposal-class-properties", {loose: true}]]
                 }
-            },
+			},
 			{
-				test: /\.sass$/,
+				test: /[^(.module)]\.(sass|scss)$/,
 				use: ExtractTextPlugin.extract({
 					use: [
 						{
 							loader: 'css-loader',
 							options: {
-								minimize: true
+								minimize: true,
 							}
 						},
 						{
@@ -52,9 +52,33 @@ module.exports={
 				})
 			},
 			{
-	            test: /\.pug$/,
-	            loader: "pug-loader"
-	        },
+				test: /\.(module.sass|module.scss)$/,
+				use: ExtractTextPlugin.extract({
+					use: [
+						// {
+						// 	loader: 'style-loader'
+						// },
+						{
+							loader: 'css-loader',
+							options: {
+								modules: true,
+								localIdentName: '[local]_[hash:5]'
+							}
+						},
+						{
+							loader: 'postcss-loader'
+						},
+						{
+							loader: 'sass-loader'
+						}
+					],
+					fallback: 'style-loader'
+				})
+			},
+			{
+				test: /\.pug$/,
+				loader: "pug-loader"
+			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/i,
 				use: [
@@ -86,12 +110,12 @@ module.exports={
                 }
             },
             {
-			    test: /\.mp3$/,
-			    loader: 'file-loader'
+				test: /\.mp3$/,
+				loader: 'file-loader'
 			},
-			 {
-			    test: /\.mp4$/,
-			    loader: 'file-loader'
+			{
+				test: /\.mp4$/,
+				loader: 'file-loader'
 			}
 		],
 	},
