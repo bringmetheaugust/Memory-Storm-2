@@ -1,7 +1,13 @@
-import initialState from './initialState.ts';
-import * as AT from './actionTypes.ts';
+// @ts-ignore
+import initialState from '../initialState.ts';
+// @ts-ignore
+import * as AT from '../actionType/index.ts';
+import State from '../interface/InitialState';
+import Action from '../interface/action';
+// @ts-ignore
+import Card from '../interface/card.ts';
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state: State  = initialState, action: Action): State {
 	switch (action.type) {
 		case AT.SET_GAME_SETTINGS: {
 			return { ...state, settings: action.payload }
@@ -18,13 +24,13 @@ export default function reducer(state = initialState, action) {
 		case AT.OPEN_ALL_CARDS: {
 			return {
 				...state,
-				cards: state.cards.map(i => ({ ...i, isOpen: i.isDisable ? true : action.payload }))
+				cards: state.cards.map((i: Card) => ({ ...i, isOpen: i.isDisable ? true : action.payload }))
 			}
 		}
 		case AT.DISACTIVE_ALL_CARDS: {
 			return {
 				...state,
-				cards: state.cards.map(i => ({ ...i, isActive: !i.isDisable }))
+				cards: state.cards.map((i: Card) => ({ ...i, isActive: !i.isDisable }))
 			}
 		}
 		case AT.SET_COUNTER: {
@@ -39,13 +45,16 @@ export default function reducer(state = initialState, action) {
 		case AT.OPEN_CARD: {
 			return {
 				...state,
-				cards: state.cards.map(i => i.id === action.payload ? {...i, isOpen: true, isActive: false } : i),
+				cards: state.cards.map((i: Card) => i.id === action.payload ?
+					{ ...i, isOpen: true, isActive: false } :
+					i
+				),
 			}
 		}
 		case AT.DISABLE_CARD: {
 			return {
 				...state,
-				cards: state.cards.map(i => i.id === action.payload ? {...i, isDisable: true} : i)
+				cards: state.cards.map((i: Card) => i.id === action.payload ? {...i, isDisable: true} : i)
 			}
 		}
 		case AT.SET_GAME_RESULT: {

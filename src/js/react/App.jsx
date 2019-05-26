@@ -4,7 +4,7 @@ import Settings from './Settings.jsx';
 import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
-import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.js';
+import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.ts';
 import PropTypes from 'prop-types';
 
 class App extends React.Component {

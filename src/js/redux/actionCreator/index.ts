@@ -1,18 +1,23 @@
-import { setGameAction, setCounter, setGameResult } from './gameState.js';
-import { combinedSettings } from './settings.js';
-import { openAllCards, closeAllCards } from './cards.js';
+// @ts-ignore
+import { setGameAction, setCounter, setGameResult } from './gameState.ts';
+// @ts-ignore
+import { combinedSettings } from './settings.ts';
+// @ts-ignore
+import { openAllCards, closeAllCards } from './cards.ts';
+// @ts-ignore
+import State from '../interface/InitialState.ts';
 
-let counter;
-let hideCards;
+let counter: any;
+let hideCards: any;
 
-export const runGame = form => (dispatch, getState) => {
+export const runGame = (form: State.settings) => (dispatch: any, getState: any) => {
 	dispatch(setGameAction());
 	dispatch(combinedSettings(form));
 	dispatch(setCounter(form.time))
 	dispatch(openAllCards(true));
 	localStorage.setItem('settings', JSON.stringify(form));
 	hideCards = setTimeout(() => dispatch(closeAllCards()), form.hiding * 1000);
-	let temporaryCount = getState().gameState.counter;
+	let temporaryCount: number = getState().gameState.counter;
 	counter = setInterval(() => {
 		if (temporaryCount <= 1) return dispatch(endGame(false)), clearInterval(counter);
 		dispatch(setCounter());
@@ -21,7 +26,7 @@ export const runGame = form => (dispatch, getState) => {
 	dispatch(setGameResult(null));
 };
 
-export const endGame = bool => dispatch => {
+export const endGame = (bool: boolean) => (dispatch: any) => {
 	clearTimeout(hideCards);
 	clearInterval(counter);
 	dispatch(setGameAction());

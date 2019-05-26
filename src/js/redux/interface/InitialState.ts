@@ -1,10 +1,13 @@
+// @ts-ignore
+import Card from './card.ts';
+
 export default interface State {
-    settings: {
+	settings: {
 		density: number
 		hiding: number
 		time: number
-	},
-	cards: any
+	}
+	cards: []|Card
 	gameState: {
 		play: boolean
 		counter: number

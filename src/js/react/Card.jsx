@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { activateCard } from '../redux/actionCreator/cards.js';
+import { activateCard } from '../redux/actionCreator/cards.ts';
 import PropTypes from 'prop-types';
 
 class Card extends React.Component {

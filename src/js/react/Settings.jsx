@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DoubleButton from './DoubleButton.jsx';
-import { runGame, endGame } from '../redux/actionCreator/index.js';
-import { combinedSettings } from '../redux/actionCreator/settings.js';
+import { runGame, endGame } from '../redux/actionCreator/index.ts';
+import { combinedSettings } from '../redux/actionCreator/settings.ts';
 import * as GV from '../constant/gameValue.ts';
 import PropTypes from 'prop-types';
 
