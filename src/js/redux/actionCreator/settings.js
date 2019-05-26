@@ -1,5 +1,5 @@
 import * as AT from '../actionTypes.js';
-import pictures from '../../pictures.js';
+import pictures from '../../DB/pictures.ts';
 
 export const setGameSettings = settings => ({
 	type: AT.SET_GAME_SETTINGS,

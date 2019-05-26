@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DoubleButton from './DoubleButton.jsx';
 import { runGame, endGame } from '../redux/actionCreator/index.js';
 import { combinedSettings } from '../redux/actionCreator/settings.js';
-import * as GV from '../gameValue.js';
+import * as GV from '../constant/gameValue.ts';
 import PropTypes from 'prop-types';
 
 class Settings extends React.Component {
