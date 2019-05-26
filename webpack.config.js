@@ -3,7 +3,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports={
+module.exports = {
 	entry: {
 		name: './src/js/index.js',
 	},
@@ -23,14 +23,10 @@ module.exports={
 	module: {
 		rules: [
 			{
-                test: /\.jsx?$/,
+                test: /\.(ts|js)x?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: "babel-loader",
-                options:{
-                    presets:["@babel/preset-env", "@babel/preset-react"],
-                    plugins: [["@babel/plugin-proposal-class-properties", {loose: true}]]
-                }
-			},
+            },
 			{
 				test: /[^(.module)]\.(sass|scss)$/,
 				use: ExtractTextPlugin.extract({
@@ -55,9 +51,6 @@ module.exports={
 				test: /\.(module.sass|module.scss)$/,
 				use: ExtractTextPlugin.extract({
 					use: [
-						// {
-						// 	loader: 'style-loader'
-						// },
 						{
 							loader: 'css-loader',
 							options: {
@@ -102,21 +95,6 @@ module.exports={
 					},
 				],
 			},
-			{
-                test: /\.svg/i,
-                use: {
-                    loader: 'svg-url-loader',
-                    options: {}
-                }
-            },
-            {
-				test: /\.mp3$/,
-				loader: 'file-loader'
-			},
-			{
-				test: /\.mp4$/,
-				loader: 'file-loader'
-			}
 		],
 	},
 	plugins: [
