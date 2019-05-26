@@ -1,4 +1,4 @@
-import * as AT from '../actionTypes.js';
+import * as AT from '../actionTypes.ts';
 import pictures from '../../DB/pictures.ts';
 
 export const setGameSettings = settings => ({

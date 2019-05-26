@@ -1,5 +1,5 @@
 import { endGame } from './index.js';
-import * as AT from '../actionTypes.js';
+import * as AT from '../actionTypes.ts';
 const cardHiddingTime = 500;
 
 export const openCard = id => ({

@@ -1,5 +1,5 @@
-import initialState from './initialState.js';
-import * as AT from './actionTypes.js';
+import initialState from './initialState.ts';
+import * as AT from './actionTypes.ts';
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
