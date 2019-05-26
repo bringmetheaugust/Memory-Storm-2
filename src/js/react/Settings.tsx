@@ -1,13 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DoubleButton from './DoubleButton.jsx';
+import DoubleButton from './DoubleButton.tsx';
 import { runGame, endGame } from '../redux/actionCreator/index.ts';
 import { combinedSettings } from '../redux/actionCreator/settings.ts';
 import * as GV from '../constant/gameValue.ts';
-import PropTypes from 'prop-types';
+import StateInterface from '../interface/InitialState.ts';
+import ActionInterface from '../interface/action.ts';
 
-class Settings extends React.Component {
-	constructor(props) {
+interface Props {
+	store: StateInterface
+	play: boolean
+	runGame: ActionInterface
+	endGame: ActionInterface
+	combinedSettings: ActionInterface
+}
+
+interface State {
+	invalidDensity: boolean
+	invalidHiding: boolean
+	invalidTime: boolean
+}
+
+class Settings extends React.Component<Props, State> {
+	density: HTMLInputElement
+	hiding: HTMLInputElement
+	time: HTMLInputElement
+	st: State
+	constructor(props: Props) {
 		super(props);
 		this.state = {
 			invalidDensity: false,
@@ -15,7 +34,7 @@ class Settings extends React.Component {
 			invalidTime: false,
 		}
 	}
-	checkForm = (e) => {
+	checkForm = e => {
 		const trg = e.target, isNan = Number.isNaN(Number(trg.value));
 		if (trg.id === 'density') {
 			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
@@ -44,7 +63,7 @@ class Settings extends React.Component {
 	}
 	render() {
 		const str = this.props.store.settings, st = this.state;
-		const submitOpportunity = !st.invalidDensity && !st.invalidHiding && !st.invalidTimeinthis;
+		const submitOpportunity: boolean = !st.invalidDensity && !st.invalidHiding && !st.invalidTime;
 		return(
 			<form onInput={this.checkForm} id='settings' className={this.props.play ? 'play' : ''}>
 				<label>select grid density
@@ -93,16 +112,8 @@ class Settings extends React.Component {
 	}
 }
 
-Settings.propTypes = {
-	store: PropTypes.object,
-	play: PropTypes.bool,
-	runGame: PropTypes.func,
-	endGame: PropTypes.func,
-	combinedSettings: PropTypes.func
-};
-
 export default connect(
-	state => ({
+	(state: StateInterface) => ({
 		store: state,
 		play: state.gameState.play
 	}),

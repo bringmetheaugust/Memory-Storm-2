@@ -2,8 +2,15 @@ import React from 'react';
 const SPLASH_TIME = 13000;
 const SPLASH_HIDDING_TIME = 1000;
 
-class Splash extends React.Component {
-	constructor(props) {
+interface State {
+	isActive: boolean
+	isHidden: boolean
+}
+
+class Splash extends React.Component<{}, State> {
+	splash: HTMLDivElement;
+	count: NodeJS.Timeout;
+	constructor(props: {}) {
 		super(props);
 		this.state = {
 			isActive: true,

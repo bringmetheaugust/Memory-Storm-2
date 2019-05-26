@@ -1,10 +1,17 @@
 import React from 'react';
-import Card from './Card.jsx';
-import Counter from './Counter.jsx';
+import Card from './Card.tsx';
+import Counter from './Counter.tsx';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import StateInterface from '../interface/InitialState.ts';
+import CardInterface from '../interface/card.ts';
 
-class Game extends React.Component {
+interface Props {
+	cards : CardInterface[]
+	density: number
+	play: boolean
+}
+
+class Game extends React.Component<Card, {}> {
 	shouldComponentUpdate = () => !this.props.play;
 	render() {
 		return(
@@ -13,7 +20,7 @@ class Game extends React.Component {
 					className={this.props.play ? 'play' : ''}
 					style={{ gridTemplate : `repeat(${this.props.density}, 1fr)/repeat(${this.props.density}, 1fr)` }}
 				>
-					{this.props.cards.map(i => <Card key={i.id} data={i} />)}
+					{this.props.cards.map((card: CardInterface) => <Card key={card.id} data={card} />)}
 				</ul>
 				<Counter />
 			</div>
@@ -21,14 +28,8 @@ class Game extends React.Component {
 	}
 }
 
-Game.propTypes = {
-	cards: PropTypes.array,
-	density: PropTypes.number,
-	play: PropTypes.bool
-}
-
 export default connect(
-	state => ({
+	(state: StateInterface) => ({
 		cards : state.cards,
 		density: state.settings.density,
 		play: state.gameState.play

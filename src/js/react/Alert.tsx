@@ -1,14 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DoubleButton from './DoubleButton.jsx';
-import PropTypes from 'prop-types';
+import DoubleButton from './DoubleButton.tsx';
+import StateInterface from '../interface/InitialState.ts';
 
-class Alert extends React.Component {
-	constructor (props) {
+interface Props {
+	win: boolean
+}
+
+interface State {
+	isHiden: boolean
+}
+
+class Alert extends React.Component<Props, State> {
+	constructor (props: Props) {
 		super(props);
 		this.state = { isHiden: false };
 	}
-	static getDerivedStateFromProps = (nextPr) => nextPr.win === null ? { isHiden: false } : null;
+	static getDerivedStateFromProps = (nextPr: Props) => nextPr.win === null ? { isHiden: false } : null;
 	render() {
 		if (this.props.win === null || this.state.isHiden) return null;
 		return(
@@ -20,8 +28,6 @@ class Alert extends React.Component {
 	}
 }
 
-Alert.propTypes = { win: PropTypes.bool };
-
 export default connect(
-	state => ({ win: state.gameState.win }),
+	(state: StateInterface) => ({ win: state.gameState.win }),
 )(Alert);

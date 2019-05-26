@@ -1,16 +1,17 @@
 import React from 'react';
-import Game from './Game.jsx';
-import Settings from './Settings.jsx';
-import Alert from './Alert.jsx';
-import Splash from './Splash.jsx';
+import Game from './Game.tsx';
+import Settings from './Settings.tsx';
+import Alert from './Alert.tsx';
+import Splash from './Splash.tsx';
 import { connect } from 'react-redux';
 import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.ts';
-import State from '../interface/InitialState.ts';
-import Action from '../interface/action.ts';
+import StateInterface from '../interface/InitialState.ts';
+import ActionInterface from '../interface/action.ts';
 
 interface Props {
-	createCardsList: Action
-	combinedSettings: Action
+	createCardsList: ActionInterface
+	combinedSettings: ActionInterface
+	store: StateInterface
 }
 
 class App extends React.Component<Props, {}> {
@@ -30,6 +31,6 @@ class App extends React.Component<Props, {}> {
 }
 
 export default connect(
-	(state: State) => ({ store: state }),
+	(state: StateInterface) => ({ store: state }),
 	{ createCardsList, combinedSettings }
 )(App);

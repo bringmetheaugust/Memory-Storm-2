@@ -1,10 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { activateCard } from '../redux/actionCreator/cards.ts';
-import PropTypes from 'prop-types';
+import CardInterface from '../interface/card.ts';
+import State from '../interface/InitialState.ts';
+import ActionInterface from '../interface/action.ts';
 
-class Card extends React.Component {
-	constructor(props) {
+interface Props {
+	cards: CardInterface[]
+	play: boolean
+	activateCard: ActionInterface
+	data: CardInterface
+}
+
+class Card extends React.Component<Props, {}> {
+	id: number;
+	card: CardInterface;
+	imgRef: HTMLImageElement;
+	constructor(props: Props) {
 		super(props);
 		this.id = this.props.data.id;
 	}
@@ -27,13 +39,8 @@ class Card extends React.Component {
 	}	
 }
 
-Card.propTypes = {
-	store: PropTypes.object,
-	activateCard: PropTypes.func
-};
-
 export default connect(
-	state => ({
+	(state: State) => ({
 		cards: state.cards,
 		play: state.gameState.play
 	}),

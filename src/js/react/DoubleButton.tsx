@@ -1,7 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const DoubleButton = (props) =>
+interface Props {
+	event: any
+	play: boolean
+	firstBlock: string
+	secondBlock: string
+}
+
+const DoubleButton = (props: Props) =>
 	<div onClick={props.event ? () => props.event() : null}
 		className={`button ${props.play? 'abort' : ''}`}
 	>
@@ -12,12 +18,5 @@ const DoubleButton = (props) =>
 			{props.secondBlock.split('').map(i => <li key={Math.random()}>{i}</li>)}
 		</ul>
 	</div>
-
-DoubleButton.propTypes = {
-	event: PropTypes.oneOfType([
-		PropTypes.func,
-		PropTypes.bool
-	])
-};
 
 export default DoubleButton;
