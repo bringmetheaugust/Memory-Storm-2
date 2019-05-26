@@ -1,11 +1,7 @@
-// @ts-ignore
 import { setGameAction, setCounter, setGameResult } from './gameState.ts';
-// @ts-ignore
 import { combinedSettings } from './settings.ts';
-// @ts-ignore
 import { openAllCards, closeAllCards } from './cards.ts';
-// @ts-ignore
-import State from '../interface/InitialState.ts';
+import State from '../../interface/InitialState.ts';
 
 let counter: any;
 let hideCards: any;

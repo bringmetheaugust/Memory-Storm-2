@@ -1,10 +1,7 @@
-// @ts-ignore
 import initialState from '../initialState.ts';
-// @ts-ignore
 import * as AT from '../actionType/index.ts';
-import State from '../interface/InitialState';
-import Action from '../interface/action';
-// @ts-ignore
+import State from '../../interface/InitialState';
+import Action from '../../interface/action';
 import Card from '../interface/card.ts';
 
 export default function reducer(state: State  = initialState, action: Action): State {

@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as AT from '../actionType/index.ts';
 
 export const setCounter = (num: number) => ({

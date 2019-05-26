@@ -1,4 +1,4 @@
-import InitialState from './interface/InitialState';
+import InitialState from '../interface/InitialState';
 
 const initialState: InitialState = {
 	settings: {

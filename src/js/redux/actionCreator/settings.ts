@@ -1,11 +1,7 @@
-// @ts-ignore
 import * as AT from '../actionType/index.ts';
-// @ts-ignore
 import pictures from '../../DB/pictures.ts';
-// @ts-ignore
-import State from '../interface/InitialState.ts';
-// @ts-ignore
-import Card from '../interface/card.ts';
+import State from '../../interface/InitialState.ts';
+import Card from '../../interface/card.ts';
 
 export const setGameSettings = (settings: State.settings) => ({
 	type: AT.SET_GAME_SETTINGS,

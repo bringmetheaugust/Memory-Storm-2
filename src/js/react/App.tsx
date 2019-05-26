@@ -5,9 +5,15 @@ import Alert from './Alert.jsx';
 import Splash from './Splash.jsx';
 import { connect } from 'react-redux';
 import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.ts';
-import PropTypes from 'prop-types';
+import State from '../interface/InitialState.ts';
+import Action from '../interface/action.ts';
 
-class App extends React.Component {
+interface Props {
+	createCardsList: Action
+	combinedSettings: Action
+}
+
+class App extends React.Component<Props, {}> {
 	componentDidMount() {
 		const localData = localStorage.getItem('settings');
 		(localData && localData !== JSON.stringify(this.props.store.settings)) ?
@@ -16,20 +22,14 @@ class App extends React.Component {
 	}
 	render = () =>
 		<React.Fragment>
-			<Splash/>
+			<Splash />
 			<Game />
 			<Settings />
 			<Alert />
 		</React.Fragment>
 }
 
-App.propTypes = {
-	store: PropTypes.object,
-	createCardsList: PropTypes.func,
-	combinedSettings: PropTypes.func
-};
-
 export default connect(
-	state => ({ store: state }),
+	(state: State) => ({ store: state }),
 	{ createCardsList, combinedSettings }
 )(App);

@@ -1,9 +1,6 @@
-// @ts-ignore
 import { endGame } from './index.ts';
-// @ts-ignore
 import * as AT from '../actionType/index.ts';
-// @ts-ignore
-import Card from '../interface/card.ts';
+import Card from '../../interface/card.ts';
 const cardHiddingTime = 500;
 
 export const openCard = (id: number) => ({
