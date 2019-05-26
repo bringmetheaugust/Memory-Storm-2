@@ -1,13 +1,13 @@
 export default interface State {
     settings: {
-		density: number;
-		hiding: number;
-		time: number;
+		density: number
+		hiding: number
+		time: number
 	},
-	cards: any,
+	cards: any
 	gameState: {
-		play: boolean;
-		counter: number;
-		win: null|boolean;
+		play: boolean
+		counter: number
+		win: null|boolean
 	}
 }
