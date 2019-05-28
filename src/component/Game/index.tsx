@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from './Card';
-import Counter from './Counter';
+import Card from '../Card/index';
+import Counter from '../Counter/index';
 import { connect } from 'react-redux';
-import StateInterface from '../interface/InitialState';
-import CardInterface from '../interface/Card';
+import StateInterface from '../../interface/InitialState';
+import CardInterface from '../../interface/Card';
 
 interface Props {
 	cards : CardInterface[]

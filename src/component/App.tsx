@@ -1,8 +1,8 @@
 import React from 'react';
-import Game from './Game';
-import Settings from './Settings';
-import Alert from './Alert';
-import Splash from './Splash';
+import Game from './Game/index';
+import Settings from './Settings/index';
+import Alert from './Alert/index';
+import Splash from './Splash/index';
 import { connect } from 'react-redux';
 import { createCardsList, combinedSettings } from '../actionCreator/settings';
 import StateInterface from '../interface/InitialState';
