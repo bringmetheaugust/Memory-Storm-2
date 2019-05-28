@@ -1,7 +1,7 @@
-import * as AT from '../actionType/index.ts';
-import pictures from '../../DB/pictures.ts';
-import State from '../../interface/InitialState.ts';
-import Card from '../../interface/card.ts';
+import * as AT from '../actionType/index';
+import pictures from '../img/index';
+import State from '../interface/InitialState';
+import Card from '../interface/Card';
 
 export const setGameSettings = (settings: State.settings) => ({
 	type: AT.SET_GAME_SETTINGS,

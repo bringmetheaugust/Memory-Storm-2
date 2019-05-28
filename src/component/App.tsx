@@ -4,9 +4,9 @@ import Settings from './Settings';
 import Alert from './Alert';
 import Splash from './Splash';
 import { connect } from 'react-redux';
-import { createCardsList, combinedSettings } from '../redux/actionCreator/settings';
+import { createCardsList, combinedSettings } from '../actionCreator/settings';
 import StateInterface from '../interface/InitialState';
-import ActionInterface from '../interface/action';
+import ActionInterface from '../interface/Action';
 
 interface Props {
 	createCardsList: ActionInterface

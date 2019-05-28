@@ -1,8 +1,8 @@
-import initialState from '../initialState.ts';
-import * as AT from '../actionType/index.ts';
-import State from '../../interface/InitialState';
-import Action from '../../interface/action';
-import Card from '../interface/card.ts';
+import initialState from './initialState';
+import * as AT from '../actionType/index';
+import State from '../interface/InitialState';
+import Action from '../interface/action';
+import Card from '../interface/card';
 
 export default function reducer(state: State  = initialState, action: Action): State {
 	switch (action.type) {

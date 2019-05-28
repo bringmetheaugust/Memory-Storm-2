@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { activateCard } from '../redux/actionCreator/cards';
-import CardInterface from '../interface/card';
+import { activateCard } from '../actionCreator/cards';
+import CardInterface from '../interface/Card';
 import State from '../interface/InitialState';
-import ActionInterface from '../interface/action';
+import ActionInterface from '../interface/Action';
 
 interface Props {
 	cards: CardInterface[]

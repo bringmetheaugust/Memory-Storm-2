@@ -3,7 +3,7 @@ import Card from './Card';
 import Counter from './Counter';
 import { connect } from 'react-redux';
 import StateInterface from '../interface/InitialState';
-import CardInterface from '../interface/card';
+import CardInterface from '../interface/Card';
 
 interface Props {
 	cards : CardInterface[]
