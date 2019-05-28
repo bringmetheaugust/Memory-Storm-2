@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { activateCard } from '../redux/actionCreator/cards.ts';
-import CardInterface from '../interface/card.ts';
-import State from '../interface/InitialState.ts';
-import ActionInterface from '../interface/action.ts';
+import { activateCard } from '../redux/actionCreator/cards';
+import CardInterface from '../interface/card';
+import State from '../interface/InitialState';
+import ActionInterface from '../interface/action';
 
 interface Props {
 	cards: CardInterface[]
 	play: boolean
-	activateCard: ActionInterface
+	activateCard: any
 	data: CardInterface
 }
 

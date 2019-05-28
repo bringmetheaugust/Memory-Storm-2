@@ -20,6 +20,9 @@ module.exports = {
 		overlay: true,
 		historyApiFallback: true,
 	},
+	resolve: {
+		extensions: [".ts", ".tsx", ".js"]
+	},
 	module: {
 		rules: [
 			{

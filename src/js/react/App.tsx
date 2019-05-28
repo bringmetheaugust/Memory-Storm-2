@@ -1,12 +1,12 @@
 import React from 'react';
-import Game from './Game.tsx';
-import Settings from './Settings.tsx';
-import Alert from './Alert.tsx';
-import Splash from './Splash.tsx';
+import Game from './Game';
+import Settings from './Settings';
+import Alert from './Alert';
+import Splash from './Splash';
 import { connect } from 'react-redux';
-import { createCardsList, combinedSettings } from '../redux/actionCreator/settings.ts';
-import StateInterface from '../interface/InitialState.ts';
-import ActionInterface from '../interface/action.ts';
+import { createCardsList, combinedSettings } from '../redux/actionCreator/settings';
+import StateInterface from '../interface/InitialState';
+import ActionInterface from '../interface/action';
 
 interface Props {
 	createCardsList: ActionInterface

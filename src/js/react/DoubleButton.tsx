@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {
 	event: any
-	play: boolean
+	play?: boolean
 	firstBlock: string
 	secondBlock: string
 }

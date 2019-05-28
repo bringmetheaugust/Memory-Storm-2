@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from './Card.tsx';
-import Counter from './Counter.tsx';
+import Card from './Card';
+import Counter from './Counter';
 import { connect } from 'react-redux';
-import StateInterface from '../interface/InitialState.ts';
-import CardInterface from '../interface/card.ts';
+import StateInterface from '../interface/InitialState';
+import CardInterface from '../interface/card';
 
 interface Props {
 	cards : CardInterface[]
@@ -11,7 +11,7 @@ interface Props {
 	play: boolean
 }
 
-class Game extends React.Component<Card, {}> {
+class Game extends React.Component<Props, {}> {
 	shouldComponentUpdate = () => !this.props.play;
 	render() {
 		return(
