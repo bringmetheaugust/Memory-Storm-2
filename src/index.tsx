@@ -2,8 +2,8 @@ import '../style/index.sass';
 import '../html/index.pug';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './react/App.tsx';
-import { store } from './redux/index.ts';
+import App from './component/App';
+import { store } from './js/redux/index';
 import { Provider } from 'react-redux';
 
 ReactDOM.render(
