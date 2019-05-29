@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DoubleButton from '../DoubleButton/index';
-import StateInterface from '../../interface/InitialState';
+import DoubleButton from './DoubleButton';
+import StateInterface from '../interface/InitialState';
 
 interface Props {
 	win: boolean

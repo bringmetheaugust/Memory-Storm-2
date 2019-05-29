@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import StateInterface from '../../interface/InitialState';
+import StateInterface from '../interface/InitialState';
 
 interface Props {
 	counterTime: number

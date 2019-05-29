@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DoubleButton from '../DoubleButton/index';
-import { runGame, endGame } from '../../actionCreator/index';
-import { combinedSettings } from '../../actionCreator/settings';
-import * as GV from '../../constant/gameValue';
-import StateInterface from '../../interface/InitialState';
-import ActionInterface from '../../interface/Action';
+import DoubleButton from './DoubleButton';
+import { runGame, endGame } from '../actionCreator/index';
+import { combinedSettings } from '../actionCreator/settings';
+import * as GV from '../constant/gameValue';
+import StateInterface from '../interface/InitialState';
+import ActionInterface from '../interface/Action';
 
 interface Props {
 	store: StateInterface
