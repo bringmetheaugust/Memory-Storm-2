@@ -1,19 +1,25 @@
 #settings
 	padding: 1%
 	+flex(center,center,column)
-	&>*
+
+	& > *
 		margin: 1% 0
+
 	label
+		position: relative
 		width: 100%
 		display: grid
 		grid-gap: 3px
 		text-align: center
 		white-space: nowrap
-		position: relative
+
 		@import './input.sass'
 		@import './error.sass'
+
 	&.play
 		pointer-events: none
+
 		.button
 			pointer-events: auto
+
 	@import './media.sass'

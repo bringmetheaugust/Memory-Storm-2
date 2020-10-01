@@ -1,13 +1,13 @@
 .title
-	opacity: 0
-	animation: title 1s both
-	animation-delay: 3s
-	position: absolute
+	+absolute($top: 0)
 	height: 100%
 	width: 100%
-	top: 0
 	+flex(center,center,column)
 	+txt(5rem, black, dv2)
+	animation: title 1s both
+	animation-delay: 3s
+	opacity: 0
+
 	.exclamation
 		display: flex
 		opacity: 0
@@ -16,6 +16,7 @@
 		font-size: 1.5rem
 		letter-spacing: 1rem
 		text-align: center
+
 		div
 			animation: exclamation .7s both linear
 			animation-delay: 9s

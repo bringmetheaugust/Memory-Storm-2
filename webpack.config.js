@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		name: './src/index.tsx',
+		name: './src/index.jsx',
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
@@ -19,6 +19,7 @@ module.exports = {
 		compress: true,
 		overlay: true,
 		historyApiFallback: true,
+		port: 2100
 	},
 	resolve: {
 		extensions: [".ts", ".tsx", ".js"]
@@ -103,7 +104,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin(
 			{
-				template: './src/html/index.pug',
+				template: './src/index.pug',
 				inject: false,
 			}
 		),

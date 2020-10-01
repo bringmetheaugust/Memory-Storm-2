@@ -1,17 +1,18 @@
 #alert
+	z-index: 10
 	perspective: 3000px
 	+flex(center,center,column)
-	position: fixed
-	top: 0
+	+fixed($top: 0)
 	height: 100vh
 	width: 100vw
 	margin: 0
-	z-index: 10
 	font-family: dv2
 	background-color: white
 	transition: all 1.5s cubic-bezier(0.07, 0.57, 0.25, 1)
-	&>*
+
+	& > *
 		margin: 1% 0
+
 	.button
 		+flex()
 		max-width: 200px

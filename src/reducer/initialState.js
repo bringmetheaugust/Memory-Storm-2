@@ -1,6 +1,4 @@
-import InitialState from '../interface/InitialState';
-
-const initialState: InitialState = {
+const initialState = {
 	settings: {
 		density: 4,
 		hiding: 5,

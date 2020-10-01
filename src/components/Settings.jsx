@@ -1,32 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DoubleButton from './DoubleButton';
-import { runGame, endGame } from '../actionCreator/index';
-import { combinedSettings } from '../actionCreator/settings';
-import * as GV from '../constant/gameValue';
-import StateInterface from '../interface/InitialState';
-import ActionInterface from '../interface/Action';
 
-interface Props {
-	store: StateInterface
-	play: boolean
-	runGame: ActionInterface
-	endGame: ActionInterface
-	combinedSettings: ActionInterface
-}
+import DoubleButton from './DoubleButton.jsx';
+import { runGame, endGame } from '../actionCreators/index';
+import { combinedSettings } from '../actionCreators/settings';
+import * as GS from '../constants/gameSettings';
 
-interface State {
-	invalidDensity: boolean
-	invalidHiding: boolean
-	invalidTime: boolean
-}
-
-class Settings extends React.Component<Props, State> {
-	density: HTMLInputElement
-	hiding: HTMLInputElement
-	time: HTMLInputElement
-	st: State
-	constructor(props: Props) {
+class Settings extends React.Component {
+	constructor(props) {
 		super(props);
 		this.state = {
 			invalidDensity: false,
@@ -37,17 +18,17 @@ class Settings extends React.Component<Props, State> {
 	checkForm = e => {
 		const trg = e.target, isNan = Number.isNaN(Number(trg.value));
 		if (trg.id === 'density') {
-			if (isNan || trg.value < GV.MIN_DENSITY || trg.value > GV.MAX_DENSITY || trg.value % 2) 
+			if (isNan || trg.value < GS.MIN_DENSITY || trg.value > GS.MAX_DENSITY || trg.value % 2) 
 				return this.setState({ invalidDensity: true });
 			this.setState({ invalidDensity: false });
 			this.props.combinedSettings({ ...this.props.store.settings, density: +trg.value });
 		}
 		if (trg.id === 'hiding') {
-			const validHiddingTime = isNan || trg.value < GV.MIN_HIDING_TIME || trg.value > GV.MAX_HIDING_TIME;
+			const validHiddingTime = isNan || trg.value < GS.MIN_HIDING_TIME || trg.value > GS.MAX_HIDING_TIME;
 			this.setState({ invalidHiding: validHiddingTime });
 		}
 		if (trg.id === 'time') {
-			const validGameTime = isNan || trg.value < GV.MIN_GAME_TIME || trg.value > GV.MAX_GAME_TIME;
+			const validGameTime = isNan || trg.value < GS.MIN_GAME_TIME || trg.value > GS.MAX_GAME_TIME;
 			this.setState({ invalidTime: validGameTime });
 		}
 	}
@@ -63,7 +44,7 @@ class Settings extends React.Component<Props, State> {
 	}
 	render() {
 		const str = this.props.store.settings, st = this.state;
-		const submitOpportunity: boolean = !st.invalidDensity && !st.invalidHiding && !st.invalidTime;
+		const submitOpportunity = !st.invalidDensity && !st.invalidHiding && !st.invalidTime;
 		return(
 			<form onInput={this.checkForm} id='settings' className={this.props.play ? 'play' : ''}>
 				<label>select grid density
@@ -113,7 +94,7 @@ class Settings extends React.Component<Props, State> {
 }
 
 export default connect(
-	(state: StateInterface) => ({
+	state => ({
 		store: state,
 		play: state.gameState.play
 	}),

@@ -1,25 +1,29 @@
 li
 	perspective: 800px
 	perspective-origin: 50% 50%
-	border: 1px solid $clr
 	display: flex
 	align-items: center
+	border: 1px solid $clr
 	transition: background 1s
 	background: linear-gradient(30deg, white  0%, white 35%, $bg  50%, white 65%, white 100%)
 	background-position: 0% 100%
 	background-size: 700%
 	animation: storm 2.5s
+
 	img
-		outline: 1px solid $clr
+		z-index: 15
 		width: 100%
 		backface-visibility: hidden
 		animation: show 1s both
 		transition: all .3s
-		z-index: 15
+		outline: 1px solid $clr
+
 		&.disactive
 			animation: hidden .5s both
+
 	&.disabled
 		pointer-events: none
+
 		img
 			opacity: .2
 
