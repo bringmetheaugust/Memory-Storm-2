@@ -1,42 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { activateCard } from '../actionCreators/cards';
+import { GAME_STATE_SELECTOR } from '../store/selectors';
 
-class Card extends React.Component {
-	constructor(props) {
-		super(props);
-		this.id = this.props.data.id;
-	}
+const Card = ({ id, img, isOpen, isActive, isDisable }) => {
+	const { play } = useSelector(GAME_STATE_SELECTOR);
+	const dispatch = useDispatch();
 	
-	activateCard = () => {
-		this.card.isDisable || !this.props.play || this.card.isOpen ?
-			null :
-			this.props.activateCard(this.props.data.id);
+	const selectCard = () => {
+		if (!isDisable && play && !isOpen) dispatch(activateCard(id));
 	}
 
-	render() {
-		this.card = this.props.cards.find(i => i.id === this.id);
-
-		return(
-			<li className={`card-wrap ${this.card.isDisable ? 'disabled' : ''}`} onClick={this.activateCard}>
-				{
-					this.card.isOpen &&
-					<img ref={i => this.imgRef = i}
-						src={this.props.data.img}
-						className={this.card.isActive ? 'disactive' : ''}
-					/>
-				}
-			</li>
-
-		)
-	}	
+	return(
+		<li className={`card-wrap ${ isDisable ? 'disabled' : '' }`} onClick={selectCard}>
+			{ isOpen && <img src={img} className={ isActive ? 'disactive' : '' } /> }
+		</li>
+	);
 }
 
-export default connect(
-	state => ({
-		cards: state.cards,
-		play: state.gameState.play
-	}),
-	{ activateCard }
-)(Card);
+export default memo(Card);

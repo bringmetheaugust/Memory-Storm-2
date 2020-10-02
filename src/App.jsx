@@ -4,28 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import GameField from './components/GameField.jsx';
 import Settings from './components/Settings.jsx';
 import Alert from './components/Alert.jsx';
-import { createCardsList, setGameSettings } from './actionCreators/settings';
-import { SETTINGS_SELECTOR } from './store/selectors';
+import { setGameSettings } from './actionCreators/settings';
+import { createCardsList } from './actionCreators/cards';
+import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from './store/selectors';
 
 const App = () => {
-	const dispatch = useDispatch();
 	const settings = useSelector(SETTINGS_SELECTOR);
+	const { win } = useSelector(GAME_STATE_SELECTOR);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const localData = localStorage.getItem('settings');
 
-		(localData && localData !== JSON.stringify(settings)) ?
-			dispatch(setGameSettings(JSON.parse(localData))) :
-			dispatch(createCardsList());
-
-		setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
+		if (localData && localData !== JSON.stringify(settings))
+			dispatch(setGameSettings(JSON.parse(localData)));
+		
+		// setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
 	}, []);
+
+	useEffect(() => {
+		dispatch(createCardsList());
+	}, [settings.density]);
 
 	return (
 		<Fragment>
 			<GameField />
 			<Settings />
-			<Alert />
+			{ typeof win === 'boolean' && <Alert result={win} /> }
 		</Fragment>
 	);
 }

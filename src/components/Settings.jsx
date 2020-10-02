@@ -50,7 +50,7 @@ const Settings = () => {
 
 		window.scrollTo(0, 0);
 		dispatch(runGame());
-	}, []);
+	}, [play]);
 
 	return (
 		<form id='settings' className={ play ? 'play' : '' }>

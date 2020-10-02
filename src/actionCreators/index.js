@@ -1,31 +1,29 @@
 import { setGameAction, setCounter, setGameResult } from './gameState';
-import { combinedSettings } from './settings';
-import { openAllCards, closeAllCards } from './cards';
+import { toggleAllCards, closeAllCards } from './cards';
 
-let counter;
-let hideCards;
+let counterCount;
+let hideCardsCount;
 
-export const runGame = form => (dispatch, getState) => {
+export const runGame = () => (dispatch, getState) => {
+	const { settings, gameState } = getState();
+	const { hiding } = settings;
+
 	dispatch(setGameAction());
-	dispatch(combinedSettings(form));
-	dispatch(setCounter(form.time))
-	dispatch(openAllCards(true));
-	localStorage.setItem('settings', JSON.stringify(form));
-	hideCards = setTimeout(() => dispatch(closeAllCards()), form.hiding * 1000);
-	let temporaryCount = getState().gameState.counter;
-	counter = setInterval(() => {
-		if (temporaryCount <= 1) return dispatch(endGame(false)), clearInterval(counter);
-		dispatch(setCounter());
-		temporaryCount--;
-	}, 1000);
+	dispatch(setCounter(settings.time));
+	dispatch(toggleAllCards(true));
 	dispatch(setGameResult(null));
+
+	hideCardsCount = setTimeout(() => dispatch(closeAllCards()), hiding * 1000);
+	counterCount = setInterval(() => dispatch(setCounter()), 1000);
+
+	localStorage.setItem('settings', JSON.stringify(settings));
 };
 
 export const endGame = bool => dispatch => {
-	clearTimeout(hideCards);
-	clearInterval(counter);
+	clearTimeout(hideCardsCount);
+	clearInterval(counterCount);
 	dispatch(setGameAction());
-	dispatch(openAllCards(false));
+	dispatch(toggleAllCards(false));
 	dispatch(setCounter(0));
 	dispatch(setGameResult(bool));
 };

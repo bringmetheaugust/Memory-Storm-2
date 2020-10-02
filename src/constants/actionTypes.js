@@ -1,4 +1,4 @@
-export const OPEN_ALL_CARDS = 'OPEN_ALL_CARDS';
+export const TOGGLE_ALL_CARDS = 'TOGGLE_ALL_CARDS';
 export const OPEN_CARD = 'OPEN_CARD';
 export const DISABLE_CARD = 'DISABLE_CARD';
 export const DISACTIVE_ALL_CARDS = 'DISACTIVE_ALL_CARDS';

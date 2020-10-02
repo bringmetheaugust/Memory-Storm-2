@@ -1,34 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { memo, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import DoubleButton from './DoubleButton.jsx';
+import { setGameResult } from '../actionCreators/gameState';
 
-class Alert extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = { isHiden: false };
-	}
-	
-	static getDerivedStateFromProps() {
-		nextPr => nextPr.win === null ? { isHiden: false } : null;
-	}
+const Alert = ({ result }) => {
+	const dispatch = useDispatch();
 
-	render() {
-		if (this.props.win === null || this.state.isHiden) return null;
+	const closeAlert = useCallback(() => dispatch(setGameResult(null)));
 
-		return(
-			<div id='alert'>
-				<div className='title'>you {this.props.win ? 'win!!!' : 'lose :('}</div>
-				<DoubleButton
-					firstBlock='back'
-					secondBlock=''
-					event={() => this.setState({ isHiden: true })}
-				/>
-			</div>
-		)
-	}
+	return(
+		<div id='alert'>
+			<div className='title'>you {result ? 'win!!!' : 'lose :('}</div>
+			<DoubleButton firstBlock='back' handleSubmit={closeAlert} />
+		</div>
+	);
 }
 
-export default connect(
-	state => ({ win: state.gameState.win }),
-)(Alert);
+export default memo(Alert);

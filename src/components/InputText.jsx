@@ -14,7 +14,7 @@ const InputText = ({ handleChange, label, id, val, error, errorText }) => {
                 key={id}
                 id={id}
                 type='number'
-                defaultValue={val}
+                value={val}
                 readOnly={play}
             />
             <div className='error'>{ error ? errorText : '' }</div>

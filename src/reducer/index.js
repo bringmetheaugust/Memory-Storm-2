@@ -18,7 +18,7 @@ export default function(state  = initialState, { type, payload }) {
 			}
 		}
 
-		case AT.OPEN_ALL_CARDS: {
+		case AT.TOGGLE_ALL_CARDS: {
 			return {
 				...state,
 				cards: state.cards.map(i => ({ ...i, isOpen: i.isDisable ? true : payload }))

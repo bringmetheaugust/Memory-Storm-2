@@ -8,10 +8,17 @@ const DoubleButton = ({ handleSubmit, play, firstBlock, secondBlock }) => (
 		<ul className='play'>
 			{ firstBlock.split('').map(letter => <li key={Math.random()}>{letter}</li>) }
 		</ul>
-		<ul className='abort'>
-			{ secondBlock.split('').map(letter => <li key={Math.random()}>{letter}</li>) }
-		</ul>
+		{
+			secondBlock &&
+			(
+				<ul className='abort'>
+					{ secondBlock.split('').map(letter => <li key={Math.random()}>{letter}</li>) }
+				</ul>
+			)
+		}
 	</div>
 );
+
+DoubleButton.defaultProps = { secondBlock: null };
 
 export default memo(DoubleButton);

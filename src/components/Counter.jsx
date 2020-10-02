@@ -1,17 +1,23 @@
-import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { memo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { COUNTER_SELECTOR } from '../store/selectors';
+import { endGame } from '../actionCreators/index';
+import { GAME_STATE_SELECTOR } from '../store/selectors';
 
 const Counter = () => {
-	const counter = useSelector(COUNTER_SELECTOR);
+    const { counter, play } = useSelector(GAME_STATE_SELECTOR);
+    const dispatch = useDispatch();
 
-	return (
-		<div className='count'>
-			time left :
-			<div id='count'>{counter}</div>
-		</div>
-	);
+    useEffect(() => {
+        if (play && counter <= 0) dispatch(endGame(false));
+    }, [counter]);
+
+    return (
+        <div className='count'>
+            time left :
+            <div id='count'>{counter}</div>
+        </div>
+    );
 };
 
 export default memo(Counter);
