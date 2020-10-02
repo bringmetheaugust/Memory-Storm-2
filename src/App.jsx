@@ -1,10 +1,10 @@
 import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Game from './components/Game.jsx';
+import GameField from './components/GameField.jsx';
 import Settings from './components/Settings.jsx';
 import Alert from './components/Alert.jsx';
-import { createCardsList, combinedSettings } from './actionCreators/settings';
+import { createCardsList, setGameSettings } from './actionCreators/settings';
 import { SETTINGS_SELECTOR } from './store/selectors';
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
 		const localData = localStorage.getItem('settings');
 
 		(localData && localData !== JSON.stringify(settings)) ?
-			dispatch(combinedSettings(JSON.parse(localData))) :
+			dispatch(setGameSettings(JSON.parse(localData))) :
 			dispatch(createCardsList());
 
 		setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
@@ -23,7 +23,7 @@ const App = () => {
 
 	return (
 		<Fragment>
-			<Game />
+			<GameField />
 			<Settings />
 			<Alert />
 		</Fragment>

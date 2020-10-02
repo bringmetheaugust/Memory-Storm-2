@@ -1,102 +1,91 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, memo, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import DoubleButton from './DoubleButton.jsx';
+import InputText from './InputText.jsx';
 import { runGame, endGame } from '../actionCreators/index';
-import { combinedSettings } from '../actionCreators/settings';
+import { setGameSettings } from '../actionCreators/settings';
 import * as GS from '../constants/gameSettings';
+import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
 
-class Settings extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			invalidDensity: false,
-			invalidHiding: false,
-			invalidTime: false,
+const DEFAULT_FIELD_STATUSES = {
+	density: false,
+	time: false,
+	hiding: false
+};
+
+const Settings = () => {
+	const [ invalidFields, setFieldStatus ] = useState(DEFAULT_FIELD_STATUSES);
+	const gameSettings = useSelector(SETTINGS_SELECTOR);
+	const { play } = useSelector(GAME_STATE_SELECTOR);
+	const dispatch = useDispatch();
+
+	const validateForm = useCallback(({ target: { id, value } }) => {
+		let invalidFieldId = null;
+
+		switch (true) {
+			case (id === 'density'):
+				if (value < GS.MIN_DENSITY || value > GS.MAX_DENSITY || value % 2) invalidFieldId = id;
+				break;
+
+			case (id === 'hiding'):
+				if (value < GS.MIN_HIDING_TIME || value > GS.MAX_HIDING_TIME) invalidFieldId = id;
+				break;
+
+			case (id === 'time'):
+				if (value < GS.MIN_GAME_TIME || value > GS.MAX_GAME_TIME) invalidFieldId = id;
+				break;
 		}
-	}
-	checkForm = e => {
-		const trg = e.target, isNan = Number.isNaN(Number(trg.value));
-		if (trg.id === 'density') {
-			if (isNan || trg.value < GS.MIN_DENSITY || trg.value > GS.MAX_DENSITY || trg.value % 2) 
-				return this.setState({ invalidDensity: true });
-			this.setState({ invalidDensity: false });
-			this.props.combinedSettings({ ...this.props.store.settings, density: +trg.value });
+
+		if (invalidFieldId || Number.isNaN(Number(value))) {
+			setFieldStatus({ ...invalidFields, [invalidFieldId]: true });
+		} else {
+			setFieldStatus(DEFAULT_FIELD_STATUSES);
+			dispatch(setGameSettings({ ...gameSettings, [id]: +value }));
 		}
-		if (trg.id === 'hiding') {
-			const validHiddingTime = isNan || trg.value < GS.MIN_HIDING_TIME || trg.value > GS.MAX_HIDING_TIME;
-			this.setState({ invalidHiding: validHiddingTime });
-		}
-		if (trg.id === 'time') {
-			const validGameTime = isNan || trg.value < GS.MIN_GAME_TIME || trg.value > GS.MAX_GAME_TIME;
-			this.setState({ invalidTime: validGameTime });
-		}
-	}
-	toSubmit = () => {
-		if (this.props.play) return this.props.endGame(null);
+	}, [gameSettings]);
+
+	const toSubmit = useCallback(() => {
+		if (play) return dispatch(endGame(null));
+
 		window.scrollTo(0, 0);
-		const form = {
-			density: +this.density.value,
-			hiding: +this.hiding.value,
-			time: +this.time.value
-		};
-		this.props.runGame(form);
-	}
-	render() {
-		const str = this.props.store.settings, st = this.state;
-		const submitOpportunity = !st.invalidDensity && !st.invalidHiding && !st.invalidTime;
-		return(
-			<form onInput={this.checkForm} id='settings' className={this.props.play ? 'play' : ''}>
-				<label>select grid density
-					<input
-						key={str.density}
-						id='density'
-						ref={i => this.density = i}
-						type='number'
-						defaultValue={str.density}
-						readOnly={this.props.play}
-					/>
-						<div className='error'>
-							{st.invalidDensity ? 'Please, set any number from 2 to 6 multiples of two' : ''}
-						</div>
-				</label>
-				<label>select time for pictures hiding (sec)
-					<input
-						key={str.hiding}
-						id='hiding'
-						ref={i => this.hiding = i}
-						type='number'
-						defaultValue={str.hiding}
-						readOnly={this.props.play}
-					/>
-						<div className='error'> {st.invalidHiding ? 'Please, set any number from 1 to 10' : ''} </div>
-				</label>
-				<label>select game time (sec)
-					<input
-						key={str.time}
-						id='time'
-						ref={i => this.time = i}
-						type='number'
-						defaultValue={str.time}
-						readOnly={this.props.play}
-					/>
-						<div className='error'> {st.invalidTime ? 'Please, set any number form 10 to 60' : ''} </div>
-				</label>
-				<DoubleButton
-					play={this.props.play}
-					event={submitOpportunity && this.toSubmit}
-					firstBlock='play'
-					secondBlock='stop'
-				/>
-			</form>
-		)
-	}
-}
+		dispatch(runGame());
+	}, []);
 
-export default connect(
-	state => ({
-		store: state,
-		play: state.gameState.play
-	}),
-	{ runGame, endGame, combinedSettings }
-)(Settings);
+	return (
+		<form id='settings' className={ play ? 'play' : '' }>
+			<InputText
+				handleChange={validateForm}
+				label="select grid density"
+				id="density"
+				val={gameSettings.density}
+				error={invalidFields.density}
+				errorText={`Please, set any number from ${GS.MIN_DENSITY} to ${GS.MAX_DENSITY} multiples of two`}
+			/>
+			<InputText
+				handleChange={validateForm}
+				label="select time for pictures hiding (sec)"
+				id="hiding"
+				val={gameSettings.hiding}
+				error={invalidFields.hiding}
+				errorText={`Please, set any number from ${GS.MIN_HIDING_TIME} to ${GS.MAX_HIDING_TIME}`}
+			/>
+			<InputText
+				handleChange={validateForm}
+				label="select game time (sec)"
+				id="time"
+				val={gameSettings.time}
+				error={invalidFields.time}
+				errorText={`Please, set any number form ${GS.MIN_GAME_TIME} to ${GS.MAX_GAME_TIME}`}
+			/>
+			<DoubleButton
+				play={play}
+				handleSubmit={ !Object.values(invalidFields).some(field => field) && toSubmit }
+				firstBlock='play'
+				secondBlock='stop'
+			/>
+		</form>
+	);
+};
+
+export default memo(Settings);

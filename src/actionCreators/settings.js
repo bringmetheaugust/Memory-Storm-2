@@ -29,7 +29,7 @@ export const createCardsList = val => (dispatch, getState) => {
 	dispatch(setCards(cards));
 };
 
-export const combinedSettings = settings => dispatch => {
-	dispatch(setGameSettings(settings));
-	dispatch(createCardsList(null));
-};
+// export const setGameDensity = settings => dispatch => {
+// 	dispatch(setGameSettings(settings));
+// 	dispatch(createCardsList(null));
+// };

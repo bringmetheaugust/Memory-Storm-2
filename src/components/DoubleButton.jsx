@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 
-const DoubleButton = ({ event, play, firstBlock, secondBlock }) => (
+const DoubleButton = ({ handleSubmit, play, firstBlock, secondBlock }) => (
 	<div
-		onClick={ event ? () => event() : null }
+		onClick={ handleSubmit ? () => handleSubmit() : null }
 		className={`button ${ play ? 'abort' : '' }`}
 	>
 		<ul className='play'>
