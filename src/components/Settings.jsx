@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DoubleButton from './DoubleButton.jsx';
 import InputText from './InputText.jsx';
-import { runGame, endGame } from '../actionCreators/index';
+import { setGameAction } from '../actionCreators/gameState';
 import { setGameSettings } from '../actionCreators/settings';
 import * as GS from '../constants/gameSettings';
 import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
@@ -46,10 +46,10 @@ const Settings = () => {
 	}, [gameSettings]);
 
 	const toSubmit = useCallback(() => {
-		if (play) return dispatch(endGame(null));
+		if (play) return dispatch(setGameAction(null));
 
 		window.scrollTo(0, 0);
-		dispatch(runGame());
+		dispatch(setGameAction(true));
 	}, [play]);
 
 	return (

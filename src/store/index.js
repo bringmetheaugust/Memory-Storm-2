@@ -11,7 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = createStore(
 	reducer,
 	composeWithDevTools(
-		applyMiddleware(sagaMiddleware, reduxThunk),
+		applyMiddleware(reduxThunk, sagaMiddleware),
 	)
 );
 

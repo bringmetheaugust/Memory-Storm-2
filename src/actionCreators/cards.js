@@ -1,4 +1,4 @@
-import { endGame } from './index.js';
+import { setGameAction } from './gameState';
 import * as AT from '../constants/actionTypes';
 import CARD_IMAGES from '../media/cards/index';
 
@@ -22,15 +22,6 @@ export const toggleAllCards = bool => ({
 	payload: bool
 });
 
-export const disactiveAllCards = () => ({
-	type: AT.DISACTIVE_ALL_CARDS
-});
-
-export const closeAllCards = () => dispatch => {
-	dispatch(disactiveAllCards());
-	setTimeout(() => dispatch(toggleAllCards(false)), 500);
-};
-
 export const createCardsList = () => (dispatch, getState) => {
 	const { density } = getState().settings;
 	const temporaryArr = CARD_IMAGES.
@@ -42,8 +33,7 @@ export const createCardsList = () => (dispatch, getState) => {
 			id: String(Math.random()).slice(2, 12),
 			img: card,
 			isOpen: false,
-			isDisable: false,
-			isActive: false
+			isDisable: false
 		}))).
 		sort(() => Math.random() - Math.random());
 		
@@ -53,15 +43,16 @@ export const createCardsList = () => (dispatch, getState) => {
 export const activateCard = id => (dispatch, getState) => {
 	dispatch(openCard(id));
 
-	const openedCards = getState().cards.filter(i => (i.isOpen && !i.isDisable) === true);
+	const { cards } = getState();
+	const openedCards = cards.filter(card => (card.isOpen && !card.isDisable) === true);
 
 	if (openedCards.length > 1) {
 		if (openedCards[0].img === openedCards[1].img) {
-			openedCards.forEach(i => dispatch(disableCard(i.id)));
+			openedCards.forEach(card => dispatch(disableCard(card.id)));
 			
-			if (getState().cards.every(i => i.isDisable === true)) return dispatch(endGame(true));
+			if (cards.every(i => i.isDisable === true)) return dispatch(setGameAction(true));
 		}
 
-		dispatch(closeAllCards());
+		dispatch(toggleAllCards(false));
 	}
 };

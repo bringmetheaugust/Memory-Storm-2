@@ -25,13 +25,6 @@ export default function(state  = initialState, { type, payload }) {
 			}
 		}
 
-		case AT.DISACTIVE_ALL_CARDS: {
-			return {
-				...state,
-				cards: state.cards.map(i => ({ ...i, isActive: !i.isDisable }))
-			}
-		}
-
 		case AT.SET_COUNTER: {
 			return {
 				...state,
@@ -45,10 +38,7 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.OPEN_CARD: {
 			return {
 				...state,
-				cards: state.cards.map(i => i.id === payload ?
-					{ ...i, isOpen: true, isActive: false } :
-					i
-				)
+				cards: state.cards.map(i => i.id === payload ? { ...i, isOpen: true } : i)
 			}
 		}
 
@@ -63,6 +53,17 @@ export default function(state  = initialState, { type, payload }) {
 			return {
 				...state,
 				gameState: { ...state.gameState, win: payload }
+			}
+		}
+
+		case AT.RESET_GAME: {
+			return {
+				...state,
+				gameState: {
+					...state.gameState,
+					play: false,
+					counter: 0
+				}
 			}
 		}
 	}

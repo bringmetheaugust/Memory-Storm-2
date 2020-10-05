@@ -1,29 +1,32 @@
-import { setGameAction, setCounter, setGameResult } from './gameState';
-import { toggleAllCards, closeAllCards } from './cards';
+import { RESET_GAME } from '../constants/actionTypes';
 
-let counterCount;
-let hideCardsCount;
+export const resetGame = () => ({
+	type: RESET_GAME
+});
 
-export const runGame = () => (dispatch, getState) => {
-	const { settings, gameState } = getState();
-	const { hiding } = settings;
+// let counterCount;
+// let hideCardsCount;
 
-	dispatch(setGameAction());
-	dispatch(setCounter(settings.time));
-	dispatch(toggleAllCards(true));
-	dispatch(setGameResult(null));
+// export const runGame = () => (dispatch, getState) => {
+// 	const { settings, gameState } = getState();
+// 	const { hiding } = settings;
 
-	hideCardsCount = setTimeout(() => dispatch(closeAllCards()), hiding * 1000);
-	counterCount = setInterval(() => dispatch(setCounter()), 1000);
+// 	dispatch(setGameAction());
+// 	dispatch(setCounter(settings.time));
+// 	dispatch(toggleAllCards(true));
+// 	dispatch(setGameResult(null));
 
-	localStorage.setItem('settings', JSON.stringify(settings));
-};
+// 	hideCardsCount = setTimeout(() => dispatch(closeAllCards()), hiding * 1000);
+// 	counterCount = setInterval(() => dispatch(setCounter()), 1000);
 
-export const endGame = bool => dispatch => {
-	clearTimeout(hideCardsCount);
-	clearInterval(counterCount);
-	dispatch(setGameAction());
-	dispatch(toggleAllCards(false));
-	dispatch(setCounter(0));
-	dispatch(setGameResult(bool));
-};
+// 	localStorage.setItem('settings', JSON.stringify(settings));
+// };
+
+// export const endGame = bool => dispatch => {
+// 	clearTimeout(hideCardsCount);
+// 	clearInterval(counterCount);
+// 	dispatch(setGameAction());
+// 	dispatch(toggleAllCards(false));
+// 	dispatch(setCounter(0));
+// 	dispatch(setGameResult(bool));
+// };

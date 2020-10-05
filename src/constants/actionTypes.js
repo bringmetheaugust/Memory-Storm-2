@@ -1,3 +1,5 @@
+export const RESET_GAME = 'RESET_GAME';
+
 export const TOGGLE_ALL_CARDS = 'TOGGLE_ALL_CARDS';
 export const OPEN_CARD = 'OPEN_CARD';
 export const DISABLE_CARD = 'DISABLE_CARD';
