@@ -1,4 +1,3 @@
-import { setGameAction } from './gameState';
 import * as AT from '../constants/actionTypes';
 import CARD_IMAGES from '../media/cards/index';
 
@@ -38,21 +37,4 @@ export const createCardsList = () => (dispatch, getState) => {
 		sort(() => Math.random() - Math.random());
 		
 	dispatch(setCards(cards));
-};
-
-export const activateCard = id => (dispatch, getState) => {
-	dispatch(openCard(id));
-
-	const { cards } = getState();
-	const openedCards = cards.filter(card => (card.isOpen && !card.isDisable) === true);
-
-	if (openedCards.length > 1) {
-		if (openedCards[0].img === openedCards[1].img) {
-			openedCards.forEach(card => dispatch(disableCard(card.id)));
-			
-			if (cards.every(i => i.isDisable === true)) return dispatch(setGameAction(true));
-		}
-
-		dispatch(toggleAllCards(false));
-	}
 };

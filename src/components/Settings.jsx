@@ -20,7 +20,7 @@ const Settings = () => {
 	const { play } = useSelector(GAME_STATE_SELECTOR);
 	const dispatch = useDispatch();
 
-	const validateForm = useCallback(({ target: { id, value } }) => {
+	const validateForm = useCallback((id, value) => {
 		let invalidFieldId = null;
 
 		switch (true) {

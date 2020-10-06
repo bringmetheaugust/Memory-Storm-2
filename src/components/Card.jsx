@@ -1,20 +1,22 @@
-import React, { memo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { memo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { activateCard } from '../actionCreators/cards';
-import { GAME_STATE_SELECTOR } from '../store/selectors';
+import { openCard } from '../actionCreators/cards';
 
-const Card = ({ id, img, isOpen, isActive, isDisable }) => {
-	const { play } = useSelector(GAME_STATE_SELECTOR);
+const Card = ({ id, img, isOpen, isDisable }) => {
+	const [ isClosed, setClosed ] = useState(false);
 	const dispatch = useDispatch();
 	
 	const selectCard = () => {
-		if (!isDisable && play && !isOpen) dispatch(activateCard(id));
-	}
+		if (!isDisable && !isOpen) dispatch(openCard(id));
+	};
 
 	return(
-		<li className={`card-wrap ${ isDisable ? 'disabled' : '' }`} onClick={selectCard}>
-			{ isOpen && <img src={img} className={ isActive ? 'disactive' : '' } /> }
+		<li
+			className={`card ${ isDisable && 'disabled'} ${ isOpen && 'open' }`}
+			onClick={selectCard}
+		>
+			<img src={img} />
 		</li>
 	);
 }

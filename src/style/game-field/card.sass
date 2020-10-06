@@ -1,4 +1,4 @@
-li
+.card
 	perspective: 800px
 	perspective-origin: 50% 50%
 	display: flex
@@ -14,12 +14,12 @@ li
 		z-index: 15
 		width: 100%
 		backface-visibility: hidden
-		animation: show 1s both
-		transition: all .3s
+		animation: hide .5s both
 		outline: 1px solid $clr
 
-		&.disactive
-			animation: hidden .5s both
+	&.open
+		img
+			animation: show 1s both
 
 	&.disabled
 		pointer-events: none
@@ -33,7 +33,7 @@ li
 	to
 		transform: rotateY(0deg)
 
-@keyframes hidden
+@keyframes hide
 	from
 		transform: rotateY(0deg)
 	to
