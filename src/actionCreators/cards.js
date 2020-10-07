@@ -1,23 +1,23 @@
-import * as AT from '../constants/actionTypes';
+import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS }from '../constants/actionTypes';
 import CARD_IMAGES from '../media/cards/index';
 
 export const setCards = cards => ({
-	type: AT.SET_CARDS,
+	type: SET_CARDS,
 	payload: cards
 });
 
 export const openCard = id => ({
-	type: AT.OPEN_CARD,
+	type: OPEN_CARD,
 	payload: id
 });
 
 export const disableCard = id => ({
-	type: AT.DISABLE_CARD,
+	type: DISABLE_CARD,
 	payload: id
 });
 
 export const toggleAllCards = bool => ({
-	type: AT.TOGGLE_ALL_CARDS,
+	type: TOGGLE_ALL_CARDS,
 	payload: bool
 });
 
@@ -29,7 +29,7 @@ export const createCardsList = () => (dispatch, getState) => {
 
 	const cards = ([ ...temporaryArr, ...temporaryArr ].
 		map(card => ({
-			id: String(Math.random()).slice(2, 12),
+			id: Math.floor(Math.random() * 100000000),
 			img: card,
 			isOpen: false,
 			isDisable: false

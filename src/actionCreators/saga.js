@@ -1,15 +1,17 @@
 import { all, takeEvery, select, put, delay } from 'redux-saga/effects';
 
-import { resetGame } from './index';
-import { setCounter, setGameResult } from './gameState';
+import { resetGame } from './common';
+import { startCounter, setGameResult } from './gameState';
 import { toggleAllCards, createCardsList, disableCard } from './cards';
-import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD } from '../constants/actionTypes';
-import { SETTINGS_SELECTOR, CARDS_SELECTOR } from '../store/selectors';
+
+import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
+import { SETTINGS_SELECTOR, CARDS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
 
 export function* rootSaga() {
     yield all([
         takeEvery(SET_GAME_ACTION, gameAction),
         takeEvery(OPEN_CARD, openCard),
+        takeEvery(SET_GAME_RESULT, gameResult),
         takeEvery(RESET_GAME, resetGameParams)
     ]);
 }
@@ -17,26 +19,18 @@ export function* rootSaga() {
 function* gameAction({ type, payload }) {
     const settings = yield select(SETTINGS_SELECTOR);
 
-    switch (payload) {
-        case true: {
-            localStorage.setItem('settings', JSON.stringify(settings));
-            yield put(setCounter(settings.time));
-            yield put(toggleAllCards(true));
-            yield delay(settings.hiding * 1000);
-            yield put(toggleAllCards(false));
-            break;
-        }
+    if (payload) {
+        localStorage.setItem('settings', JSON.stringify(settings));
+        yield put(startCounter());
+        yield put(createCardsList());
+        yield put(toggleAllCards(true));
+        yield delay(settings.hidingTime * 1000);
 
-        case false: {
-            yield put(setGameResult(false));
-            yield put(resetGame());
-            break;
-        }
+        const { play } = yield select(GAME_STATE_SELECTOR);
 
-        case null: {
-            yield put(resetGame());
-            break;
-        }
+        if (play) yield put(toggleAllCards(false));
+    } else {
+        yield put(resetGame());
     }
 }
 
@@ -60,8 +54,13 @@ function* openCard() {
 	}
 }
 
+function* gameResult() {
+    yield put(resetGame());
+}
+
 function* resetGameParams() {
+    const { counterId } = yield select(GAME_STATE_SELECTOR);
+
+    clearInterval(counterId);
     yield put(toggleAllCards(false));
-    yield delay(500);
-    yield put(createCardsList());
 }

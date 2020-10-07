@@ -1,7 +1,7 @@
 const initialState = {
 	settings: {
 		density: 4,
-		hiding: 5,
+		hidingTime: 5,
 		time: 60
 	},
 	cards: [],
@@ -9,7 +9,7 @@ const initialState = {
 		play: false,
 		counter: 0,
 		counterId: null,
-		win: null
+		result: null
 	}
 };
 

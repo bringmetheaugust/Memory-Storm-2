@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Card from './Card.jsx';
 import Counter from './Counter.jsx';
+
 import { CARDS_SELECTOR, GAME_STATE_SELECTOR, SETTINGS_SELECTOR } from '../store/selectors';
 
 const GameField = () => {
@@ -14,7 +15,7 @@ const GameField = () => {
 		<div className='game-field-wrap'>
 			<ul
 				id='game-field'
-				className={ play ? 'play' : '' }
+				className={ play && 'play' }
 				style={{ gridTemplate : `repeat(${density}, 1fr)/repeat(${density}, 1fr)` }}
 			>
 				{ cards.map(card => <Card key={card.id} {...card} />) }

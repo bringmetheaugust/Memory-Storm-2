@@ -3,9 +3,9 @@
 	perspective-origin: 50% 50%
 	display: flex
 	align-items: center
-	border: 1px solid $clr
+	border: 1px solid $gray-color
 	transition: background 1s
-	background: linear-gradient(30deg, white  0%, white 35%, $bg  50%, white 65%, white 100%)
+	background: linear-gradient(30deg, white  0%, white 35%, $green-color  50%, white 65%, white 100%)
 	background-position: 0% 100%
 	background-size: 700%
 	animation: storm 2.5s
@@ -15,17 +15,18 @@
 		width: 100%
 		backface-visibility: hidden
 		animation: hide .5s both
-		outline: 1px solid $clr
+		outline: 1px solid $gray-color
 
-	&.open
-		img
-			animation: show 1s both
+	&.open img
+		animation: show 1s both
 
+	&.disabled img
+		opacity: .2
+
+	&.open,
 	&.disabled
 		pointer-events: none
-
-		img
-			opacity: .2
+		cursor: none
 
 @keyframes show
 	from

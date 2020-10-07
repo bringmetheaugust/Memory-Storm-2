@@ -1,6 +1,6 @@
-import * as AT from '../constants/actionTypes';
+import { SET_GAME_SETTINGS } from '../constants/actionTypes';
 
 export const setGameSettings = settings => ({
-	type: AT.SET_GAME_SETTINGS,
+	type: SET_GAME_SETTINGS,
 	payload: settings
 });

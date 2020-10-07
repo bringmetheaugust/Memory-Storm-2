@@ -5,13 +5,14 @@ import DoubleButton from './DoubleButton.jsx';
 import InputText from './InputText.jsx';
 import { setGameAction } from '../actionCreators/gameState';
 import { setGameSettings } from '../actionCreators/settings';
+
 import * as GS from '../constants/gameSettings';
 import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
 
 const DEFAULT_FIELD_STATUSES = {
 	density: false,
 	time: false,
-	hiding: false
+	hidingTime: false
 };
 
 const Settings = () => {
@@ -28,7 +29,7 @@ const Settings = () => {
 				if (value < GS.MIN_DENSITY || value > GS.MAX_DENSITY || value % 2) invalidFieldId = id;
 				break;
 
-			case (id === 'hiding'):
+			case (id === 'hidingTime'):
 				if (value < GS.MIN_HIDING_TIME || value > GS.MAX_HIDING_TIME) invalidFieldId = id;
 				break;
 
@@ -46,14 +47,14 @@ const Settings = () => {
 	}, [gameSettings]);
 
 	const toSubmit = useCallback(() => {
-		if (play) return dispatch(setGameAction(null));
+		if (play) return dispatch(setGameAction(false));
 
 		window.scrollTo(0, 0);
 		dispatch(setGameAction(true));
 	}, [play]);
 
 	return (
-		<form id='settings' className={ play ? 'play' : '' }>
+		<form id='settings' className={ play && 'play' }>
 			<InputText
 				handleChange={validateForm}
 				label="select grid density"
@@ -64,10 +65,10 @@ const Settings = () => {
 			/>
 			<InputText
 				handleChange={validateForm}
-				label="select time for pictures hiding (sec)"
-				id="hiding"
-				val={gameSettings.hiding}
-				error={invalidFields.hiding}
+				label="select time for pictures hidingTime (sec)"
+				id="hidingTime"
+				val={gameSettings.hidingTime}
+				error={invalidFields.hidingTime}
 				errorText={`Please, set any number from ${GS.MIN_HIDING_TIME} to ${GS.MAX_HIDING_TIME}`}
 			/>
 			<InputText

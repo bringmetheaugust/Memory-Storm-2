@@ -111,5 +111,4 @@ module.exports = {
     	new ExtractTextPlugin("style.css"),
     	new CleanWebpackPlugin(['dist']),
   	],
-	mode: 'development'
 };

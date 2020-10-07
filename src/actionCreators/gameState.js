@@ -1,16 +1,28 @@
-import * as AT from '../constants/actionTypes';
+import { SET_GAME_STATE, SET_COUNTER, SET_GAME_RESULT, SET_GAME_ACTION } from '../constants/actionTypes';
+
+export const setGameState = gameState => ({
+	type: SET_GAME_STATE,
+	payload: gameState
+});
 
 export const setCounter = num => ({
-	type: AT.SET_COUNTER,
+	type: SET_COUNTER,
 	payload: num
 });
 
 export const setGameResult = bool => ({
-	type: AT.SET_GAME_RESULT,
+	type: SET_GAME_RESULT,
 	payload: bool
 });
 
 export const setGameAction = bool => ({
-	type: AT.SET_GAME_ACTION,
+	type: SET_GAME_ACTION,
 	payload: bool
 });
+
+export const startCounter = () => (dispatch, getState) => {
+	const { time } = getState().settings;
+	const newCounterId = setInterval(() => dispatch(setCounter()), 1000);
+
+	dispatch(setGameState({ counter: time, counterId: newCounterId }));
+};

@@ -6,6 +6,13 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.SET_GAME_SETTINGS: {
 			return { ...state, settings: payload }
 		}
+
+		case AT.SET_GAME_STATE: {
+			return {
+				...state,
+				gameState: { ...state.gameState, ...payload }
+			}
+		}
 		
 		case AT.SET_CARDS: {
 			return { ...state, cards: payload };
@@ -52,7 +59,7 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.SET_GAME_RESULT: {
 			return {
 				...state,
-				gameState: { ...state.gameState, win: payload }
+				gameState: { ...state.gameState, result: payload }
 			}
 		}
 
@@ -62,7 +69,7 @@ export default function(state  = initialState, { type, payload }) {
 				gameState: {
 					...state.gameState,
 					play: false,
-					counter: 0
+					counter: 0,
 				}
 			}
 		}

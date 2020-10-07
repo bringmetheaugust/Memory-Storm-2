@@ -1,10 +1,9 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { openCard } from '../actionCreators/cards';
 
 const Card = ({ id, img, isOpen, isDisable }) => {
-	const [ isClosed, setClosed ] = useState(false);
 	const dispatch = useDispatch();
 	
 	const selectCard = () => {

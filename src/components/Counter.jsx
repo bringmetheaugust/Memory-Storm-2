@@ -1,7 +1,8 @@
 import React, { memo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { endGame } from '../actionCreators/index';
+import { setGameResult } from '../actionCreators/gameState';
+
 import { GAME_STATE_SELECTOR } from '../store/selectors';
 
 const Counter = () => {
@@ -9,7 +10,7 @@ const Counter = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (play && counter <= 0) dispatch(endGame(false));
+        if (play && counter <= 0) dispatch(setGameResult(false));
     }, [counter]);
 
     return (

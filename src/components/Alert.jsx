@@ -11,7 +11,7 @@ const Alert = ({ result }) => {
 
 	return(
 		<div id='alert'>
-			<div className='title'>you {result ? 'win!!!' : 'lose :('}</div>
+			<div className='title'>you { result ? 'result!!!' : 'lose :(' }</div>
 			<DoubleButton firstBlock='back' handleSubmit={closeAlert} />
 		</div>
 	);
