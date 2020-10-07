@@ -1,27 +1,32 @@
-li
+.card
 	perspective: 800px
 	perspective-origin: 50% 50%
-	border: 1px solid $clr
 	display: flex
 	align-items: center
+	border: 1px solid $gray-color
 	transition: background 1s
-	background: linear-gradient(30deg, white  0%, white 35%, $bg  50%, white 65%, white 100%)
+	background: linear-gradient(30deg, white  0%, white 35%, $green-color  50%, white 65%, white 100%)
 	background-position: 0% 100%
 	background-size: 700%
 	animation: storm 2.5s
+
 	img
-		outline: 1px solid $clr
+		z-index: 15
 		width: 100%
 		backface-visibility: hidden
+		animation: hide .5s both
+		outline: 1px solid $gray-color
+
+	&.open img
 		animation: show 1s both
-		transition: all .3s
-		z-index: 15
-		&.disactive
-			animation: hidden .5s both
+
+	&.disabled img
+		opacity: .2
+
+	&.open,
 	&.disabled
 		pointer-events: none
-		img
-			opacity: .2
+		cursor: none
 
 @keyframes show
 	from
@@ -29,7 +34,7 @@ li
 	to
 		transform: rotateY(0deg)
 
-@keyframes hidden
+@keyframes hide
 	from
 		transform: rotateY(0deg)
 	to

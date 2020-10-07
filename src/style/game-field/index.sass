@@ -1,16 +1,21 @@
 .game-field-wrap
 	#game-field
+		pointer-events: none
+		box-sizing: border-box
 		width: 80vh
 		height: 80vh
 		display: grid
-		border: 1px solid $clr
-		box-sizing: border-box
+		border: 1px solid $gray-color
+
 		&.play
-			li
+			pointer-events: all
+
+			& li
 				transition: background .5s
 				cursor: pointer
+
 				&:hover
-					background: $bg
+					background: $green-color
 		
 	@import './count.sass'
 	@import './card.sass'

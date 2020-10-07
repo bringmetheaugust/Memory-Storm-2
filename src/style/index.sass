@@ -1,9 +1,10 @@
 @import 'reset.sass'
-@import 'font.sass'
+@import 'fonts.sass'
 @import 'mixin.sass'
 
-$clr: #d6d6d6
-$bg: #cbfdf1
+$gray-color: #d6d6d6
+$green-color: #cbfdf1
+$red-color: red
 
 #root
 	overflow-x: hidden
@@ -11,25 +12,29 @@ $bg: #cbfdf1
 	flex-wrap: wrap
 	min-height: 100vh
 	+txt(1.5rem, black, dv)
-	@import './splash/index.sass'
+
 	@import './alert/index.sass'
 	@import './game-field/index.sass'
 	@import './settings/index.sass'
+
+@import './splash/index.sass'
 @import './button.sass'
 
 @media only screen and (max-width : 600px)
 	#root
 		flex-direction: column
-		&>*
+
+		& > *
 			margin: 0
+
 @media (orientation: portrait)
 	#root
 		flex-direction: column
-		#splash
-			.splash-wrap
-				grid-template-columns: repeat(10, 8vw)
-				grid-template-rows: repeat(10, 8vw)
-		.game-field-wrap
-			#game-field
-				width: 100vw
-				height: 100vw
+
+		#splash .splash-wrap
+			grid-template-columns: repeat(10, 8vw)
+			grid-template-rows: repeat(10, 8vw)
+
+		.game-field-wrap #game-field
+			width: 100vw
+			height: 100vw

@@ -1,10 +1,31 @@
-=txt($fs: 1.5rem, $clr: black, $ff: dv)
+=txt($fs: 1.5rem, $gray-color: black, $ff: dv)
 	font-size: $fs
-	color: $clr
+	color: $gray-color
 	font-family: $ff
 
-=flex($jc: center,$ai: center,$dir: row)
+=flex($jc: center, $ai: center, $dir: row)
 	display: flex
 	justify-content: $jc
 	align-items: $ai
 	flex-direction: $dir
+
+=absolute($top :null, $bottom :null, $left :null, $right :null)
+	position: absolute
+	top: $top
+	bottom: $bottom
+	left: $left
+	right: $right
+
+=relative($top :null, $bottom :null, $left :null, $right :null)
+	position: relative
+	top: $top
+	bottom: $bottom
+	left: $left
+	right: $right
+
+=fixed($top :null, $bottom :null, $left :null, $right :null)
+	position: fixed
+	top: $top
+	bottom: $bottom
+	left: $left
+	right: $right

@@ -1,0 +1,17 @@
+html(lang="en")
+	head
+		link(rel="stylesheet", href="style.css")
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		link(rel="shortcut icon", href=require('./media/favicon.png') type='image/x-icon')
+		title MEMORY STORM
+	body
+		#root
+		#splash
+			.title MEMORY STORM
+				.exclamation work hard , play hard
+					div !
+			.splash-wrap
+				- for(var i = 0; i < 100; i++)
+					.splash
+		script(src="bundle.js" type='text/javascript')

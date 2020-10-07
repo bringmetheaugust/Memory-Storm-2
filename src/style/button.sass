@@ -1,30 +1,37 @@
 .button
+	overflow: hidden
 	width: 70%
 	height: 50px
 	padding: 1%
 	+txt(2rem, black, dv2)
 	letter-spacing: .7rem
-	border: 1px solid $clr
+	border: 1px solid $gray-color
 	cursor: pointer
-	background-color: $bg
-	overflow: hidden
+	background-color: $green-color
 	transition: background-color .5s
+
 	.abort
 		transform: translateY(10px)
+
 	&:hover
 		li:not(.play):not(.abort)
 			animation: play .4s both linear
+
 			@for $i from 1 to 5
 				&:nth-child(#{$i})
 					animation-delay: #{$i/30}s
-	&>ul
+
+	& > ul
 		+flex()
 		transition: transform .5s
-		&>li
+
+		& > li
 			text-align: center
+
 	&.abort
-		background-color: red
-		&>ul
+		background-color: $red-color
+
+		& > ul
 			transform: translateY(-40px)
 
 @keyframes play

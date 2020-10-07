@@ -10,19 +10,24 @@ $column: 0
 	grid-template-rows: repeat(10, 6vh)
 	justify-content: center
 	align-items: center
+
 	.splash
 		perspective: 1000px
 		height: 100%
 		animation: splash 5s both
 		height: 100%
-		background-image: url('../img/splash.png')
+		background-image: url('../media/splash.png')
+
 		@for $i from 1 through 100
 			&:nth-child(#{$i})
 				animation-delay: #{$i/40}s
+
 		@while $div < 100
 			&:nth-child(#{$div+1})
 				background-position: #{$column}0% #{$row}0%
+
 			$div : $div + 1
+
 			@if $column == 9
 				$column: 0
 				$row : $row + 1

@@ -1,23 +1,17 @@
 #splash
-	position: fixed
-	top: 0
+	z-index: 100
+	+fixed($top: 0)
+	+flex()
 	width: 100vw
 	height: 100vh
-	z-index: 100
 	background-color: white
 	transition: opacity .7s
-	+flex()
+
 	@import '/title.sass'
 	@import './splash-wrap.sass'
-	#close
-		position: absolute
-		bottom: 0
-		margin: 2% 0
-		letter-spacing: 2px
-		color: #7b7b7b
-		transition: color .5s
-		cursor: pointer
-		&:hover
-			color: inherit
+
+	&.hide
+		pointer-events: none
+		opacity: 0
 
 @import './media.sass'
