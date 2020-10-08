@@ -27,7 +27,7 @@ export const createCardsList = () => async (dispatch, getState) => {
 	const cardArr = await Promise.
 		all([ ...new Array(Math.pow(density, 2) / 2)].
 		map(async () => {
-			const { url } = await fetch('https://picsum.photos/200');
+			const { url } = await fetch(`https://picsum.photos/${600 / density}`);
 			return url;
 		}
 	));

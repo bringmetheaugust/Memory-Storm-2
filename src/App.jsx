@@ -20,7 +20,7 @@ const App = () => {
 		if (localData && localData !== JSON.stringify(settings))
 			dispatch(setGameSettings(JSON.parse(localData)));
 		
-		// setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
+		setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
 	}, []);
 
 	useEffect(() => {
