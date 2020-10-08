@@ -1,4 +1,6 @@
-import { SET_GAME_STATE, SET_COUNTER, SET_GAME_RESULT, SET_GAME_ACTION } from '../constants/actionTypes';
+import {
+	SET_GAME_STATE, SET_COUNTER, SET_GAME_RESULT, SET_GAME_ACTION, PICTURES_FETCHING
+} from '../constants/actionTypes';
 
 export const setGameState = gameState => ({
 	type: SET_GAME_STATE,
@@ -17,6 +19,11 @@ export const setGameResult = bool => ({
 
 export const setGameAction = bool => ({
 	type: SET_GAME_ACTION,
+	payload: bool
+});
+
+export const setPicturesFetch = bool => ({
+	type: PICTURES_FETCHING,
 	payload: bool
 });
 

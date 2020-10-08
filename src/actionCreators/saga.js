@@ -1,15 +1,15 @@
-import { all, takeEvery, select, put, delay } from 'redux-saga/effects';
+import { all, takeEvery, takeLatest, select, put, delay, take } from 'redux-saga/effects';
 
 import { resetGame } from './common';
 import { startCounter, setGameResult } from './gameState';
 import { toggleAllCards, createCardsList, disableCard } from './cards';
 
-import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
+import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD, SET_GAME_RESULT, SET_CARDS } from '../constants/actionTypes';
 import { SETTINGS_SELECTOR, CARDS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
 
 export function* rootSaga() {
     yield all([
-        takeEvery(SET_GAME_ACTION, gameAction),
+        takeLatest(SET_GAME_ACTION, gameAction), // ? use { fork, cancel } to stop toggleAllCards(false)
         takeEvery(OPEN_CARD, openCard),
         takeEvery(SET_GAME_RESULT, gameResult),
         takeEvery(RESET_GAME, resetGameParams)
@@ -21,14 +21,12 @@ function* gameAction({ type, payload }) {
 
     if (payload) {
         localStorage.setItem('settings', JSON.stringify(settings));
-        yield put(startCounter());
         yield put(createCardsList());
+        yield take(SET_CARDS); // ! better use { call } for async actions
+        yield put(startCounter());
         yield put(toggleAllCards(true));
         yield delay(settings.hidingTime * 1000);
-
-        const { play } = yield select(GAME_STATE_SELECTOR);
-
-        if (play) yield put(toggleAllCards(false));
+        yield put(toggleAllCards(false));
     } else {
         yield put(resetGame());
     }
