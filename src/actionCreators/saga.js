@@ -1,4 +1,4 @@
-import { all, takeEvery, select, put, delay, take } from 'redux-saga/effects';
+import { all, takeEvery, takeLatest, select, put, delay, take } from 'redux-saga/effects';
 
 import { resetGame } from './common';
 import { startCounter, setGameResult } from './gameState';
@@ -9,7 +9,7 @@ import { SETTINGS_SELECTOR, CARDS_SELECTOR, GAME_STATE_SELECTOR } from '../store
 
 export function* rootSaga() {
     yield all([
-        takeEvery(SET_GAME_ACTION, gameAction),
+        takeLatest(SET_GAME_ACTION, gameAction), // ? use { fork, cancel } to stop toggleAllCards(false)
         takeEvery(OPEN_CARD, openCard),
         takeEvery(SET_GAME_RESULT, gameResult),
         takeEvery(RESET_GAME, resetGameParams)
@@ -22,11 +22,11 @@ function* gameAction({ type, payload }) {
     if (payload) {
         localStorage.setItem('settings', JSON.stringify(settings));
         yield put(createCardsList());
-        yield take(SET_CARDS); // ! better use call for async actions
+        yield take(SET_CARDS); // ! better use { call } for async actions
+        yield put(startCounter());
         yield put(toggleAllCards(true));
         yield delay(settings.hidingTime * 1000);
         yield put(toggleAllCards(false));
-        yield put(startCounter());
     } else {
         yield put(resetGame());
     }

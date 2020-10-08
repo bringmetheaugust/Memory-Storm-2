@@ -13,6 +13,16 @@ $red-color: red
 	min-height: 100vh
 	+txt(1.5rem, black, dv)
 
+	&:before
+		content: ''
+		z-index: -1
+		+absolute($top: 0, $left: 0)
+		display: block
+		width: 100%
+		height: 100%
+		opacity: .05
+		background: url('../media/splash.png') center
+
 	@import './alert/index.sass'
 	@import './game-field/index.sass'
 	@import './settings/index.sass'
