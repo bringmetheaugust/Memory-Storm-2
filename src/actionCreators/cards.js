@@ -1,5 +1,4 @@
-import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS }from '../constants/actionTypes';
-import CARD_IMAGES from '../media/cards/index';
+import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS } from '../constants/actionTypes';
 
 export const setCards = cards => ({
 	type: SET_CARDS,
@@ -21,20 +20,26 @@ export const toggleAllCards = bool => ({
 	payload: bool
 });
 
-export const createCardsList = () => (dispatch, getState) => {
+export const createCardsList = () => async (dispatch, getState) => {
 	const { density } = getState().settings;
-	const temporaryArr = CARD_IMAGES.
-		sort(() => Math.random() - Math.random()).
-		slice(0, Math.pow((density), 2) / 2);
+	const cardArr = await Promise.
+		all([ ...new Array(Math.pow(density, 2) / 2)].
+		map(async () => {
+			const { url } = await fetch('https://picsum.photos/200');
+			return url;
+		}
+	));
 
-	const cards = ([ ...temporaryArr, ...temporaryArr ].
+	const cards = [ ...cardArr, ...cardArr ].
 		map(card => ({
 			id: Math.floor(Math.random() * 100000000),
 			img: card,
 			isOpen: false,
 			isDisable: false
-		}))).
+		})).
 		sort(() => Math.random() - Math.random());
+
+		console.log(cards);
 		
 	dispatch(setCards(cards));
 };
