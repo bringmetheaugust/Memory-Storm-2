@@ -1,4 +1,5 @@
 import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS } from '../constants/actionTypes';
+import { setPicturesFetch } from './gameState';
 
 export const setCards = cards => ({
 	type: SET_CARDS,
@@ -21,6 +22,7 @@ export const toggleAllCards = bool => ({
 });
 
 export const createCardsList = () => async (dispatch, getState) => {
+	dispatch(setPicturesFetch(true));
 	const { density } = getState().settings;
 	const cardArr = await Promise.
 		all([ ...new Array(Math.pow(density, 2) / 2)].
@@ -38,8 +40,7 @@ export const createCardsList = () => async (dispatch, getState) => {
 			isDisable: false
 		})).
 		sort(() => Math.random() - Math.random());
-
-		console.log(cards);
 		
 	dispatch(setCards(cards));
+	dispatch(setPicturesFetch(false));
 };

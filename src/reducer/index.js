@@ -25,6 +25,13 @@ export default function(state  = initialState, { type, payload }) {
 			}
 		}
 
+		case AT.PICTURES_FETCHING: {
+			return {
+				...state,
+				gameState: { ...state.gameState, picturesIsFetching: payload }
+			}
+		}
+
 		case AT.TOGGLE_ALL_CARDS: {
 			return {
 				...state,
