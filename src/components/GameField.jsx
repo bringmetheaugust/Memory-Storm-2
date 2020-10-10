@@ -9,14 +9,14 @@ import { CARDS_SELECTOR, GAME_STATE_SELECTOR, SETTINGS_SELECTOR } from '../store
 
 const GameField = () => {
 	const cards = useSelector(CARDS_SELECTOR);
-	const { play, picturesIsFetching } = useSelector(GAME_STATE_SELECTOR);
+	const { play, picturesIsFetching, counter } = useSelector(GAME_STATE_SELECTOR);
 	const { density } = useSelector(SETTINGS_SELECTOR);
 
 	return (
 		<div className='game-field-wrap'>
 			<ul
 				id='game-field'
-				className={ play && 'play' }
+				className={`${ counter > 0 && counter < 6 && 'low-count' } ${ play && 'play' }`}
 				style={{ gridTemplate : `repeat(${density}, 1fr)/repeat(${density}, 1fr)` }}
 			>
 				{ picturesIsFetching && preloader }
