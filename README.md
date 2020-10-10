@@ -11,7 +11,7 @@ In a bad case, all pictures will be hidden again.
 
 ### How can I play?
 
-U can play [here](https://bringmetheaugust.github.io/memoryPro).
+U can play [here](https://bringmetheaugust.github.io/memoryStorm).
 
 ***
 
