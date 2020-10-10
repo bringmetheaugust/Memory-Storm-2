@@ -16,7 +16,9 @@ const Counter = () => {
     return (
         <div className='count'>
             time left :
-            <div id='count'>{counter}</div>
+            <div className={`counter ${ counter > 0 && counter < 6 && 'low-count' }`} >
+                {counter}
+            </div>
         </div>
     );
 };

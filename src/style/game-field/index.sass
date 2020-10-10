@@ -1,4 +1,6 @@
 .game-field-wrap
+	+flex($dir: column)
+
 	#game-field
 		position: relative
 		pointer-events: none
@@ -17,8 +19,19 @@
 
 				&:hover
 					background: $green-color
+
+		&.low-count
+			animation: low-count 1s both infinite
 		
 	@import './count.sass'
 	@import './card.sass'
 
 	@import './media.sass'
+
+@keyframes low-count
+	0%
+		border-color: $red-color
+		box-shadow: 0 0 3px $red-color
+	100%
+		border-color: $gray-color
+		box-shadow: 0 0 0 $red-color
