@@ -1,4 +1,8 @@
-### What is this?   
+# Memory Storm 2
+
+![online](https://img.shields.io/website?url=https%3A%2F%2Fbringmetheaugust.github.io%2FmemoryStorm%2F) ![releaze](https://img.shields.io/github/v/release/bringmetheaugust/Memory-Storm-2) ![license](https://img.shields.io/github/license/bringmetheaugust/Memory-Storm-2) ![last commit](https://img.shields.io/github/release-date/bringmetheaugust/Memory-Storm-2) ![issues](https://img.shields.io/github/issues-raw/bringmetheaugust/Memory-Storm-2) ![PR](https://img.shields.io/github/issues-pr-raw/bringmetheaugust/Memory-Storm-2)
+
+## What is this?   
 
 ![memory storm](./icon.png)
 Web game to improve Your attention, which make Your memory better and improve Your brain activity.    
@@ -7,29 +11,24 @@ After that, You can click on two blocks with hidden images.
 If You select two equal images, You can keep on until they gone.
 In a bad case, all pictures will be hidden again.
 
-***
+## Where can I play this?
 
-### How can I play?
+U can play it [here](https://bringmetheaugust.github.io/memoryStorm) 👩🏻‍💻
 
-U can play [here](https://bringmetheaugust.github.io/memoryStorm).
+## How can I deploy this?
 
-***
-
-### How can I deploy it?
-
- * run `yarn` to install all dependencies.
- * run `yarn dev` and open Your *localhost:2100*.
+ * run `yarn` to install all dependencies
+ * run `yarn dev` and open Your *localhost:2100*
  
-Required global packages: *NodeJS* v6+, *yarn*.
+###### Required global packages:
 
-***
+ * *NodeJS v6+*
+ * *yarn*.
 
-### Who made this?
+## Who made this?
 
-August Luzanovsky, 2019
+August Luzanovsky, 2019 [![GitHub](https://img.shields.io/badge/-GitHub-000?&logo=github)](https://github.com/bringmetheaugust)
 
-***
+## WTF? 
 
-### WTF? 
-
-Good luck, nerds!
+Good luck, nerds!🧑‍🦼

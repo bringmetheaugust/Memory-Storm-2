@@ -54,7 +54,7 @@ const Settings = () => {
 	}, [play]);
 
 	return (
-		<form id='settings' className={ play && 'play' }>
+		<form id='settings' className={`${play && 'play'}`}>
 			<InputText
 				handleChange={validateForm}
 				label="select grid density"

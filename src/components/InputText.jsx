@@ -12,7 +12,7 @@ const InputText = ({ handleChange, label, id, val, error, errorText }) => {
     }, [val]);
 
     return (
-        <label className={ error && 'with-error' }>
+        <label className={`${error && 'with-error'}`}>
             {label}
             <input
                 onChange={e => handleChange(id, e.target.value)}
