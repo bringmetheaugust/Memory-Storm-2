@@ -4,7 +4,7 @@
 
 ## What is this?   
 
-![memory storm](./icon.png)
+![memory storm](./README_icon.png)
 Web game to improve Your attention, which make Your memory better and improve Your brain activity.    
 When You start the game, You should memorize location of all pictures before their hiding.
 After that, You can click on two blocks with hidden images.
@@ -13,7 +13,7 @@ In a bad case, all pictures will be hidden again.
 
 ## Where can I play this?
 
-U can play it [here](https://bringmetheaugust.github.io/memoryStorm) 👩🏻‍💻
+You can play it [here](https://bringmetheaugust.github.io/memoryStorm) 👩🏻‍💻
 
 ## How can I deploy this?
 
