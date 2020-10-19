@@ -1,6 +1,6 @@
 # Memory Storm 2
 
-![online](https://img.shields.io/website?url=https%3A%2F%2Fbringmetheaugust.github.io%2FmemoryStorm%2F) ![releaze](https://img.shields.io/github/v/release/bringmetheaugust/Memory-Storm-2) ![license](https://img.shields.io/github/license/bringmetheaugust/Memory-Storm-2) ![last commit](https://img.shields.io/github/release-date/bringmetheaugust/Memory-Storm-2) ![issues](https://img.shields.io/github/issues-raw/bringmetheaugust/Memory-Storm-2) ![PR](https://img.shields.io/github/issues-pr-raw/bringmetheaugust/Memory-Storm-2)
+![online](https://img.shields.io/website?url=https%3A%2F%2Fbringmetheaugust.github.io%2FmemoryStorm%2F) ![license](https://img.shields.io/github/license/bringmetheaugust/Memory-Storm-2) ![releaze](https://img.shields.io/github/v/release/bringmetheaugust/Memory-Storm-2) ![realise date](https://img.shields.io/github/release-date/bringmetheaugust/Memory-Storm-2) ![issues](https://img.shields.io/github/issues-raw/bringmetheaugust/Memory-Storm-2) ![PR](https://img.shields.io/github/issues-pr-raw/bringmetheaugust/Memory-Storm-2)
 
 ## What is this?   
 
