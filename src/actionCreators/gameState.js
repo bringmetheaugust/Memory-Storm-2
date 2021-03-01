@@ -1,5 +1,6 @@
 import {
-	SET_GAME_STATE, SET_COUNTER, SET_GAME_RESULT, SET_GAME_ACTION, PICTURES_FETCHING
+	SET_GAME_STATE, SET_COUNTER, SET_GAME_RESULT,
+	SET_GAME_ACTION, PICTURES_FETCHING
 } from '../constants/actionTypes';
 
 export const setGameState = gameState => ({

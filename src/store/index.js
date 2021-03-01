@@ -4,7 +4,7 @@ import reduxThunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducer/index';
-import { rootSaga } from '../actionCreators/saga';
+import { rootSaga } from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
 

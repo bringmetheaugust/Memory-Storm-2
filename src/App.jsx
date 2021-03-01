@@ -23,9 +23,9 @@ const App = () => {
 		setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
 	}, []);
 
-	useEffect(() => {
-		dispatch(createCardsList());
-	}, [settings.density]);
+	// useEffect(() => {
+	// 	dispatch(createCardsList());
+	// }, [settings.density]);
 
 	return (
 		<Fragment>
