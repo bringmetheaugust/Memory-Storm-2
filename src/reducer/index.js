@@ -32,6 +32,13 @@ export default function(state  = initialState, { type, payload }) {
 			}
 		}
 
+		case AT.SET_FAKE_CARDS: {
+			return {
+				...state,
+				cards: [ ...Array(state.settings.density ** 2) ].map(() => ({ id: Math.random() }))
+			}
+		}
+
 		case AT.TOGGLE_ALL_CARDS: {
 			return {
 				...state,

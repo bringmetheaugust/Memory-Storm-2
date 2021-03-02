@@ -1,4 +1,4 @@
-import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS } from '../constants/actionTypes';
+import { SET_CARDS, OPEN_CARD, DISABLE_CARD, TOGGLE_ALL_CARDS, SET_FAKE_CARDS } from '../constants/actionTypes';
 
 export const setCards = cards => ({
 	type: SET_CARDS,
@@ -18,4 +18,8 @@ export const disableCard = id => ({
 export const toggleAllCards = bool => ({
 	type: TOGGLE_ALL_CARDS,
 	payload: bool
+});
+
+export const setFakeCards = () => ({
+	type: SET_FAKE_CARDS
 });

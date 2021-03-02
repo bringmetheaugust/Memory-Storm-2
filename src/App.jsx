@@ -5,7 +5,6 @@ import GameField from './components/GameField.jsx';
 import Settings from './components/Settings.jsx';
 import Alert from './components/Alert.jsx';
 import { setGameSettings } from './actionCreators/settings';
-import { createCardsList } from './actionCreators/cards';
 
 import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from './store/selectors';
 
@@ -17,15 +16,12 @@ const App = () => {
 	useEffect(() => {
 		const localData = localStorage.getItem('settings');
 
-		if (localData && localData !== JSON.stringify(settings))
+		if (localData && localData !== JSON.stringify(settings)) {
 			dispatch(setGameSettings(JSON.parse(localData)));
+		}
 		
 		setTimeout(() => document.getElementById('splash').classList.add('hide'), 10000);
 	}, []);
-
-	// useEffect(() => {
-	// 	dispatch(createCardsList());
-	// }, [settings.density]);
 
 	return (
 		<Fragment>
