@@ -27,10 +27,3 @@ export const setPicturesFetch = bool => ({
 	type: PICTURES_FETCHING,
 	payload: bool
 });
-
-export const startCounter = () => (dispatch, getState) => {
-	const { time } = getState().settings;
-	const newCounterId = setInterval(() => dispatch(setCounter()), 1000);
-
-	dispatch(setGameState({ counter: time, counterId: newCounterId }));
-};

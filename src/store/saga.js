@@ -1,31 +1,44 @@
-import { takeEvery, takeLatest, select, put, delay, call } from 'redux-saga/effects';
+import { takeEvery, takeLatest, select, put, delay, call, all, fork, cancel } from 'redux-saga/effects';
 
 import { resetGame } from '../actionCreators/common';
-import { startCounter, setGameResult, setPicturesFetch } from '../actionCreators/gameState';
+import { setCounter, setGameResult, setPicturesFetch, setGameAction } from '../actionCreators/gameState';
 import { toggleAllCards, disableCard, setCards } from '../actionCreators/cards';
 
 import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
 import { SETTINGS_SELECTOR, CARDS_SELECTOR, GAME_STATE_SELECTOR } from './selectors';
 
-export function* rootSaga() {
-    yield takeLatest(SET_GAME_ACTION, gameAction); // ? use { fork, cancel } to stop toggleAllCards(false)
-    yield takeEvery(OPEN_CARD, openCard);
-    yield takeEvery(SET_GAME_RESULT, gameResult);
-    yield takeEvery(RESET_GAME, resetGameParams);
+class Card {
+    constructor(cardImg) {
+        this.id = Math.floor(Math.random() * 100000000);
+        this.img = cardImg;
+        this.isOpen = false;
+        this.isDisable = false;
+    }
 }
 
-function* gameAction({ payload }) {
+const getRandomImage = async density => await (await fetch(`https://picsum.photos/${600 / density}`)).url;
+
+export function* rootSaga() {
+    yield takeLatest(SET_GAME_ACTION, gameActionWorker);
+    yield takeEvery(OPEN_CARD, openCardWorker);
+    yield takeEvery(SET_GAME_RESULT, gameResultWorker);
+    yield takeEvery(RESET_GAME, resetGameParamsWorker);
+}
+
+function* gameActionWorker({ payload }) {
     const settings = yield select(SETTINGS_SELECTOR);
+    let counterFork;
 
     if (payload) {
         localStorage.setItem('settings', JSON.stringify(settings));
         yield createCardsList();
-        yield put(startCounter());
+        counterFork = yield fork(counter);
         yield put(toggleAllCards(true));
         yield delay(settings.hidingTime * 1000);
         yield put(toggleAllCards(false));
     } else {
         yield put(resetGame());
+        yield cancel(counterFork);
     }
 }
 
@@ -33,39 +46,49 @@ function* createCardsList() {
 	yield put(setPicturesFetch(true));
 
 	const { density } = yield select(SETTINGS_SELECTOR);
-	const cardArr = yield call(async () => {
-        return await Promise.all([ ...new Array(Math.pow(density, 2) / 2) ].map(async () => {
-			return await (await fetch(`https://picsum.photos/${600 / density}`)).url;
-	    }));
-    });
+	const cardArr = yield call(async () => await Promise.all(
+        [ ...new Array(Math.pow(density, 2) / 2) ].map(async () => await getRandomImage(density))
+    ));
 
 	const cards = [ ...cardArr, ...cardArr ].
-		map(card => ({
-			id: Math.floor(Math.random() * 100000000),
-			img: card,
-			isOpen: false,
-			isDisable: false
-		})).
+		map(card => new Card(card)).
 		sort(() => Math.random() - Math.random());
 		
 	yield put(setCards(cards));
 	yield put(setPicturesFetch(false));
 };
 
+function* counter() {
+    const { time } = yield select(SETTINGS_SELECTOR);
 
-function* openCard() {
+    yield put(setCounter(time));
+
+    while(true) {
+        yield delay(1000);
+        yield put(setCounter());
+
+        const { counter } = yield select(GAME_STATE_SELECTOR);
+
+        if (counter <= 0) {
+            yield put(setGameResult(false));
+            break;
+        }
+    }
+}
+
+function* openCardWorker() {
     const cards = yield select(CARDS_SELECTOR);
-    const openedCards = cards.filter(card => (card.isOpen && !card.isDisable) === true);
+    const openedCards = cards.filter(({ isOpen, isDisable }) => isOpen && !isDisable);
 
     if (openedCards.length > 1) {
-		if (openedCards[0].img === openedCards[1].img) {
-            yield put(disableCard(openedCards[0].id));
-            yield put(disableCard(openedCards[1].id));
+        const [ card1, card2 ] = openedCards;
+
+		if (card1.img === card2.img) {
+            yield all([ put(disableCard(card1.id)), put(disableCard(card2.id)) ]);
             
             const updatedCards = yield select(CARDS_SELECTOR);
 
-            if (updatedCards.every(card => card.isDisable === true))
-                return yield put(setGameResult(true));
+            if (updatedCards.every(({ isDisable }) => isDisable)) return yield put(setGameResult(true));
 		}
 
         yield delay(500);
@@ -73,13 +96,11 @@ function* openCard() {
 	}
 }
 
-function* gameResult() {
+function* gameResultWorker() {
+    yield put(setGameAction(false));
     yield put(resetGame());
 }
 
-function* resetGameParams() {
-    const { counterId } = yield select(GAME_STATE_SELECTOR);
-
-    clearInterval(counterId);
+function* resetGameParamsWorker() {
     yield put(toggleAllCards(false));
 }
