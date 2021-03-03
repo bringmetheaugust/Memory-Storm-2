@@ -1,14 +1,15 @@
 import React, { useState, memo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import DoubleButton from './DoubleButton.jsx';
-import InputText from './InputText.jsx';
-import { startGame, stopGame } from '../actionCreators/gameState';
-import { resetGame } from '../actionCreators/common';
-import { setGameSettings } from '../actionCreators/settings';
+import css from './index.module.sass';
+import DoubleButton from '../DoubleButton/index.jsx';
+import InputText from '../InputText/index.jsx';
+import { startGame, stopGame } from '../../actionCreators/gameState';
+import { resetGame } from '../../actionCreators/common';
+import { setGameSettings } from '../../actionCreators/settings';
 
-import * as GS from '../constants/gameSettings';
-import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
+import * as GS from '../../constants/gameSettings';
+import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../../store/selectors';
 
 const DEFAULT_FIELD_STATUSES = {
 	density: false,
@@ -58,7 +59,7 @@ const Settings = () => {
 	}, [play]);
 
 	return (
-		<form id='settings' className={`${play && 'play'}`}>
+		<form className={`${css.index} ${ play && css.play }`}>
 			<InputText
 				handleChange={validateForm}
 				label="select grid density"
@@ -84,7 +85,7 @@ const Settings = () => {
 				errorText={`Please, set any number form ${GS.MIN_GAME_TIME} to ${GS.MAX_GAME_TIME}`}
 			/>
 			<DoubleButton
-				play={play}
+				isActive={play}
 				handleSubmit={ !Object.values(invalidFields).some(field => field) && toSubmit }
 				firstBlock='play'
 				secondBlock='stop'

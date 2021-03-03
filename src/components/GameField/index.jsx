@@ -1,12 +1,14 @@
 import React, { memo, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Card from './Card.jsx';
-import Counter from './Counter.jsx';
-import preloader from './preloader.jsx';
+import css from './index.module.sass';
+import Card from '../Card/index.jsx';
+import Counter from '../Counter/index.jsx';
+import preloader from '../preloader/index.jsx';
+import { setFakeCards } from '../../actionCreators/cards';
 
-import { CARDS_SELECTOR, GAME_STATE_SELECTOR, SETTINGS_SELECTOR } from '../store/selectors';
-import { setFakeCards } from '../actionCreators/cards';
+import { COUNTER_WARNING } from '../../constants/gameSettings';
+import { CARDS_SELECTOR, GAME_STATE_SELECTOR, SETTINGS_SELECTOR } from '../../store/selectors';
 
 const GameField = () => {
 	const cards = useSelector(CARDS_SELECTOR);
@@ -18,13 +20,13 @@ const GameField = () => {
 		dispatch(setFakeCards());
 	}, [density]);
 
+	const withWarning = useMemo(() => counter > 0 && counter <= COUNTER_WARNING, [counter]);
 	const densityFromCardLength = useMemo(() => Math.pow(cards.length, .5), [cards.length]);
 
 	return (
-		<div className='game-field-wrap'>
+		<div className={css.index}>
 			<ul
-				id='game-field'
-				className={`${ counter > 0 && counter < 6 && 'low-count' } ${ play && 'play' }`}
+				className={`${css.field} ${ withWarning && css.warning } ${ play && css.play }`}
 				style={{ gridTemplate : `repeat(${densityFromCardLength}, 1fr)/repeat(${densityFromCardLength}, 1fr)` }}
 			>
 				{ picturesIsFetching && preloader }

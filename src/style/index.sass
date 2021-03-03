@@ -1,10 +1,7 @@
-@import 'reset.sass'
-@import 'fonts.sass'
-@import 'mixin.sass'
-
-$gray-color: #cccccc
-$green-color: #cbfdf1
-$red-color: red
+@import './_reset'
+@import './_fonts'
+@import './_mixin'
+@import './_variables'
 
 #root
 	overflow-x: hidden
@@ -23,13 +20,7 @@ $red-color: red
 		opacity: .04
 		background: url('../media/splash.png') center
 
-	@import './alert/index.sass'
-	@import './game-field/index.sass'
-	@import './settings/index.sass'
-
-@import './splash/index.sass'
-@import './button.sass'
-@import './preloader'
+@import './splash/index'
 
 @media only screen and (max-width : 600px)
 	#root
@@ -45,7 +36,3 @@ $red-color: red
 		#splash .splash-wrap
 			grid-template-columns: repeat(10, 8vw)
 			grid-template-rows: repeat(10, 8vw)
-
-		.game-field-wrap #game-field
-			width: 100vw
-			height: 100vw

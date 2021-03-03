@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { openCard } from '../actionCreators/cards';
-import { GAME_STATE_SELECTOR } from '../store/selectors';
+import css from './index.module.sass';
+import { openCard } from '../../actionCreators/cards';
+import { GAME_STATE_SELECTOR } from '../../store/selectors';
 
 const Card = ({ id, img, isOpen, isDisable }) => {
 	const { play } = useSelector(GAME_STATE_SELECTOR);
@@ -14,10 +15,10 @@ const Card = ({ id, img, isOpen, isDisable }) => {
 
 	return(
 		<li
-			className={`card ${ isDisable && 'disabled'} ${ isOpen && 'open' }`}
+			className={`${css.index} ${ isDisable && css.disabled} ${ isOpen && css.open }`}
 			onClick={selectCard}
 		>
-			<img className={`${ !play && 'fixed' }`} src={img} />
+			<img className={`${ !play && css.fixed }`} src={img} />
 		</li>
 	);
 }

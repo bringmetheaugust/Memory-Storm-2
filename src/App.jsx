@@ -1,9 +1,9 @@
 import React, { memo, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import GameField from './components/GameField.jsx';
-import Settings from './components/Settings.jsx';
-import Alert from './components/Alert.jsx';
+import GameField from './components/GameField/index.jsx';
+import Settings from './components/Settings/index.jsx';
+import Alert from './components/Alert/index.jsx';
 import { setGameSettings } from './actionCreators/settings';
 
 import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from './store/selectors';

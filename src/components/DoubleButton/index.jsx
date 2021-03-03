@@ -1,17 +1,19 @@
 import React, { memo } from 'react';
 
-const DoubleButton = ({ handleSubmit, play, firstBlock, secondBlock }) => (
+import css from './index.module.sass';
+
+const DoubleButton = ({ handleSubmit, isActive, firstBlock, secondBlock, classNames }) => (
 	<div
 		onClick={ handleSubmit ? () => handleSubmit() : null }
-		className={`button ${ play && 'abort' }`}
+		className={`${css.index} ${ isActive && css.active } ${classNames}`}
 	>
-		<ul className='play'>
+		<ul>
 			{ firstBlock.split('').map(letter => <li key={Math.random()}>{letter}</li>) }
 		</ul>
 		{
 			secondBlock &&
 			(
-				<ul className='abort'>
+				<ul className={css.second}>
 					{ secondBlock.split('').map(letter => <li key={Math.random()}>{letter}</li>) }
 				</ul>
 			)
@@ -19,6 +21,6 @@ const DoubleButton = ({ handleSubmit, play, firstBlock, secondBlock }) => (
 	</div>
 );
 
-DoubleButton.defaultProps = { secondBlock: null };
+DoubleButton.defaultProps = { secondBlock: null, classNames: '' };
 
 export default memo(DoubleButton);
