@@ -6,22 +6,22 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.SET_GAME_SETTINGS: {
 			return { ...state, settings: payload }
 		}
-
-		case AT.SET_GAME_STATE: {
-			return {
-				...state,
-				gameState: { ...state.gameState, ...payload }
-			}
-		}
 		
 		case AT.SET_CARDS: {
 			return { ...state, cards: payload };
 		}
 
-		case AT.SET_GAME_ACTION: {
+		case AT.START_GAME: {
 			return {
 				...state,
-				gameState: { ...state.gameState, play: !state.gameState.play }
+				gameState: { ...state.gameState, play: true }
+			}
+		}
+
+		case AT.STOP_GAME: {
+			return {
+				...state,
+				gameState: { ...state.gameState, play: false }
 			}
 		}
 
@@ -80,11 +80,7 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.RESET_GAME: {
 			return {
 				...state,
-				gameState: {
-					...state.gameState,
-					play: false,
-					counter: 0,
-				}
+				gameState: initialState.gameState
 			}
 		}
 	}

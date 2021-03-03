@@ -2,12 +2,12 @@ import React, { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import DoubleButton from './DoubleButton.jsx';
-import { setGameResult } from '../actionCreators/gameState';
+import { resetGame } from '../actionCreators/common';
 
 const Alert = ({ result }) => {
 	const dispatch = useDispatch();
 
-	const closeAlert = useCallback(() => dispatch(setGameResult(null)));
+	const closeAlert = useCallback(() => dispatch(resetGame()));
 
 	return(
 		<div id='alert'>

@@ -1,10 +1,9 @@
 import { takeEvery, takeLatest, select, put, delay, call, all, fork, cancel } from 'redux-saga/effects';
 
-import { resetGame } from '../actionCreators/common';
-import { setCounter, setGameResult, setPicturesFetch, setGameAction } from '../actionCreators/gameState';
+import { setCounter, setGameResult, setPicturesFetch } from '../actionCreators/gameState';
 import { toggleAllCards, disableCard, setCards } from '../actionCreators/cards';
 
-import { SET_GAME_ACTION, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
+import { START_GAME, STOP_GAME, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
 import { SETTINGS_SELECTOR, CARDS_SELECTOR, GAME_STATE_SELECTOR } from './selectors';
 
 class Card {
@@ -19,26 +18,29 @@ class Card {
 const getRandomImage = async density => await (await fetch(`https://picsum.photos/${600 / density}`)).url;
 
 export function* rootSaga() {
-    yield takeLatest(SET_GAME_ACTION, gameActionWorker);
+    yield takeLatest(START_GAME, startGameWorker);
     yield takeEvery(OPEN_CARD, openCardWorker);
-    yield takeEvery(SET_GAME_RESULT, gameResultWorker);
-    yield takeEvery(RESET_GAME, resetGameParamsWorker);
+    yield takeEvery(SET_GAME_RESULT, stopGameWorker);
+    yield takeLatest(STOP_GAME, stopGameWorker);
+    yield takeEvery(RESET_GAME, function*() {
+        yield put(toggleAllCards(false));
+    });
 }
 
-function* gameActionWorker({ payload }) {
-    const settings = yield select(SETTINGS_SELECTOR);
-    let counterFork;
+// start decrementing counter when the game has been started
+function* counter(counterTime) {
+    yield put(setCounter(counterTime));
 
-    if (payload) {
-        localStorage.setItem('settings', JSON.stringify(settings));
-        yield createCardsList();
-        counterFork = yield fork(counter);
-        yield put(toggleAllCards(true));
-        yield delay(settings.hidingTime * 1000);
-        yield put(toggleAllCards(false));
-    } else {
-        yield put(resetGame());
-        yield cancel(counterFork);
+    while(true) {
+        yield delay(1000);
+        yield put(setCounter());
+
+        const { counter } = yield select(GAME_STATE_SELECTOR);
+
+        if (counter <= 0) {
+            yield put(setGameResult(false));
+            break;
+        }
     }
 }
 
@@ -58,22 +60,25 @@ function* createCardsList() {
 	yield put(setPicturesFetch(false));
 };
 
-function* counter() {
-    const { time } = yield select(SETTINGS_SELECTOR);
+// toogle cards when game has been started
+function* showCards(hidingTime) {
+    yield put(toggleAllCards(true));
+    yield delay(hidingTime * 1000);
+    yield put(toggleAllCards(false));
+}
 
-    yield put(setCounter(time));
+// saga's workers
 
-    while(true) {
-        yield delay(1000);
-        yield put(setCounter());
+let forkedCounter, forkedToggleCards;
 
-        const { counter } = yield select(GAME_STATE_SELECTOR);
+function* startGameWorker() {
+    const settings = yield select(SETTINGS_SELECTOR);
 
-        if (counter <= 0) {
-            yield put(setGameResult(false));
-            break;
-        }
-    }
+    localStorage.setItem('settings', JSON.stringify(settings));
+    
+    yield createCardsList();
+    forkedCounter = yield fork(counter, settings.time);
+    forkedToggleCards = yield fork(showCards, settings.hidingTime);
 }
 
 function* openCardWorker() {
@@ -96,11 +101,9 @@ function* openCardWorker() {
 	}
 }
 
-function* gameResultWorker() {
-    yield put(setGameAction(false));
-    yield put(resetGame());
-}
-
-function* resetGameParamsWorker() {
-    yield put(toggleAllCards(false));
+function* stopGameWorker() {
+    yield all([
+        cancel(forkedCounter),
+        cancel(forkedToggleCards)
+    ]);
 }
