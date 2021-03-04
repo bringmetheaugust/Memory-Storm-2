@@ -1,7 +1,9 @@
 import React from 'react';
 
+import css from './index.module.sass';
+
 const preloader = (
-    <div className="loading">
+    <div className={css.index}>
         <svg x="0px" y="0px" width="50" height="50" viewBox="0 0 40 40">
             <path
                 opacity="0.2"

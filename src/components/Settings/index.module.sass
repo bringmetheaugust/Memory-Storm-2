@@ -1,0 +1,23 @@
+@import '../../style/_mixin'
+	
+.index
+	padding: 1%
+	+flex(center,center,column)
+
+	& > *
+		margin: 1% 0
+
+.play label // ? better make disabled InputText via props
+	pointer-events: none
+
+@media only screen and (max-width: 1000px)
+	.index
+		width: 100%
+		box-sizing: border-box
+		flex-direction: initial
+		flex-wrap: wrap
+		font-size: 1.3rem
+
+	.input
+		width: auto !important
+		flex-basis: 30%

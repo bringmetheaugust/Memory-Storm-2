@@ -4,3 +4,4 @@ export const MIN_HIDING_TIME = 1;
 export const MAX_HIDING_TIME = 10;
 export const MIN_DENSITY = 2;
 export const MAX_DENSITY = 8;
+export const COUNTER_WARNING = 5;

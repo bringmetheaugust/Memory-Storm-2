@@ -1,4 +1,7 @@
-.button
+@import '../../style/_mixin'
+@import '../../style/_variables'
+    
+.index
 	overflow: hidden
 	width: 70%
 	height: 50px
@@ -10,12 +13,9 @@
 	background-color: $green-color
 	transition: background-color .5s
 
-	.abort
-		transform: translateY(10px)
-
 	&:hover
-		li:not(.play):not(.abort)
-			animation: play .4s both linear
+		li:not(.play):not(.second)
+			animation: hover .4s both linear
 
 			@for $i from 1 to 5
 				&:nth-child(#{$i})
@@ -28,13 +28,16 @@
 		& > li
 			text-align: center
 
-	&.abort
-		background-color: $red-color
+.second
+		transform: translateY(10px)
 
-		& > ul
-			transform: translateY(-40px)
+.active
+    background-color: $red-color
 
-@keyframes play
+    & > ul
+        transform: translateY(-40px)
+
+@keyframes hover
 	0%
 		transform: translateY(0)
 	50%

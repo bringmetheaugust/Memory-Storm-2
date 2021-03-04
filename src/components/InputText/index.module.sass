@@ -1,0 +1,42 @@
+@import '../../style/_mixin'
+@import '../../style/_variables'
+    
+.index
+    position: relative
+    width: 100%
+    display: grid
+    grid-gap: 3px
+    text-align: center
+    white-space: nowrap
+
+    &.with-error input
+        background-color: $red-color !important
+
+    input
+        width: 100%
+        min-height: 30px
+        border: 1px solid $gray-color
+        padding: 1%
+        +txt(2rem, black, dv2)
+        text-align: center
+        transition: background-color .5s
+
+        &::-webkit-inner-spin-button
+            -webkit-appearance: none
+
+        &:hover
+            background-color: $green-color
+
+.error
+    width: 100%
+    min-height: 20px
+    text-align: center
+    +txt(1rem, $red-color, dv2)
+
+@media only screen and (max-width: 1000px)
+    .index
+        margin: 5px
+        font-size: 1rem
+
+        input
+            font-size: 1.5rem

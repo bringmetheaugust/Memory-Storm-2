@@ -24,6 +24,24 @@ module.exports = {
 				]
 			},
 			{
+				test: /\.(module.sass|module.scss)$/,
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								exportGlobals: true,
+								localIdentName: '[local]__[hash:5]',
+								exportLocalsConvention: 'camelCase',
+							}
+						}
+					},
+					{ loader: 'postcss-loader' },
+					{ loader: 'sass-loader' }
+				]
+			},
+			{
 				test: /\.pug$/,
 				loader: "pug-loader"
 			},

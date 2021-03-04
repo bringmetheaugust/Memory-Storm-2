@@ -1,0 +1,47 @@
+@import '../../style/_mixin'
+@import '../../style/_variables'
+    
+.index
+	+flex($dir: column)
+
+.field
+    position: relative
+    pointer-events: none
+    box-sizing: border-box
+    width: 80vh
+    height: 80vh
+    display: grid
+    border: 1px solid $gray-color
+
+    &.warning
+        animation: warning 1s both infinite
+
+.play
+    pointer-events: all
+
+    & li
+        transition: background .5s
+        cursor: pointer
+
+        &:hover
+            background: $green-color
+
+@keyframes warning
+	0%
+		border-color: $red-color
+		box-shadow: 0 0 3px $red-color
+	100%
+		border-color: $gray-color
+		box-shadow: 0 0 0 $red-color
+
+@media only screen and (max-width : 600px)
+	.field
+		width: 100vw
+		height: 100vw
+		min-width: auto
+		min-height: auto
+
+@media (orientation: portrait)
+    .field
+        width: 100vw
+        height: 100vw

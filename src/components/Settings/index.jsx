@@ -1,13 +1,15 @@
-import React, { useState, memo, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import DoubleButton from './DoubleButton.jsx';
-import InputText from './InputText.jsx';
-import { setGameAction } from '../actionCreators/gameState';
-import { setGameSettings } from '../actionCreators/settings';
+import css from './index.module.sass';
+import DoubleButton from '../DoubleButton/index.jsx';
+import InputText from '../InputText/index.jsx';
+import { startGame, stopGame } from '../../actionCreators/gameState';
+import { resetGame } from '../../actionCreators/common';
+import { setGameSettings } from '../../actionCreators/settings';
 
-import * as GS from '../constants/gameSettings';
-import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../store/selectors';
+import * as GS from '../../constants/gameSettings';
+import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from '../../store/selectors';
 
 const DEFAULT_FIELD_STATUSES = {
 	density: false,
@@ -18,7 +20,7 @@ const DEFAULT_FIELD_STATUSES = {
 const Settings = () => {
 	const [ invalidFields, setFieldStatus ] = useState(DEFAULT_FIELD_STATUSES);
 	const gameSettings = useSelector(SETTINGS_SELECTOR);
-	const { play } = useSelector(GAME_STATE_SELECTOR);
+	const { play } = useSelector(GAME_STATE_SELECTOR, shallowEqual);
 	const dispatch = useDispatch();
 
 	const validateForm = useCallback((id, value) => {
@@ -47,40 +49,46 @@ const Settings = () => {
 	}, [gameSettings]);
 
 	const toSubmit = useCallback(() => {
-		if (play) return dispatch(setGameAction(false));
-
-		window.scrollTo(0, 0);
-		dispatch(setGameAction(true));
+		if (play) {
+			dispatch(stopGame());
+			dispatch(resetGame());
+		} else {
+			window.scrollTo(0, 0);
+			dispatch(startGame());
+		}
 	}, [play]);
 
 	return (
-		<form id='settings' className={`${play && 'play'}`}>
+		<form className={`${css.index} ${ play && css.play }`}>
 			<InputText
 				handleChange={validateForm}
-				label="select grid density"
+				label="grid density"
 				id="density"
 				val={gameSettings.density}
 				error={invalidFields.density}
 				errorText={`Please, set any number from ${GS.MIN_DENSITY} to ${GS.MAX_DENSITY} multiples of two`}
+				classNames={css.input}
 			/>
 			<InputText
 				handleChange={validateForm}
-				label="select time for pictures hidingTime (sec)"
+				label="pictures hiding time(sec)"
 				id="hidingTime"
 				val={gameSettings.hidingTime}
 				error={invalidFields.hidingTime}
 				errorText={`Please, set any number from ${GS.MIN_HIDING_TIME} to ${GS.MAX_HIDING_TIME}`}
+				classNames={css.input}
 			/>
 			<InputText
 				handleChange={validateForm}
-				label="select game time (sec)"
+				label="game time(sec)"
 				id="time"
 				val={gameSettings.time}
 				error={invalidFields.time}
 				errorText={`Please, set any number form ${GS.MIN_GAME_TIME} to ${GS.MAX_GAME_TIME}`}
+				classNames={css.input}
 			/>
 			<DoubleButton
-				play={play}
+				isActive={play}
 				handleSubmit={ !Object.values(invalidFields).some(field => field) && toSubmit }
 				firstBlock='play'
 				secondBlock='stop'
@@ -89,4 +97,4 @@ const Settings = () => {
 	);
 };
 
-export default memo(Settings);
+export default Settings;
