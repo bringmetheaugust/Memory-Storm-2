@@ -1,6 +1,6 @@
 import { takeEvery, takeLatest, select, put, delay, call, all, fork, cancel } from 'redux-saga/effects';
 
-import { setCounter, setGameResult, setPicturesFetch } from '../actionCreators/gameState';
+import { setCounter, setGameResult, setPicturesFetch, stopGame, setError } from '../actionCreators/gameState';
 import { toggleAllCards, disableCard, setCards } from '../actionCreators/cards';
 
 import { START_GAME, STOP_GAME, RESET_GAME, OPEN_CARD, SET_GAME_RESULT } from '../constants/actionTypes';
@@ -14,8 +14,6 @@ class Card {
         this.isDisable = false;
     }
 }
-
-const getRandomImage = async density => await (await fetch(`https://picsum.photos/${600 / density}`)).url;
 
 export function* rootSaga() {
     yield takeLatest(START_GAME, startGameWorker);
@@ -44,20 +42,33 @@ function* counter(counterTime) {
     }
 }
 
+function* getRandomImage(density) {
+    return yield call(async () => await (await fetch(`https://picsum.photos/${600 / density}`)).url);
+}
+
 function* createCardsList() {
 	yield put(setPicturesFetch(true));
 
 	const { density } = yield select(SETTINGS_SELECTOR);
-	const cardArr = yield call(async () => await Promise.all(
-        [ ...new Array(Math.pow(density, 2) / 2) ].map(async () => await getRandomImage(density))
-    ));
 
-	const cards = [ ...cardArr, ...cardArr ].
-		map(card => new Card(card)).
-		sort(() => Math.random() - Math.random());
-		
-	yield put(setCards(cards));
-	yield put(setPicturesFetch(false));
+    try {
+        const cardArr = yield all(
+            [ ...new Array(Math.pow(density, 2) / 2) ].map(() => getRandomImage(density))
+        );
+
+        const cards = [ ...cardArr, ...cardArr ].
+            map(card => new Card(card)).
+            sort(() => Math.random() - Math.random());
+            
+        yield put(setCards(cards));
+
+        return true;
+    } catch(err) {
+        yield put(stopGame());
+        yield put(setError());
+    } finally {
+        yield put(setPicturesFetch(false));
+    }
 };
 
 // toogle cards when game has been started
@@ -76,9 +87,12 @@ function* startGameWorker() {
 
     localStorage.setItem('settings', JSON.stringify(settings));
     
-    yield createCardsList();
-    forkedCounter = yield fork(counter, settings.time);
-    forkedToggleCards = yield fork(showCards, settings.hidingTime);
+    const success = yield createCardsList();
+
+    if (success) {
+        forkedCounter = yield fork(counter, settings.time);
+        forkedToggleCards = yield fork(showCards, settings.hidingTime);
+    }
 }
 
 function* openCardWorker() {

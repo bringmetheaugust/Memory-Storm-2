@@ -9,7 +9,8 @@ const initialState = {
 		play: false,
 		counter: 0,
 		result: null,
-		picturesIsFetching: false
+		picturesIsFetching: false,
+		error: false
 	}
 };
 

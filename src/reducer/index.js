@@ -14,7 +14,11 @@ export default function(state  = initialState, { type, payload }) {
 		case AT.START_GAME: {
 			return {
 				...state,
-				gameState: { ...state.gameState, play: true }
+				gameState: {
+					...state.gameState,
+					play: true,
+					error: false
+				}
 			}
 		}
 
@@ -81,6 +85,13 @@ export default function(state  = initialState, { type, payload }) {
 			return {
 				...state,
 				gameState: initialState.gameState
+			}
+		}
+
+		case AT.SET_ERROR: {
+			return {
+				...state,
+				gameState: { ...state.gameState, error: true }
 			}
 		}
 	}

@@ -1,0 +1,19 @@
+@import '../../style/_variables'
+@import '../../style/_mixin'
+    
+.index
+    z-index: 1
+    +absolute()
+    +flex($dir: column)
+    width: 100%
+    height: 100%
+    color: $red-color
+    background-color: #f5cccc
+    animation: hide 2s both
+    animation-delay: 3s
+
+@keyframes hide
+    from
+        opacity: 1
+    to
+        opacity: 0
