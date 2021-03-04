@@ -11,7 +11,13 @@
 	pointer-events: none
 
 @media only screen and (max-width: 1000px)
-	font-size: 1.3rem
+	.index
+		width: 100%
+		box-sizing: border-box
+		flex-direction: initial
+		flex-wrap: wrap
+		font-size: 1.3rem
 
-	label input
-		font-size: 1.5rem
+	.input
+		width: auto !important
+		flex-basis: 30%

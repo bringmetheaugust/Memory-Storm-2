@@ -1,5 +1,5 @@
-import React, { memo, useEffect, Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, Fragment } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import GameField from './components/GameField/index.jsx';
 import Settings from './components/Settings/index.jsx';
@@ -10,7 +10,7 @@ import { SETTINGS_SELECTOR, GAME_STATE_SELECTOR } from './store/selectors';
 
 const App = () => {
 	const settings = useSelector(SETTINGS_SELECTOR);
-	const { result } = useSelector(GAME_STATE_SELECTOR);
+	const { result } = useSelector(GAME_STATE_SELECTOR, shallowEqual);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -32,4 +32,4 @@ const App = () => {
 	);
 }
 
-export default memo(App);
+export default App;

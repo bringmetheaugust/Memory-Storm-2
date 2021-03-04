@@ -1,5 +1,5 @@
-import React, { memo, useMemo, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useMemo, useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import css from './index.module.sass';
 import Card from '../Card/index.jsx';
@@ -12,8 +12,8 @@ import { CARDS_SELECTOR, GAME_STATE_SELECTOR, SETTINGS_SELECTOR } from '../../st
 
 const GameField = () => {
 	const cards = useSelector(CARDS_SELECTOR);
-	const { play, picturesIsFetching, counter } = useSelector(GAME_STATE_SELECTOR);
-	const { density } = useSelector(SETTINGS_SELECTOR);
+	const { play, picturesIsFetching, counter } = useSelector(GAME_STATE_SELECTOR, shallowEqual);
+	const { density } = useSelector(SETTINGS_SELECTOR, shallowEqual);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -37,4 +37,4 @@ const GameField = () => {
 	);
 }
 
-export default memo(GameField);
+export default GameField;

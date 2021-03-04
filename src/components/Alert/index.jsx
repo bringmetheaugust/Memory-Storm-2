@@ -7,7 +7,7 @@ import { resetGame } from '../../actionCreators/common';
 
 const Alert = ({ result }) => {
 	const dispatch = useDispatch();
-
+	
 	const closeAlert = useCallback(() => dispatch(resetGame()));
 
 	return(

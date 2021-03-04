@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
 import css from './index.module.sass';
@@ -20,4 +20,4 @@ const Counter = () => {
     );
 };
 
-export default memo(Counter);
+export default Counter;
