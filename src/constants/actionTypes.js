@@ -12,5 +12,6 @@ export const STOP_GAME = 'gmae_state/STOP_GAME';
 export const SET_COUNTER = 'game_state/SET_COUNTER';
 export const SET_GAME_RESULT = 'game_state/SET_GAME_RESULT';
 export const PICTURES_FETCHING = 'game_state/PICTURES_FETCHING';
+export const SET_ERROR = 'game_state/SET_ERROR';
 
 export const SET_GAME_SETTINGS = 'game_settings/SET_GAME_SETTINGS';

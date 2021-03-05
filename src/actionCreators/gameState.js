@@ -1,5 +1,5 @@
 import {
-	SET_COUNTER, SET_GAME_RESULT, START_GAME,PICTURES_FETCHING, STOP_GAME
+	SET_COUNTER, SET_GAME_RESULT, START_GAME,PICTURES_FETCHING, STOP_GAME, SET_ERROR
 } from '../constants/actionTypes';
 
 export const startGame = () => ({ type: START_GAME });
@@ -20,3 +20,5 @@ export const setPicturesFetch = bool => ({
 	type: PICTURES_FETCHING,
 	payload: bool
 });
+
+export const setError = () => ({ type: SET_ERROR });
