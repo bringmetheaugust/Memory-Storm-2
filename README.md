@@ -1,6 +1,6 @@
 # Memory🤯Storm **2**
 
-![online](https://img.shields.io/website?url=https%3A%2F%2Fbringmetheaugust.github.io%2FmemoryStorm%2F) ![license](https://img.shields.io/github/license/bringmetheaugust/Memory-Storm-2) ![releaze](https://img.shields.io/github/v/release/bringmetheaugust/Memory-Storm-2) ![realise date](https://img.shields.io/github/release-date/bringmetheaugust/Memory-Storm-2) ![issues](https://img.shields.io/github/issues-raw/bringmetheaugust/Memory-Storm-2) ![PR](https://img.shields.io/github/issues-pr-raw/bringmetheaugust/Memory-Storm-2)
+![online](https://img.shields.io/website?url=https%3A%2F%2Fbringmetheaugust.github.io/projects/memory_storm) ![license](https://img.shields.io/github/license/bringmetheaugust/Memory-Storm-2) ![releaze](https://img.shields.io/github/v/release/bringmetheaugust/Memory-Storm-2) ![realise date](https://img.shields.io/github/release-date/bringmetheaugust/Memory-Storm-2) ![issues](https://img.shields.io/github/issues-raw/bringmetheaugust/Memory-Storm-2) ![PR](https://img.shields.io/github/issues-pr-raw/bringmetheaugust/Memory-Storm-2)
 
 ## What is this?   
 
@@ -13,7 +13,7 @@ In a bad case, all pictures will be hidden again.
 
 ## Where can I play this?
 
-You can play it [here](https://bringmetheaugust.github.io/memoryStorm) 👩🏻‍💻
+You can play it [here](https://bringmetheaugust.github.io/projects/memory_storm) 👩🏻‍💻
 
 ## How can I deploy this?
 
@@ -22,9 +22,9 @@ You can play it [here](https://bringmetheaugust.github.io/memoryStorm) 👩🏻�
  
 ###### Required global packages:
 
- * *NodeJS v10+*
- * *yarn*.
+ * *NodeJS v14.16.*\*
+ * *yarn v1.22.*\*.
 
 ## Who made this?
 
-August Luzanovsky, 2019 [![GitHub](https://img.shields.io/badge/-GitHub-000?&logo=github)](https://github.com/bringmetheaugust)
+August Luzanovsky, 2019
